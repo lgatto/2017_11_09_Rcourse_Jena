@@ -9,7 +9,8 @@ description: "Material for the 'Data analysis and R programming' course."
 github-repo: lgatto/2017_11_09_Rcourse_Jena
 ---
 
-```{r setup, echo=FALSE, warning=FALSE}
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+source("./src/setup.R")
 ```
 
 # Preface 

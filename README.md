@@ -10,6 +10,7 @@
 - Spreadsheets and tidy data
 - Data manipulation using the tidyverse
 - Visualisation with ggplot2
+- Wrap-up
 
 ### Day 2
 

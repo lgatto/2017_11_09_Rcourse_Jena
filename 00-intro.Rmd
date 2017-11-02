@@ -4,14 +4,22 @@ This course presents a 2-day introduction to data analysis and
 visualisation with R as well as certain programming topics. It is
 formatted as a `bookdown` document
 
-## Table of content
+## Programme  {-}
 
-- Spreadsheets and tidy data
-- Data manipulation using the tidyverse
-- Visualisation with ggplot2
-- Reproducible research with Rmarkdown - 1 hour
+#### Day 1  {-}
+
+- Setup and introduction
+- Spreadsheets and tidy data (1 hour)
+- Data manipulation using the tidyverse (1.5 hours)
+- Visualisation with ggplot2 (1.5 hours)
+- Wrap-up
+
+#### Day 2 {-}
+
+- Reproducible research with Rmarkdown (1 hour)
 - R package development (about 1.5 hours)
-- Viz. of high-dimensional data (bit.ly/highdimvis) - 1 hour
+- Viz. of high-dimensional data (bit.ly/highdimvis) (1.5 hours)
 - Interactive visualisation: ggvis, shiny (1.5 hours)
 - Navigate and mine Bioconductor for useful scripting components (0.5 hour)
 - Wrap-up
+
