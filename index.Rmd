@@ -15,18 +15,6 @@ source("./src/setup.R")
 
 # Preface 
 
-This course material is aimed at people who are already familiar with
-the R language and syntax, and who would like to get a hands-on
-introduction to machine learning. 
-
-## Installation
-
-We will install required packages as we go along. Before the course,
-participants should install a recent version of
-[R](https://www.r-project.org/) (ideally the current release version)
-and [RStudio](https://www.rstudio.com/products/RStudio/), or any other
-editor of their choice.
-
 The material can be accessed here: 
 
 - https://lgatto.github.io/2017_11_09_Rcourse_Jena/
@@ -35,9 +23,13 @@ The source code for this document is available on GitHub at
 
 - https://github.com/lgatto/2017_11_09_Rcourse_Jena.
 
+## Installation
 
-
-
+We will install required packages as we go along. Before the course,
+participants should install a recent version of
+[R](https://www.r-project.org/) (ideally the current release version)
+and [RStudio](https://www.rstudio.com/products/RStudio/), or any other
+editor of their choice.
 
 ## License
 
