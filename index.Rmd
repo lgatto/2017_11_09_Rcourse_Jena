@@ -1,0 +1,40 @@
+--- 
+title: "Data analysis and R programming"
+author: "Laurent Gatto"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+description: "Material for the 'Data analysis and R programming' course."
+github-repo: lgatto/2017_11_09_Rcourse_Jena
+---
+
+```{r setup, echo=FALSE, warning=FALSE}
+```
+
+# Preface 
+
+This course material is aimed at people who are already familiar with
+the R language and syntax, and who would like to get a hands-on
+introduction to machine learning. 
+
+## Installation
+
+We will install required packages as we go along. Before the course,
+participants should install a recent version of
+[R](https://www.r-project.org/) (ideally the current release version)
+and [RStudio](https://www.rstudio.com/products/RStudio/), or any other
+editor of their choice.
+
+The source code for this document is available on GitHub at
+https://github.com/lgatto/2017_11_09_Rcourse_Jena.
+
+A short URL for this book is http://bit.ly/TODO
+
+## License
+
+This material is licensed under the
+[Creative Commons Attribution-ShareAlike 3.0 License](http://creativecommons.org/licenses/by-sa/3.0/). Some
+content is inspired by other sources though, see the *Credit* section
+in the material.
+
