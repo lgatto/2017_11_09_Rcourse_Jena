@@ -355,6 +355,8 @@ shinyServer(function(input, output) {
 </div>
 <div id="another-shiny-app" class="section level3">
 <h3><span class="header-section-number">5.2.3</span> Another shiny app</h3>
+<iframe src="https://lgatto.shinyapps.io/shiny-app2/?showcase=0" width="672" height="650px">
+</iframe>
 <p>The <em>ui</em> uses the <code>fluidPage</code> UI and a sidebar layout. The sidebar panel contains a <code>textInput</code> with a caption, a <code>selectInput</code> to choose from the three possible datasets <code>rock</code>, <code>pressure</code> or <code>cars</code>, and a <code>numericInput</code> to define how many observations to show.</p>
 <p>The main panel use a <code>textOutput</code> to display the caption, a <code>verbatimOutput</code> to show the output of the <code>summary</code> function on the data chosen in the <code>selectInput</code> above, and a <code>tableOutput</code> to show the head of that same data.</p>
 <pre><code>library(&quot;shiny&quot;)
@@ -388,8 +390,6 @@ shinyUI(fluidPage(
 <li>the appropriate summary using <code>renderPrint</code> and the reactive data;</li>
 <li>the table using <code>renderTable</code> to produce the head with the reactive data and number of observations defined by the <code>numbericInput</code> above.</li>
 </ol>
-<iframe src="https://lgatto.shinyapps.io/shiny-app2/?showcase=0" width="672" height="650px">
-</iframe>
 <pre><code>library(shiny)
 library(datasets)
 # Define server logic required to summarize and view the selected

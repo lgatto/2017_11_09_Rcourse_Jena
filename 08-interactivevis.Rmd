@@ -208,6 +208,11 @@ the [written tutorial](https://shiny.rstudio.com/tutorial/).
 
 ### Another shiny app
 
+```{r shinyapp2, echo=FALSE}
+knitr::include_app("https://lgatto.shinyapps.io/shiny-app2/",
+                   height = "650px")
+```
+
 The *ui* uses the `fluidPage` UI and a sidebar layout. The sidebar
 panel contains a `textInput` with a caption, a `selectInput` to choose
 from the three possible datasets `rock`, `pressure` or `cars`, and a
@@ -231,11 +236,6 @@ data based on the `selectInput` above. It produces three outputs:
 3. the table using `renderTable` to produce the head with the reactive
    data and number of observations defined by the `numbericInput`
    above.
-
-```{r shinyapp2, echo=FALSE}
-knitr::include_app("https://lgatto.shinyapps.io/shiny-app2/",
-                   height = "650px")
-```
 
 ```{r server2, comment = "", echo=FALSE}
 lns <- readLines('src/shiny-app2/server.R')
