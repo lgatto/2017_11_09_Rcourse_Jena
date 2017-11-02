@@ -1,7 +1,8 @@
 # Data analysis and R programming
 
-Where: Leibniz Fritz Lipmann Institute
-When: 9 - 10  October 2017
+- Where: Leibniz Fritz Lipmann Institute
+- When: 9 - 10  October 2017
+
 ## Topics
 
 ### Day 1
