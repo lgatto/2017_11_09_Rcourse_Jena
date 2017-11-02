@@ -16,7 +16,6 @@ of data transformation.
 library("ggvis")
 sml <- sample(nrow(surveys), 1e3)
 surveys_sml <- surveys_complete[sml, ]
-
 ```
 
 ```{r, eval = FALSE}
@@ -114,7 +113,16 @@ p %>%
   produced by the scales. See the
   [axes and legends vignette](http://ggvis.rstudio.com/axes-legends.html).
 
+
+### Challenge
+
+> Apply a PCA analysis on the `iris` data, and use `ggvis` to
+> visualise that data along PC1 and PC2, controlling the point size
+> using a slide bar.
+
 ## Interactive apps 
+
+> This section is based on RStudio `shiny` tutorials.
 
 From the [`shiny`](https://shiny.rstudio.com/)
 package [website](https://shiny.rstudio.com/):
@@ -190,4 +198,59 @@ writeLines(lns[-grep("^\\s*$", lns)])
 > Challenge 
 > 
 > Run your `shinyapp` application, as described above.
+
+### The shiny infrastructure 
+
+The overview figure below is based and makes reference to lessons of
+the [written tutorial](https://shiny.rstudio.com/tutorial/).
+
+![](./figs/shiny-overview.jpg)
+
+### Another shiny app
+
+The *ui* uses the `fluidPage` UI and a sidebar layout. The sidebar
+panel contains a `textInput` with a caption, a `selectInput` to choose
+from the three possible datasets `rock`, `pressure` or `cars`, and a
+`numericInput` to define how many observations to show. 
+
+The main panel use a `textOutput` to display the caption, a
+`verbatimOutput` to show the output of the `summary` function on the
+data chosen in the `selectInput` above, and a `tableOutput` to show
+the head of that same data.
+
+```{r ui2, comment = "", echo=FALSE}
+lns <- readLines('src/shiny-app2/ui.R')
+writeLines(lns[-grep("^\\s*$", lns)])
+```
+
+The *server* defines a `reactive` expression that sets the appropriate
+data based on the `selectInput` above. It produces three outputs: 
+
+1. the caption using `renderText` and the caption defined above; 
+2. the appropriate summary using `renderPrint` and the reactive data;
+3. the table using `renderTable` to produce the head with the reactive
+   data and number of observations defined by the `numbericInput`
+   above.
+
+```{r shinyapp2, echo=FALSE}
+knitr::include_app("https://lgatto.shinyapps.io/shiny-app2/",
+                   height = "650px")
+```
+
+```{r server2, comment = "", echo=FALSE}
+lns <- readLines('src/shiny-app2/server.R')
+writeLines(lns[-grep("^\\s*$", lns)])
+```
+
+> Challenge
+>
+> Using the code above, implement and test the app.
+
+### Challenges
+
+> 1. Create an app to visualise the `iris` data where the user can select
+>    along which features to view the data.
+
+> 2. As above, where the visualisation is a PCA plot and the user chooses
+>    the PCs.
 

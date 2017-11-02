@@ -154,9 +154,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.1.1" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#interactivity"><i class="fa fa-check"></i><b>5.1.1</b> Interactivity</a></li>
 <li class="chapter" data-level="5.1.2" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#layers"><i class="fa fa-check"></i><b>5.1.2</b> Layers</a></li>
 <li class="chapter" data-level="5.1.3" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#more-components"><i class="fa fa-check"></i><b>5.1.3</b> More components</a></li>
+<li class="chapter" data-level="5.1.4" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#challenge"><i class="fa fa-check"></i><b>5.1.4</b> Challenge</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#interactive-apps"><i class="fa fa-check"></i><b>5.2</b> Interactive apps</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#creation-of-our-fist-shiny-app"><i class="fa fa-check"></i><b>5.2.1</b> Creation of our fist shiny app</a></li>
+<li class="chapter" data-level="5.2.2" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#the-shiny-infrastructure"><i class="fa fa-check"></i><b>5.2.2</b> The shiny infrastructure</a></li>
+<li class="chapter" data-level="5.2.3" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#another-shiny-app"><i class="fa fa-check"></i><b>5.2.3</b> Another shiny app</a></li>
+<li class="chapter" data-level="5.2.4" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#challenges"><i class="fa fa-check"></i><b>5.2.4</b> Challenges</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -246,9 +250,18 @@ p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_
 <li><p><code>legends</code> and <code>axes</code> to control the appearance of the guides produced by the scales. See the <a href="http://ggvis.rstudio.com/axes-legends.html">axes and legends vignette</a>.</p></li>
 </ul>
 </div>
+<div id="challenge" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> Challenge</h3>
+<blockquote>
+<p>Apply a PCA analysis on the <code>iris</code> data, and use <code>ggvis</code> to visualise that data along PC1 and PC2, controlling the point size using a slide bar.</p>
+</blockquote>
+</div>
 </div>
 <div id="interactive-apps" class="section level2">
 <h2><span class="header-section-number">5.2</span> Interactive apps</h2>
+<blockquote>
+<p>This section is based on RStudio <code>shiny</code> tutorials.</p>
+</blockquote>
 <p>From the <a href="https://shiny.rstudio.com/"><code>shiny</code></a> package <a href="https://shiny.rstudio.com/">website</a>:</p>
 <blockquote>
 <p>Shiny is an R package that makes it easy to build interactive web apps straight from R.</p>
@@ -330,6 +343,117 @@ shinyServer(function(input, output) {
 <blockquote>
 <p>Challenge</p>
 <p>Run your <code>shinyapp</code> application, as described above.</p>
+</blockquote>
+</div>
+<div id="the-shiny-infrastructure" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> The shiny infrastructure</h3>
+<p>The overview figure below is based and makes reference to lessons of the <a href="https://shiny.rstudio.com/tutorial/">written tutorial</a>.</p>
+<div class="figure">
+<img src="figs/shiny-overview.jpg" />
+
+</div>
+</div>
+<div id="another-shiny-app" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Another shiny app</h3>
+<p>The <em>ui</em> uses the <code>fluidPage</code> UI and a sidebar layout. The sidebar panel contains a <code>textInput</code> with a caption, a <code>selectInput</code> to choose from the three possible datasets <code>rock</code>, <code>pressure</code> or <code>cars</code>, and a <code>numericInput</code> to define how many observations to show.</p>
+<p>The main panel use a <code>textOutput</code> to display the caption, a <code>verbatimOutput</code> to show the output of the <code>summary</code> function on the data chosen in the <code>selectInput</code> above, and a <code>tableOutput</code> to show the head of that same data.</p>
+<pre><code>library(&quot;shiny&quot;)
+# Define UI for dataset viewer application
+shinyUI(fluidPage(
+  # Application title
+  titlePanel(&quot;Reactivity&quot;),
+  # Sidebar with controls to provide a caption, select a dataset,
+  # and specify the number of observations to view. Note that
+  # changes made to the caption in the textInput control are
+  # updated in the output area immediately as you type
+  sidebarLayout(
+    sidebarPanel(
+      textInput(&quot;caption&quot;, &quot;Caption:&quot;, &quot;Data Summary&quot;),
+      selectInput(&quot;dataset&quot;, &quot;Choose a dataset:&quot;, 
+                  choices = c(&quot;rock&quot;, &quot;pressure&quot;, &quot;cars&quot;)),
+      numericInput(&quot;obs&quot;, &quot;Number of observations to view:&quot;, 10)
+    ),
+    # Show the caption, a summary of the dataset and an HTML 
+   # table with the requested number of observations
+    mainPanel(
+      h3(textOutput(&quot;caption&quot;, container = span)),
+      verbatimTextOutput(&quot;summary&quot;), 
+      tableOutput(&quot;view&quot;)
+    )
+  )
+))</code></pre>
+<p>The <em>server</em> defines a <code>reactive</code> expression that sets the appropriate data based on the <code>selectInput</code> above. It produces three outputs:</p>
+<ol style="list-style-type: decimal">
+<li>the caption using <code>renderText</code> and the caption defined above;</li>
+<li>the appropriate summary using <code>renderPrint</code> and the reactive data;</li>
+<li>the table using <code>renderTable</code> to produce the head with the reactive data and number of observations defined by the <code>numbericInput</code> above.</li>
+</ol>
+<iframe src="https://lgatto.shinyapps.io/shiny-app2/?showcase=0" width="672" height="650px">
+</iframe>
+<pre><code>library(shiny)
+library(datasets)
+# Define server logic required to summarize and view the selected
+# dataset
+shinyServer(function(input, output) {
+  # By declaring datasetInput as a reactive expression we ensure 
+  # that:
+  #
+  #  1) It is only called when the inputs it depends on changes
+  #  2) The computation and result are shared by all the callers 
+  #   (it only executes a single time)
+  #
+  datasetInput &lt;- reactive({
+    switch(input$dataset,
+           &quot;rock&quot; = rock,
+           &quot;pressure&quot; = pressure,
+           &quot;cars&quot; = cars)
+  })
+  # The output$caption is computed based on a reactive expression
+  # that returns input$caption. When the user changes the
+  # &quot;caption&quot; field:
+  #
+  #  1) This function is automatically called to recompute the 
+  #     output 
+  #  2) The new caption is pushed back to the browser for 
+  #     re-display
+  # 
+  # Note that because the data-oriented reactive expressions
+  # below don&#39;t depend on input$caption, those expressions are
+  # NOT called when input$caption changes.
+  output$caption &lt;- renderText({
+    input$caption
+  })
+  # The output$summary depends on the datasetInput reactive
+  # expression, so will be re-executed whenever datasetInput is
+  # invalidated
+  # (i.e. whenever the input$dataset changes)
+  output$summary &lt;- renderPrint({
+    dataset &lt;- datasetInput()
+    summary(dataset)
+  })
+  # The output$view depends on both the databaseInput reactive
+  # expression and input$obs, so will be re-executed whenever
+  # input$dataset or input$obs is changed. 
+  output$view &lt;- renderTable({
+    head(datasetInput(), n = input$obs)
+  })
+})</code></pre>
+<blockquote>
+<p>Challenge</p>
+<p>Using the code above, implement and test the app.</p>
+</blockquote>
+</div>
+<div id="challenges" class="section level3">
+<h3><span class="header-section-number">5.2.4</span> Challenges</h3>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>Create an app to visualise the <code>iris</code> data where the user can select along which features to view the data.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>As above, where the visualisation is a PCA plot and the user chooses the PCs.</li>
+</ol>
 </blockquote>
 
 </div>
