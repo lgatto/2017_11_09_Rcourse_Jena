@@ -115,3 +115,34 @@ p %>%
 
 ## Interactive apps with [`shiny`](https://shiny.rstudio.com/)
 
+From the main [*shiny* page](https://shiny.rstudio.com/):
+
+> Shiny is an R package that makes it easy to build interactive web
+> apps straight from R.
+
+When using `shiny`, one tends to aim for more complete, long-lasting
+applications, rather then *simply* and transient visualisations.
+
+A `shiny` application is composed of a *ui* (user interface) and a
+server that exchange information using a programming paradigm called
+*reactive programming*: changes performed by the user to the *ui*
+trigger a reaction by the *server* and the output is updated
+accordingly.
+
+Before looking at the details of such an architecture, let's build a
+simple example from scratch. This app, shown below, uses the
+`faithful` data, describing the wainting time between eruptions and
+the duration of the reuption for the Old Faithful geyser in
+Yellowstone National Park, Wyoming, USA. 
+
+```{r faithfuldata}
+head(faithful)
+```
+
+It shows the distribution of waiting times along a histogram (produced by the )
+
+```{r shinyapp1, echo=FALSE}
+knitr::include_app("https://lgatto.shinyapps.io/shiny-app1/")
+```
+
+
