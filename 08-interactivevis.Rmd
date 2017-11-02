@@ -1,15 +1,16 @@
 # Interactive visualisation
 
-## Interactivity with [`ggvis`](http://ggvis.rstudio.com/)
+## Interactivity graphs 
 
 > This section is based on the on-line [`ggvis` documentation](http://ggvis.rstudio.com/)
 
 The goal of ggvis is to make it easy to build interactive graphics for
-exploratory data analysis. `ggvis` has a similar underlying theory to
-`ggplot2` (the grammar of graphics), but it's expressed a little
-differently, and adds new features to make your plots
-interactive. `ggvis` also incorporates shiny's reactive programming
-model and `dplyr`'s grammar of data transformation.
+exploratory data analysis. [`ggvis`](http://ggvis.rstudio.com/) has a
+similar underlying theory to `ggplot2` (the grammar of graphics), but
+it's expressed a little differently, and adds new features to make
+your plots interactive. [`ggvis`](http://ggvis.rstudio.com/) also
+incorporates shiny's reactive programming model and `dplyr`'s grammar
+of data transformation.
 
 ```{r, eval = FALSE}
 library("ggvis")
@@ -113,21 +114,23 @@ p %>%
   produced by the scales. See the
   [axes and legends vignette](http://ggvis.rstudio.com/axes-legends.html).
 
-## Interactive apps with [`shiny`](https://shiny.rstudio.com/)
+## Interactive apps 
 
-From the main [*shiny* page](https://shiny.rstudio.com/):
+From the [`shiny`](https://shiny.rstudio.com/)
+package [website](https://shiny.rstudio.com/):
 
 > Shiny is an R package that makes it easy to build interactive web
 > apps straight from R.
 
-When using `shiny`, one tends to aim for more complete, long-lasting
-applications, rather then *simply* and transient visualisations.
+When using [`shiny`](https://shiny.rstudio.com/), one tends to aim for
+more complete, long-lasting applications, rather then *simply* and
+transient visualisations.
 
-A `shiny` application is composed of a *ui* (user interface) and a
-server that exchange information using a programming paradigm called
-*reactive programming*: changes performed by the user to the *ui*
-trigger a reaction by the *server* and the output is updated
-accordingly.
+A [`shiny`](https://shiny.rstudio.com/) application is composed of a
+*ui* (user interface) and a server that exchange information using a
+programming paradigm called *reactive programming*: changes performed
+by the user to the *ui* trigger a reaction by the *server* and the
+output is updated accordingly.
 
 Before looking at the details of such an architecture, let's build a
 simple example from scratch. This app, shown below, uses the
@@ -139,10 +142,52 @@ Yellowstone National Park, Wyoming, USA.
 head(faithful)
 ```
 
-It shows the distribution of waiting times along a histogram (produced by the )
+It shows the distribution of waiting times along a histogram (produced
+by the `hist` function) and provides a slider to adjust the number of
+bins (the `breaks` argument to `hist`).
 
 ```{r shinyapp1, echo=FALSE}
-knitr::include_app("https://lgatto.shinyapps.io/shiny-app1/")
+knitr::include_app("https://lgatto.shinyapps.io/shiny-app1/",
+                   height = "650px")
 ```
 
+### Creation of our fist shiny app
+
+1. Create a directory that will contain the app, such as for example
+   `"shinyapp"`.
+2. In this directory, create the *ui* and *server* files, named `ui.R`
+   and `server.R`.
+3. In the `ui.R` file, copy and paste the following code, that defines
+   a the general UI containing
+   - a titel panel with a page title;
+   - a page with a sidebar layout, containing a sidebar and a main
+     panel;
+   - the sidebar panel contains a slider defining the `bins` variable
+     (ranging from 1 to 50 with default value of 30);
+   - the main panel that plots the `distPlot` figure.
+
+```{r ui1, comment = "", echo=FALSE}
+lns <- readLines('src/shiny-app1/ui.R')
+writeLines(lns[-grep("^\\s*$", lns)])
+```
+
+4. In the `server.R` file, copy and paste the following code, that
+   defines the server backend
+   - the server is a function that manages an `input` and an `ouput`;
+   - the input is the `bins` defined in the *ui* that can be accessed
+     with `input$bins`;
+   - the outputs are created by assigning `output$distPlot` a value
+     with a *render* functon (here `renderPlot`).
+
+```{r server1, comment = "", echo=FALSE}
+lns <- readLines('src/shiny-app1/server.R')
+writeLines(lns[-grep("^\\s*$", lns)])
+```
+
+5. Run the app with `shiny::runApp("shinyapp")` or simply
+   `shiny::runApp()` of your working directory is the app dir.
+
+> Challenge 
+> 
+> Run your `shinyapp` application, as described above.
 
