@@ -87,7 +87,7 @@ package.
 
 
 - Package vignettes https://bioconductor.org/help/package-vignettes/
-
+- Also `knitr::purl`
 
 ## Installation
 

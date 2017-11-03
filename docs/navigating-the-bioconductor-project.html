@@ -234,7 +234,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.2.4" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#challenges"><i class="fa fa-check"></i><b>11.2.4</b> Challenges</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html"><i class="fa fa-check"></i><b>12</b> Navigating the Bioconductor project</a></li>
+<li class="chapter" data-level="12" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html"><i class="fa fa-check"></i><b>12</b> Navigating the Bioconductor project</a><ul>
+<li class="chapter" data-level="12.1" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#biocviews"><i class="fa fa-check"></i><b>12.1</b> <em>biocViews</em></a></li>
+<li class="chapter" data-level="12.2" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#workflows"><i class="fa fa-check"></i><b>12.2</b> Workflows</a></li>
+<li class="chapter" data-level="12.3" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#learning-about-specific-packages"><i class="fa fa-check"></i><b>12.3</b> Learning about specific packages</a></li>
+<li class="chapter" data-level="12.4" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#installation-1"><i class="fa fa-check"></i><b>12.4</b> Installation</a></li>
+<li class="chapter" data-level="12.5" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#versions"><i class="fa fa-check"></i><b>12.5</b> Versions</a></li>
+<li class="chapter" data-level="12.6" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#getting-help"><i class="fa fa-check"></i><b>12.6</b> Getting help</a></li>
+<li class="chapter" data-level="12.7" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#data-structures"><i class="fa fa-check"></i><b>12.7</b> Data structures</a></li>
+<li class="chapter" data-level="12.8" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#more"><i class="fa fa-check"></i><b>12.8</b> More</a></li>
+<li class="chapter" data-level="12.9" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#challenges-1"><i class="fa fa-check"></i><b>12.9</b> Challenges</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -254,15 +264,100 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="navigating-the-bioconductor-project" class="section level1">
 <h1><span class="header-section-number">Chapter 12</span> Navigating the Bioconductor project</h1>
+<div id="biocviews" class="section level2">
+<h2><span class="header-section-number">12.1</span> <em>biocViews</em></h2>
+<p>Bioconductor has become a large project proposing many packages (1473 software packages at the time of writing) across many domains of high throughput biology. It continues to grow, at an increasing rate, and it can be difficult to get started.</p>
+<p>One way to find packages of interest is to navigate the <em>biocViews</em> hierarchy. Every package is tagged with a set of <em>biocViews</em> labels. The highest level defines 3 types of packages:</p>
 <ul>
-<li>The biocViews</li>
-<li>The support forum</li>
-<li>Package landing pages</li>
-<li>Workflows</li>
-<li>Core infrastructure</li>
-<li>A note on tidy data and high throughput biology data</li>
+<li>Software: packages providing a specific functionality.</li>
+<li>AnnotationData: packages providing annotations, such as various ontologies, species annotations, microarray annotations, …</li>
+<li>ExperimentData: packages distributing experiments.</li>
 </ul>
+<p>The <em>biocViews</em> page is available here</p>
+<ul>
+<li><a href="https://bioconductor.org/packages/release/BiocViews.html#___Software" class="uri">https://bioconductor.org/packages/release/BiocViews.html#___Software</a></li>
+</ul>
+<p>It is most easily accessed by clicking on the <em>software packages</em> link on the homepage, under <em>About Bioconductor</em>.</p>
+<div class="figure">
+<img src="figs/biocwww.png" />
 
+</div>
+</div>
+<div id="workflows" class="section level2">
+<h2><span class="header-section-number">12.2</span> Workflows</h2>
+<p>On the other hand, people generally don’t approach the Bioconductor project to learn the whole project, but are interested by a specific analysis from a Bioconductor package, that they have read in a paper of interest. In my opinion, it is more effective to restrict ones attention to a problem or analysis of interest to first immerse oneself into Bioconductor, then broaden up ones experience to other topics and packages.</p>
+<p>To to that, the project offers workflows that provide a general introduction to topics such as sequence analysis, annotation resources, RNA-Seq data analyis, Mass spectrometry and proteomics, CyTOF analysis, ….</p>
+<ul>
+<li><a href="https://bioconductor.org/help/workflows/" class="uri">https://bioconductor.org/help/workflows/</a></li>
+</ul>
+<p>A similar set of resources are published in <a href="https://f1000research.com/">F1000Research</a> under the Bioconductor gateway</p>
+<ul>
+<li><a href="https://f1000research.com/gateways/bioconductor" class="uri">https://f1000research.com/gateways/bioconductor</a></li>
+</ul>
+<p>These peer-reviewed papers describe more complete pipelines involving one or several packages.</p>
+</div>
+<div id="learning-about-specific-packages" class="section level2">
+<h2><span class="header-section-number">12.3</span> Learning about specific packages</h2>
+<p>Each Bioconductor package has it’s own <em>landing pages</em> that provides all necessary information about a package, including a short summary, its current version, the authors, how the cite the package, installation instructions, and links to all package vignettes.</p>
+<p>Any Bioconductor package page can be contructed by appending the package’s name to <code>https://bioconductor.org/packages/</code> to produce an URL like</p>
+<ul>
+<li><a href="https://bioconductor.org/packages/packagename" class="uri">https://bioconductor.org/packages/packagename</a></li>
+</ul>
+<p>This works for any type of package (software, annotation or data). For example, the pages for packages <em><a href="http://bioconductor.org/packages/DESeq2">DESeq2</a></em> or <em><a href="http://bioconductor.org/packages/MSnbase">MSnbase</a></em> would be</p>
+<ul>
+<li><a href="https://bioconductor.org/packages/DESeq2" class="uri">https://bioconductor.org/packages/DESeq2</a></li>
+</ul>
+<p>and</p>
+<ul>
+<li><a href="https://bioconductor.org/packages/MSnbase" class="uri">https://bioconductor.org/packages/MSnbase</a></li>
+</ul>
+<p>These short URLs are then resolved to their longer form to redirect to the longer package URL leading the user to the current release version of the packge.</p>
+<p>An important quality of every Bioconductor package is the availability of a dedicated <em>vignette</em>. Vignettes are documentations (generally provided as pdf or html files) that provide a generic overview of the package, without necessarily going in detail for every function of the package.</p>
+<ul>
+<li>Package vignettes <a href="https://bioconductor.org/help/package-vignettes/" class="uri">https://bioconductor.org/help/package-vignettes/</a></li>
+<li>Also <code>knitr::purl</code></li>
+</ul>
+</div>
+<div id="installation-1" class="section level2">
+<h2><span class="header-section-number">12.4</span> Installation</h2>
+<p>The installation of a Bioconductor package is done using the <code>biocLite</code> function from the <code>BiocInstaller</code> package. The first time, when the package isn’t available yet, you need to run</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## try http:// if https:// URLs are not supported
+<span class="kw">source</span>(<span class="st">&quot;https://bioconductor.org/biocLite.R&quot;</span>)</code></pre></div>
+<p>The above command will install and load <code>r Biocpkg(&quot;BiocInstaller&quot;)</code>. If it isn’t loaded yet, first load it with <code>library</code>, then install your package(s) of interest with <code>biocLite</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;BiocInstaller&quot;</span>)
+<span class="kw">biocLite</span>(<span class="st">&quot;Biobase&quot;</span>)</code></pre></div>
+</div>
+<div id="versions" class="section level2">
+<h2><span class="header-section-number">12.5</span> Versions</h2>
+</div>
+<div id="getting-help" class="section level2">
+<h2><span class="header-section-number">12.6</span> Getting help</h2>
+<ul>
+<li>The support forum</li>
+</ul>
+</div>
+<div id="data-structures" class="section level2">
+<h2><span class="header-section-number">12.7</span> Data structures</h2>
+<ul>
+<li><p>Core infrastructure</p></li>
+<li><p>A note on tidy data and high throughput biology data</p></li>
+</ul>
+</div>
+<div id="more" class="section level2">
+<h2><span class="header-section-number">12.8</span> More</h2>
+<ul>
+<li>Videos: <a href="https://www.youtube.com/user/bioconductor" class="uri">https://www.youtube.com/user/bioconductor</a></li>
+<li>Community Contributed Help Resources: <a href="https://bioconductor.org/help/community/" class="uri">https://bioconductor.org/help/community/</a></li>
+</ul>
+</div>
+<div id="challenges-1" class="section level2">
+<h2><span class="header-section-number">12.9</span> Challenges</h2>
+<ol style="list-style-type: decimal">
+<li><p>Install a Bioconductor package of your choice, discover the vignette(s) it offers, open one, and extract the R code of it.</p></li>
+<li><p>Find a package that allows reading raw mass spectrometry data and identify the specific function. Either use the <em>biocViews</em> tree or look for a possible <em>workflow</em>.</p></li>
+</ol>
+
+</div>
 </div>
             </section>
 
