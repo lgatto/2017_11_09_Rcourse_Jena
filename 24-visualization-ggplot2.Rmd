@@ -1,21 +1,4 @@
----
-title: Data visualization with ggplot2
-author: Data Carpentry contributors
-minutes: 60
----
-
-
-```{r setup, echo=FALSE, purl=FALSE}
-source("setup.R")
-surveys_complete <- read_csv(file = "data_output/surveys_complete.csv")
-```
-
-```{r, echo=FALSE, purl=TRUE}
-### Data Visualization with ggplot2
-```
-
-
-------------
+# Data visualization with ggplot2
 
 > ### Learning Objectives
 >
@@ -25,18 +8,18 @@ surveys_complete <- read_csv(file = "data_output/surveys_complete.csv")
 > * Modify the aesthetics of an existing ggplot plot (including axis labels and color).
 > * Build complex and customized plots from data in a data frame.
 
---------------
 
-We start by loading the required packages. **`ggplot2`** is included in the **`tidyverse`** package.
+We start by loading the required packages. **`ggplot2`** is included
+in the **`tidyverse`** package.
 
-```{r load-package, message=FALSE, purl=FALSE}
+```{r load-package2, message=FALSE, purl=FALSE}
 library(tidyverse)
 ```
 
 If not still in the workspace, load the data we saved in the previous lesson.
 
 ```{r load-data, eval=FALSE,  purl=FALSE}
-surveys_complete <- read_csv('data_output/surveys_complete.csv')
+surveys_complete <- read_csv('data/surveys_complete.csv')
 ```
 
 ## Plotting with **`ggplot2`**
@@ -572,4 +555,3 @@ Note: The parameters `width` and `height` also determine the font size in the sa
 ##  https://www.rstudio.com/wp-content/uploads/2015/08/ggplot2-cheatsheet.pdf
 ```
 
-<p style="text-align: right; font-size: small;">Page built on: `r format(Sys.time())`</p>

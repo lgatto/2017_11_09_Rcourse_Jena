@@ -1,22 +1,5 @@
----
-title: Manipulating and analyzing data with dplyr; Exporting data
-author: Data Carpentry contributors
----
+# Manipulating and analyzing data
 
-```{r, echo=FALSE, purl=FALSE, message = FALSE}
-source("setup.R")
-surveys <- read.csv("data/portal_data_joined.csv")
-suppressWarnings(surveys$date <- lubridate::ymd(paste(surveys$year,
-                                                      surveys$month,
-                                                      surveys$day,
-                                                      sep = "-")))
-```
-
-```{r, echo=FALSE, purl=TRUE}
-### Manipulating and analyzing data with dplyr
-```
-
-------------
 
 > ### Learning Objectives
 >
@@ -31,11 +14,6 @@ suppressWarnings(surveys$date <- lubridate::ymd(paste(surveys$year,
 > * Understand what key-value pairs are.
 > * Reshape a data frame from long to wide format and back with the `spread` and `gather` commands from the **`tidyr`** package.
 > * Export a data frame to a .csv file.
-
-
-------------
-
-# Data Manipulation using **`dplyr`** and **`tidyr`**
 
 Bracket subsetting is handy, but it can be cumbersome and difficult to read,
 especially for complicated operations. Enter **`dplyr`**. **`dplyr`** is a package for
@@ -55,9 +33,14 @@ work together well such as **`tidyr`**, **`dplyr`**, **`ggplot2`**, **`tibble`**
 2. Using R expressions in a non standard way, which can be confusing for new learners.
 3. Hidden arguments, having default operations that new learners are not aware of.
 
-We have seen in our previous lesson that when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the factor data type. We had to set **`stringsAsFactor`** to **`FALSE`** to avoid this hidden argument to convert our data type. 
+We have seen in our previous lesson that when building or importing a
+data frame, the columns that contain characters (i.e., text) are
+coerced (=converted) into the factor data type. We had to set
+**`stringsAsFactor`** to **`FALSE`** to avoid this hidden argument to
+convert our data type.
 
-This time will use the **`tidyverse`** package to read the data and avoid having to set **`stringsAsFactor`** to **`FALSE`**
+This time will use the **`tidyverse`** package to read the data and
+avoid having to set **`stringsAsFactor`** to **`FALSE`**
 
 To load the package type:
 
@@ -82,10 +65,21 @@ memory. The database connections essentially remove that limitation in that you
 can have a database of many 100s GB, conduct queries on it directly, and pull
 back into R only what you need for analysis.
 
-The package **`tidyr`** addresses the common problem of wanting to reshape your data for plotting and use by different R functions. Sometimes we want data sets where we have one row per measurement. Sometimes we want a data frame where each measurement type has its own column, and rows are instead more aggregated groups - like plots or aquaria. Moving back and forth between these formats is nontrivial, and **`tidyr`** gives you tools for this and more sophisticated  data manipulation.
+The package **`tidyr`** addresses the common problem of wanting to
+reshape your data for plotting and use by different R
+functions. Sometimes we want data sets where we have one row per
+measurement. Sometimes we want a data frame where each measurement
+type has its own column, and rows are instead more aggregated groups -
+like plots or aquaria. Moving back and forth between these formats is
+nontrivial, and **`tidyr`** gives you tools for this and more
+sophisticated data manipulation.
 
-To learn more about **`dplyr`** and **`tidyr`** after the workshop, you may want to check out this
-[handy data transformation with **`dplyr`** cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) and this [one about **`tidyr`**](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf).
+To learn more about **`dplyr`** and **`tidyr`** after the workshop,
+you may want to check out
+this
+[handy data transformation with **`dplyr`** cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) and
+this
+[one about **`tidyr`**](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf).
 
 **`dplyr`**  reads data using read_csv(), instead of read.csv()
 
@@ -96,11 +90,14 @@ surveys <- read_csv('data/portal_data_joined.csv')
 str(surveys)
 ```
 
-Notice that the class of the data is now `tbl_df`
-This is referred to as a "tibble"
-Tibbles are data frames, but they tweak some of the old behaviors of data frames. The data structure is very similar to a data frame. For our purposes the only differences are that:
-1. In addition to displaying the data type of each column under its name, it only prints the first few rows of data and only as many columns as fit
-on one screen.
+Notice that the class of the data is now `tbl_df` This is referred to
+as a "tibble" Tibbles are data frames, but they tweak some of the old
+behaviors of data frames. The data structure is very similar to a data
+frame. For our purposes the only differences are that:
+
+1. In addition to displaying the data type of each column under its
+   name, it only prints the first few rows of data and only as many
+   columns as fit on one screen.
 2. Columns of class `character` are never converted into factors.
 
 ## Selecting columns and filtering rows
@@ -254,18 +251,6 @@ surveys_hindfoot_half <- surveys %>%
     select(species_id, hindfoot_half)
 ```
 --->
-
-    ```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-    ## Mutate Challenge:
-    ##  Create a new data frame from the `surveys` data that meets the following
-    ##  criteria: contains only the `species_id` column and a column that
-    ##  contains values that are half the `hindfoot_length` values (e.g. a
-    ##  new column `hindfoot_half`). In this `hindfoot_half` column, there are
-    ##  no NA values and all values are < 30.
-
-    ##  Hint: think about how the commands should be ordered to produce this data frame!
-
-    ```
 
 ### Split-apply-combine data analysis and the summarize() function
 
@@ -612,7 +597,7 @@ surveys_long %>%
 ```
 --->
 
-# Exporting data
+## Exporting data
 
 Now that you have learned how to use **`dplyr`** to extract information from
 or summarize your raw data, you may want to export these new datasets to share
@@ -698,12 +683,11 @@ Now that our dataset is ready, we can save it as a CSV file in our `data_output`
 folder.
 
 ```{r, purl=FALSE, eval=FALSE}
-write_csv(surveys_complete, path = "data_output/surveys_complete.csv")
+write_csv(surveys_complete, path = "data/surveys_complete.csv")
 ```
 
 ```{r, purl=FALSE, eval=TRUE, echo=FALSE}
-if (!file.exists("data_output")) dir.create("data_output")
-write_csv(surveys_complete, path = "data_output/surveys_complete.csv")
+if (!file.exists("data")) dir.create("data")
+   write_csv(surveys_complete, path = "data/surveys_complete.csv")
 ```
 
-<p style="text-align: right; font-size: small;">Page built on: `r format(Sys.time())`</p>

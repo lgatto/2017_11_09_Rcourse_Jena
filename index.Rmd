@@ -13,7 +13,11 @@ github-repo: lgatto/2017_11_09_Rcourse_Jena
 source("./src/setup.R")
 ```
 
-# Preface 
+# Introduction
+
+This course presents a 2-day introduction to data analysis and
+visualisation with R as well as certain programming topics. It is
+formatted as a `bookdown` document
 
 The material can be accessed here: 
 
@@ -31,10 +35,37 @@ participants should install a recent version of
 and [RStudio](https://www.rstudio.com/products/RStudio/), or any other
 editor of their choice.
 
-## License
+## Programme
+
+- Morning: 9:30 - 13:00 (3 hours, with 30 min break)
+- Afternoon: 14:00 - 17:00 (3 hours, with a shorter break)
+
+#### Day 1  {-}
+
+- Setup and introduction
+
+> The following material is based on Data Carpentry's the
+> [Data analisis and visualisation](http://www.datacarpentry.org/R-ecology-lesson/) lessons.
+
+- Spreadsheets and tidy data (1 hour)
+- Data manipulation using the tidyverse (1.5 hours)
+- Visualisation with ggplot2 (1.5 hours)
+- Reproducible research with Rmarkdown (0.5 hour)
+- Wrap-up
+
+#### Day 2 {-}
+- R package development (about 1.5 hours)
+- Viz. of high-dimensional data (bit.ly/highdimvis) (1.5 hours)
+- Interactive visualisation: ggvis, shiny (1.5 hours)
+- Navigate and mine Bioconductor for useful scripting components (0.5 hour)
+- Wrap-up
+
+
+## License and credits
 
 This material is licensed under the
-[Creative Commons Attribution-ShareAlike 3.0 License](http://creativecommons.org/licenses/by-sa/3.0/). Some
-content is inspired by other sources though, see the *Credit* section
-in the material.
+[Creative Commons Attribution-ShareAlike 3.0 License](http://creativecommons.org/licenses/by-sa/3.0/). 
+
+Some content is inspired by other sources, see the first paragraph in
+the respective chapters for credits.
 

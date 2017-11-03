@@ -1,12 +1,5 @@
----
-title: "Starting with data"
-author: "Data Carpentry contributors"
-minutes: 20
----
+# Starting with data
 
-```{r, echo=FALSE, purl=FALSE, message = FALSE}
-source("setup.R")
-```
 
 ------------
 
@@ -53,14 +46,21 @@ load into memory the content of the CSV file as an object of class `data.frame`.
 
 To download the data into the `data/` subdirectory, run the following:
 
-```{r, eval=FALSE, purl=TRUE}
+```{r, eval=TRUE, show=FALSE}
+if (!file.exists("data/portal_data_joined.csv"))
+    download.file("https://ndownloader.figshare.com/files/2292169",
+                  "data/portal_data_joined.csv")
+```
+
+
+```{r, eval=FALSE}
 download.file("https://ndownloader.figshare.com/files/2292169",
               "data/portal_data_joined.csv")
 ```
 
 You are now ready to load the data:
 
-```{r, eval=TRUE,  purl=FALSE}
+```{r, eval=TRUE}
 surveys <- read.csv('data/portal_data_joined.csv')
 ```
 
@@ -551,7 +551,7 @@ character vector formatted as "YYYY-MM-DD".
 
 Start by loading the required package:
 
-```{r load-package, message=FALSE, purl=FALSE}
+```{r load-package1, message=FALSE, purl=FALSE}
 library(lubridate)
 ```
 
@@ -599,4 +599,3 @@ surveys_dates[is.na(surveys$date)]
 Why did these dates fail to parse? If you had to use these data for your
 analyses, how would you deal with this situation?
 
-<p style="text-align: right; font-size: small;">Page built on: `r format(Sys.time())`</p>

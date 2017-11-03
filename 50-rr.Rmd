@@ -2,6 +2,7 @@
 
 - Short explanation of markdown and Rmarkdown
 - Rmarkdown file or notebook
+- show also DT::datatable
 - Reminder about session info
 
 > Challenge

@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="visualisation-of-high-dimensional-data-in-r.html">
-<link rel="next" href="navigating-the-bioconductor-project.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="before-we-start.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -268,283 +268,195 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="interactive-visualisation" class="section level1">
-<h1><span class="header-section-number">Chapter 11</span> Interactive visualisation</h1>
-<div id="interactivity-graphs" class="section level2">
-<h2><span class="header-section-number">11.1</span> Interactivity graphs</h2>
+<div id="tidy-data" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Tidy data</h1>
 <blockquote>
-<p>This section is based on the on-line <a href="http://ggvis.rstudio.com/"><code>ggvis</code> documentation</a></p>
+<p>This material is based on the Data Carpentry <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Data Organization in Spreadsheets</a> lesson.</p>
 </blockquote>
-<p>The goal of ggvis is to make it easy to build interactive graphics for exploratory data analysis. <a href="http://ggvis.rstudio.com/"><code>ggvis</code></a> has a similar underlying theory to <code>ggplot2</code> (the grammar of graphics), but it’s expressed a little differently, and adds new features to make your plots interactive. <a href="http://ggvis.rstudio.com/"><code>ggvis</code></a> also incorporates shiny’s reactive programming model and <code>dplyr</code>’s grammar of data transformation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;ggvis&quot;</span>)
-sml &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(surveys), <span class="fl">1e3</span>)
-surveys_sml &lt;-<span class="st"> </span>surveys_complete[sml, ]</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggvis</span>(surveys_sml, <span class="dt">x =</span> <span class="op">~</span>weight, <span class="dt">y =</span> <span class="op">~</span>hindfoot_length)
-p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_points</span>()</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys_sml <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">ggvis</span>(<span class="dt">x =</span> <span class="op">~</span>weight, <span class="dt">y =</span> <span class="op">~</span>hindfoot_length,
-          <span class="dt">fill =</span> <span class="op">~</span>species_id) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">layer_points</span>()</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_points</span>(<span class="dt">fill =</span> <span class="op">~</span>species_id)
-p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_points</span>(<span class="dt">shape =</span> <span class="op">~</span>species_id)</code></pre></div>
-<p>To set fixed plotting parameters, use <code>:=</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_points</span>(fill <span class="op">:</span><span class="er">=</span><span class="st"> &quot;red&quot;</span>, stroke <span class="op">:</span><span class="er">=</span><span class="st"> &quot;black&quot;</span>)
-p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_points</span>(size <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">300</span>, opacity <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="fl">0.4</span>)
-p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_points</span>(shape <span class="op">:</span><span class="er">=</span><span class="st"> &quot;cross&quot;</span>)</code></pre></div>
-<div id="interactivity" class="section level3">
-<h3><span class="header-section-number">11.1.1</span> Interactivity</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_points</span>(
-          size <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">input_slider</span>(<span class="dv">10</span>, <span class="dv">100</span>),
-          opacity <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">input_slider</span>(<span class="dv">0</span>, <span class="dv">1</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">layer_points</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">add_tooltip</span>(<span class="cf">function</span>(df) df<span class="op">$</span>weight)</code></pre></div>
-<ul>
-<li><code>input_slider()</code></li>
-<li><code>input_checkbox()</code></li>
-<li><code>input_checkboxgroup()</code></li>
-<li><code>input_numeric()</code></li>
-<li><code>input_radiobuttons()</code></li>
-<li><code>input_select()</code></li>
-<li><code>input_text()</code></li>
-</ul>
-<p>See the <a href="http://ggvis.rstudio.com/interactivity.html">interactivity vignette</a> for details.</p>
-</div>
-<div id="layers" class="section level3">
-<h3><span class="header-section-number">11.1.2</span> Layers</h3>
-<p><strong>Simple layers</strong></p>
-<ul>
-<li><code>layer_points()</code>, with properties x, y, shape, stroke, fill, strokeOpacity, fillOpacity, and opacity.</li>
-<li><code>layer_paths()</code>, for paths and polygons (using the fill argument).</li>
-<li><code>layer_ribbons()</code> for filled areas.</li>
-<li><code>layer_rects()</code>, <code>layer_text()</code>.</li>
-</ul>
-<p><strong>Compound layers</strong>, which which combine data transformations with one or more simple layers.</p>
-<ul>
-<li><code>layer_lines()</code> which automatically orders by the x variable with <code>arrange()</code>.</li>
-<li><code>layer_histograms()</code> and <code>layer_freqpolys()</code>, which first bin the data with <code>compute_bin()</code>.</li>
-<li><code>layer_smooths()</code>, which fits and plots a smooth model to the data using <code>compute_smooth()</code>.</li>
-</ul>
-<p>See the <a href="http://ggvis.rstudio.com/layers.html">layers vignette</a> for details.</p>
-<p>Like for <code>ggplot2</code>’s geoms, we can overly multiple layers:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">layer_points</span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">layer_smooths</span>(stroke <span class="op">:</span><span class="er">=</span><span class="st"> &quot;red&quot;</span>)</code></pre></div>
-</div>
-<div id="more-components" class="section level3">
-<h3><span class="header-section-number">11.1.3</span> More components</h3>
-<ul>
-<li><p><code>scales</code>, to control the mapping between data and visual properties; see the <a href="http://ggvis.rstudio.com/properties-scales.html">properties and scales vignette</a>.</p></li>
-<li><p><code>legends</code> and <code>axes</code> to control the appearance of the guides produced by the scales. See the <a href="http://ggvis.rstudio.com/axes-legends.html">axes and legends vignette</a>.</p></li>
-</ul>
-</div>
-<div id="challenge-14" class="section level3">
-<h3><span class="header-section-number">11.1.4</span> Challenge</h3>
-<blockquote>
-<p>Apply a PCA analysis on the <code>iris</code> data, and use <code>ggvis</code> to visualise that data along PC1 and PC2, controlling the point size using a slide bar.</p>
-</blockquote>
-</div>
-</div>
-<div id="interactive-apps" class="section level2">
-<h2><span class="header-section-number">11.2</span> Interactive apps</h2>
-<blockquote>
-<p>This section is based on RStudio <code>shiny</code> tutorials.</p>
-</blockquote>
-<p>From the <a href="https://shiny.rstudio.com/"><code>shiny</code></a> package <a href="https://shiny.rstudio.com/">website</a>:</p>
-<blockquote>
-<p>Shiny is an R package that makes it easy to build interactive web apps straight from R.</p>
-</blockquote>
-<p>When using <a href="https://shiny.rstudio.com/"><code>shiny</code></a>, one tends to aim for more complete, long-lasting applications, rather then <em>simply</em> and transient visualisations.</p>
-<p>A <a href="https://shiny.rstudio.com/"><code>shiny</code></a> application is composed of a <em>ui</em> (user interface) and a server that exchange information using a programming paradigm called <em>reactive programming</em>: changes performed by the user to the <em>ui</em> trigger a reaction by the <em>server</em> and the output is updated accordingly.</p>
-<p>Before looking at the details of such an architecture, let’s build a simple example from scratch. This app, shown below, uses the <code>faithful</code> data, describing the wainting time between eruptions and the duration of the reuption for the Old Faithful geyser in Yellowstone National Park, Wyoming, USA.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(faithful)</code></pre></div>
-<pre><code>##   eruptions waiting
-## 1     3.600      79
-## 2     1.800      54
-## 3     3.333      74
-## 4     2.283      62
-## 5     4.533      85
-## 6     2.883      55</code></pre>
-<p>It shows the distribution of waiting times along a histogram (produced by the <code>hist</code> function) and provides a slider to adjust the number of bins (the <code>breaks</code> argument to <code>hist</code>).</p>
-<iframe src="https://lgatto.shinyapps.io/shiny-app1/?showcase=0" width="672" height="650px">
-</iframe>
-<div id="creation-of-our-fist-shiny-app" class="section level3">
-<h3><span class="header-section-number">11.2.1</span> Creation of our fist shiny app</h3>
-<ol style="list-style-type: decimal">
-<li>Create a directory that will contain the app, such as for example <code>&quot;shinyapp&quot;</code>.</li>
-<li>In this directory, create the <em>ui</em> and <em>server</em> files, named <code>ui.R</code> and <code>server.R</code>.</li>
-<li>In the <code>ui.R</code> file, copy and paste the following code, that defines a the general UI containing</li>
-</ol>
-<ul>
-<li>a titel panel with a page title;</li>
-<li>a page with a sidebar layout, containing a sidebar and a main panel;</li>
-<li>the sidebar panel contains a slider defining the <code>bins</code> variable (ranging from 1 to 50 with default value of 30);</li>
-<li>the main panel that plots the <code>distPlot</code> figure.</li>
-</ul>
-<pre><code>library(shiny)
-# Define UI for application that draws a histogram
-shinyUI(fluidPage(
-  # Application title
-  titlePanel(&quot;Hello Shiny!&quot;),
-  # Sidebar with a slider input for the number of bins
-  sidebarLayout(
-    sidebarPanel(
-      sliderInput(&quot;bins&quot;,
-                  &quot;Number of bins:&quot;,
-                  min = 1,
-                  max = 50,
-                  value = 30)
-    ),
-    # Show a plot of the generated distribution
-    mainPanel(
-      plotOutput(&quot;distPlot&quot;)
-    )
-  )
-))</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>In the <code>server.R</code> file, copy and paste the following code, that defines the server backend</li>
-</ol>
-<ul>
-<li>the server is a function that manages an <code>input</code> and an <code>ouput</code>;</li>
-<li>the input is the <code>bins</code> defined in the <em>ui</em> that can be accessed with <code>input$bins</code>;</li>
-<li>the outputs are created by assigning <code>output$distPlot</code> a value with a <em>render</em> functon (here <code>renderPlot</code>).</li>
-</ul>
-<pre><code>library(shiny)
-# Define server logic required to draw a histogram
-shinyServer(function(input, output) {
-  # Expression that generates a histogram. The expression is
-  # wrapped in a call to renderPlot to indicate that:
-  #
-  #  1) It is &quot;reactive&quot; and therefore should be automatically
-  #     re-executed when inputs change
-  #  2) Its output type is a plot
-  output$distPlot &lt;- renderPlot({
-    x    &lt;- faithful[, 2]  # Old Faithful Geyser data
-    bins &lt;- seq(min(x), max(x), length.out = input$bins + 1)
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = &#39;darkgray&#39;, border = &#39;white&#39;)
-  })
-})</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Run the app with <code>shiny::runApp(&quot;shinyapp&quot;)</code> or simply <code>shiny::runApp()</code> of your working directory is the app dir.</li>
-</ol>
-<blockquote>
-<p>Challenge</p>
-<p>Run your <code>shinyapp</code> application, as described above.</p>
-</blockquote>
-</div>
-<div id="the-shiny-infrastructure" class="section level3">
-<h3><span class="header-section-number">11.2.2</span> The shiny infrastructure</h3>
-<p>The overview figure below is based and makes reference to lessons of the <a href="https://shiny.rstudio.com/tutorial/">written tutorial</a>.</p>
+<div id="introduction-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Introduction</h2>
 <div class="figure">
-<img src="figs/shiny-overview.jpg" />
+<img src="figs/analysis.png" />
+
+</div>
+<p>However, most time is spend in clearning up and preparing the data, rather than actually analysing it.</p>
+<div class="figure">
+<img src="figs/families.jpg" />
+
+</div>
+<blockquote>
+<p>Like families, tidy datasets are all alike but every messy dataset is messy in its own way - (Hadley Wickham)</p>
+</blockquote>
+<p>An example of a really messy data!</p>
+<div class="figure">
+<img src="figs/messy.png" />
 
 </div>
 </div>
-<div id="another-shiny-app" class="section level3">
-<h3><span class="header-section-number">11.2.3</span> Another shiny app</h3>
-<iframe src="https://lgatto.shinyapps.io/shiny-app2/?showcase=0" width="672" height="650px">
-</iframe>
-<p>The <em>ui</em> uses the <code>fluidPage</code> UI and a sidebar layout. The sidebar panel contains a <code>textInput</code> with a caption, a <code>selectInput</code> to choose from the three possible datasets <code>rock</code>, <code>pressure</code> or <code>cars</code>, and a <code>numericInput</code> to define how many observations to show.</p>
-<p>The main panel use a <code>textOutput</code> to display the caption, a <code>verbatimOutput</code> to show the output of the <code>summary</code> function on the data chosen in the <code>selectInput</code> above, and a <code>tableOutput</code> to show the head of that same data.</p>
-<pre><code>library(&quot;shiny&quot;)
-# Define UI for dataset viewer application
-shinyUI(fluidPage(
-  # Application title
-  titlePanel(&quot;Reactivity&quot;),
-  # Sidebar with controls to provide a caption, select a dataset,
-  # and specify the number of observations to view. Note that
-  # changes made to the caption in the textInput control are
-  # updated in the output area immediately as you type
-  sidebarLayout(
-    sidebarPanel(
-      textInput(&quot;caption&quot;, &quot;Caption:&quot;, &quot;Data Summary&quot;),
-      selectInput(&quot;dataset&quot;, &quot;Choose a dataset:&quot;, 
-                  choices = c(&quot;rock&quot;, &quot;pressure&quot;, &quot;cars&quot;)),
-      numericInput(&quot;obs&quot;, &quot;Number of observations to view:&quot;, 10)
-    ),
-    # Show the caption, a summary of the dataset and an HTML 
-   # table with the requested number of observations
-    mainPanel(
-      h3(textOutput(&quot;caption&quot;, container = span)),
-      verbatimTextOutput(&quot;summary&quot;), 
-      tableOutput(&quot;view&quot;)
-    )
-  )
-))</code></pre>
-<p>The <em>server</em> defines a <code>reactive</code> expression that sets the appropriate data based on the <code>selectInput</code> above. It produces three outputs:</p>
-<ol style="list-style-type: decimal">
-<li>the caption using <code>renderText</code> and the caption defined above;</li>
-<li>the appropriate summary using <code>renderPrint</code> and the reactive data;</li>
-<li>the table using <code>renderTable</code> to produce the head with the reactive data and number of observations defined by the <code>numbericInput</code> above.</li>
-</ol>
-<pre><code>library(shiny)
-library(datasets)
-# Define server logic required to summarize and view the selected
-# dataset
-shinyServer(function(input, output) {
-  # By declaring datasetInput as a reactive expression we ensure 
-  # that:
-  #
-  #  1) It is only called when the inputs it depends on changes
-  #  2) The computation and result are shared by all the callers 
-  #   (it only executes a single time)
-  #
-  datasetInput &lt;- reactive({
-    switch(input$dataset,
-           &quot;rock&quot; = rock,
-           &quot;pressure&quot; = pressure,
-           &quot;cars&quot; = cars)
-  })
-  # The output$caption is computed based on a reactive expression
-  # that returns input$caption. When the user changes the
-  # &quot;caption&quot; field:
-  #
-  #  1) This function is automatically called to recompute the 
-  #     output 
-  #  2) The new caption is pushed back to the browser for 
-  #     re-display
-  # 
-  # Note that because the data-oriented reactive expressions
-  # below don&#39;t depend on input$caption, those expressions are
-  # NOT called when input$caption changes.
-  output$caption &lt;- renderText({
-    input$caption
-  })
-  # The output$summary depends on the datasetInput reactive
-  # expression, so will be re-executed whenever datasetInput is
-  # invalidated
-  # (i.e. whenever the input$dataset changes)
-  output$summary &lt;- renderPrint({
-    dataset &lt;- datasetInput()
-    summary(dataset)
-  })
-  # The output$view depends on both the databaseInput reactive
-  # expression and input$obs, so will be re-executed whenever
-  # input$dataset or input$obs is changed. 
-  output$view &lt;- renderTable({
-    head(datasetInput(), n = input$obs)
-  })
-})</code></pre>
-<blockquote>
-<p>Challenge</p>
-<p>Using the code above, implement and test the app.</p>
-</blockquote>
+<div id="common-spreadsheet-errors" class="section level2">
+<h2><span class="header-section-number">2.2</span> Common Spreadsheet Errors</h2>
+<p>There are a few potential errors to be on the lookout for in your own data as well as data from collaborators or the Internet. If you are aware of the errors and the possible negative effect on downstream data analysis and result interpretation, it might motivate yourself and your project members to try and avoid them. Making small changes to the way you format your data in spreadsheets, can have a great impact on efficiency and reliability when it comes to data cleaning and analysis.</p>
+<ul>
+<li><a href="#tables">Using multiple tables</a></li>
+<li><a href="#tabs">Using multiple tabs</a></li>
+<li><a href="#zeros">Not filling in zeros</a></li>
+<li><a href="#null">Using problematic null values</a></li>
+<li><a href="#formatting">Using formatting to convey information</a></li>
+<li><a href="#formatting_pretty">Using formatting to make the data sheet look pretty</a></li>
+<li><a href="#units">Placing comments or units in cells</a></li>
+<li><a href="#info">Entering more than one piece of information in a cell</a></li>
+<li><a href="#field_name">Using problematic field names</a></li>
+<li><a href="#special">Using special characters in data</a></li>
+<li><a href="#metadata">Inclusion of metadata in data table</a></li>
+<li>Date formatting</li>
+</ul>
+<div id="using-multiple-tables" class="section level3 unnumbered">
+<h3><a name="tables"></a> Using multiple tables</h3>
+<p>A common strategy is creating multiple data tables within one spreadsheet. This confuses the computer, so don’t do this! When you create multiple tables within one spreadsheet, you’re drawing false associations between things for the computer, which sees each row as an observation. You’re also potentially using the same field name in multiple places, which will make it harder to clean your data up into a usable form. The example below depicts the problem:</p>
+<div class="figure">
+<img src="../fig/2_datasheet_example.jpg" alt="multiple tabs" />
+<p class="caption">multiple tabs</p>
 </div>
-<div id="challenges-1" class="section level3">
-<h3><span class="header-section-number">11.2.4</span> Challenges</h3>
-<blockquote>
+<p>In the example above, the computer will see (for example) row 4 and assume that all columns A-AF refer to the same sample. This row actually represents four distinct samples (sample 1 for each of four different collection dates - May 29th, June 12th, June 19th, and June 26th), as well as some calculated summary statistics (an average (avr) and standard error of measurement (SEM)) for two of those samples. Other rows are similarly problematic.</p>
+</div>
+<div id="using-multiple-tabs" class="section level3 unnumbered">
+<h3><a name="tabs"></a> Using multiple tabs</h3>
+<p>But what about workbook tabs? That seems like an easy way to organize data, right? Well, yes and no. When you create extra tabs, you fail to allow the computer to see connections in the data that are there (you have to introduce spreadsheet application-specific functions or scripting to ensure this connection). Say, for instance, you make a separate tab for each day you take a measurement.</p>
+<p>This isn’t good practice for two reasons:</p>
 <ol style="list-style-type: decimal">
-<li>Create an app to visualise the <code>iris</code> data where the user can select along which features to view the data.</li>
+<li><p>you are more likely to accidentally add inconsistencies to your data if each time you take a measurement, you start recording data in a new tab, and</p></li>
+<li><p>even if you manage to prevent all inconsistencies from creeping in, you will add an extra step for yourself before you analyze the data because you will have to combine these data into a single datatable. You will have to explicitly tell the computer how to combine tabs - and if the tabs are inconsistently formatted, you might even have to do it manually.</p></li>
 </ol>
-</blockquote>
-<blockquote>
-<ol start="2" style="list-style-type: decimal">
-<li>As above, where the visualisation is a PCA plot and the user chooses the PCs.</li>
-</ol>
-</blockquote>
+<p>The next time you’re entering data, and you go to create another tab or table, ask yourself if you could avoid adding this tab by adding another column to your original spreadsheet.</p>
+<p>Your data sheet might get very long over the course of the experiment. This makes it harder to enter data if you can’t see your headers at the tnop of the spreadsheet. But don’t repeat your header row. These can easily get mixed into the data, leading to problems down the road.</p>
+<p>Instead you can freeze the column headers so that they remain visible even when you have a spreadsheet with many rows.</p>
+</div>
+<div id="not-filling-in-zeros" class="section level3 unnumbered">
+<h3><a name="zeros"></a> Not filling in zeros</h3>
+<p>It might be that when you’re measuring something, it’s usually a zero, say the number of times a rabbit is observed in the survey. Why bother writing in the number zero in that column, when it’s mostly zeros?</p>
+<p>However, there’s a difference between a zero and a blank cell in a spreadsheet. To the computer, a zero is actually data. You measured or counted it. A blank cell means that it wasn’t measured and the computer will interpret it as an unknown value (otherwise known as a null value).</p>
+<p>The spreadsheets or statistical programs will likely mis-interpret blank cells that you intend to be zeros. By not entering the value of your observation, you are telling your computer to represent that data as unknown or missing (null). This can cause problems with subsequent calculations or analyses. For example, the average of a set of numbers which includes a single null value is always null (because the computer can’t guess the value of the missing observations). Because of this, it’s very important to record zeros as zeros and truly missing data as nulls.</p>
+</div>
+<div id="using-problematic-null-values" class="section level3 unnumbered">
+<h3><a name="null"></a> Using problematic null values</h3>
+<p><strong>Example</strong>: using -999 or other numerical values (or zero) to represent missing data.</p>
+<p><strong>Solution</strong>: One common practice is to record unknown or missing data as -999, 999, or 0. Many statistical programs will not recognize that these are intended to represent missing (null) values. How these values are interpreted will depend on the software you use to analyze your data. It is essential to use a clearly defined and consistent null indicator. Blanks (most applications) and NA (for R) are good choices. White et al, 2013, explain good choices for indicating null values for different software applications in their article: <a href="https://peerj.com/preprints/7/">Nine simple ways to make it easier to (re)use your data.</a> Ideas in Ecology and Evolution.</p>
+<div class="figure">
+<img src="../figs/3_white_table_1.jpg" alt="White et al." />
+<p class="caption">White et al.</p>
+</div>
+</div>
+<div id="using-formatting-to-convey-information" class="section level3 unnumbered">
+<h3><a name="formatting"></a> Using formatting to convey information</h3>
+<p><strong>Example</strong>: highlighting cells, rows or columns that should be excluded from an analysis, leaving blank rows to indicate separations in data.</p>
+<div class="figure">
+<img src="../figs/formatting.png" alt="formatting" />
+<p class="caption">formatting</p>
+</div>
+<p><strong>Solution</strong>: create a new field to encode which data should be excluded.</p>
+<div class="figure">
+<img src="../figs/good_formatting.png" alt="good formatting" />
+<p class="caption">good formatting</p>
+</div>
+</div>
+<div id="using-formatting-to-make-the-data-sheet-look-pretty" class="section level3 unnumbered">
+<h3><a name="formatting_pretty"></a> Using formatting to make the data sheet look pretty</h3>
+<p><strong>Example</strong>: merging cells.</p>
+<p><strong>Solution</strong>: If you’re not careful, formatting a worksheet to be more aesthetically pleasing can compromise your computer’s ability to see associations in the data. Merged cells will make your data unreadable by statistics software. Consider restructuring your data in such a way that you will not need to merge cells to organize your data.</p>
+</div>
+<div id="placing-comments-or-units-in-cells" class="section level3 unnumbered">
+<h3><a name="units"></a> Placing comments or units in cells</h3>
+<p><strong>Example</strong>: Your data was collected, in part, by a summer student who you later found out was mis-identifying some of your species, some of the time. You want a way to note these data are suspect.</p>
+<p><strong>Solution</strong>: Most analysis software can’t see Excel or LibreOffice comments, and would be confused by comments placed within your data cells. As described above for formatting, create another field if you need to add notes to cells. Similarly, don’t include units in cells: ideally, all the measurements you place in one column should be in the same unit, but if for some reason they aren’t, create another field and specify the units the cell is in.</p>
+</div>
+<div id="entering-more-than-one-piece-of-information-in-a-cell" class="section level3 unnumbered">
+<h3><a name="info"></a> Entering more than one piece of information in a cell</h3>
+<p><strong>Example</strong>: You find one male, and one female of the same species. You enter this as 1M, 1F.</p>
+<p><strong>Solution</strong>: Don’t include more than one piece of information in a cell. This will limit the ways in which you can analyze your data. If you need both these measurements, design your data sheet to include this information. For example, include one column for number of individuals and a separate column for sex.</p>
+</div>
+<div id="using-problematic-field-names" class="section level3 unnumbered">
+<h3><a name="field_name"></a> Using problematic field names</h3>
+<p>Choose descriptive field names, but be careful not to include spaces, numbers, or special characters of any kind. Spaces can be misinterpreted by parsers that use whitespace as delimiters and some programs don’t like field names that are text strings that start with numbers.</p>
+<p>Underscores (<code>_</code>) are a good alternative to spaces. Consider writing names in camel case (like this: ExampleFileName) to improve readability. Remember that abbreviations that make sense at the moment may not be so obvious in 6 months, but don’t overdo it with names that are excessively long. Including the units in the field names avoids confusion and enables others to readily interpret your fields.</p>
+<p><strong>Examples</strong></p>
+<table align="left" style="width =50%; border: 1px solid black;">
+<tr>
+<pre><code>&lt;td&gt; &lt;b&gt;Good Name&lt;/b&gt;&lt;/td&gt; &lt;br /&gt;
+&lt;td&gt; &lt;b&gt;Good Alternative &lt;/b&gt; &lt;/td&gt;&lt;br /&gt;
+&lt;td&gt; &lt;b&gt;Avoid &lt;/b&gt;&lt;/td&gt;&lt;br /&gt;</code></pre>
+</tr>
+<tr>
+<pre><code>&lt;td&gt; Max_temp_C&lt;/td&gt;
+&lt;td&gt; MaxTemp &lt;/td&gt;
+&lt;td&gt; Maximum Temp (°C) &lt;/td&gt;</code></pre>
+</tr>
+<tr>
+<pre><code>&lt;td&gt; Precipitation_mm&lt;/td&gt;
+&lt;td&gt; Precipitation&lt;/td&gt;
+&lt;td&gt; precmm &lt;/td&gt;</code></pre>
+</tr>
+<tr>
+<pre><code>&lt;td&gt; Mean_year_growth&lt;/td&gt;
+&lt;td&gt; MeanYearGrowth &lt;/td&gt;
+&lt;td&gt; Mean growth/year&lt;/td&gt;  </code></pre>
+</tr>
+<tr>
+<pre><code>&lt;td&gt; sex &lt;/td&gt;
+&lt;td&gt; sex &lt;/td&gt;  
+&lt;td&gt; M/F &lt;/td&gt;</code></pre>
+</tr>
+<tr>
+<pre><code>&lt;td&gt; weight &lt;/td&gt;
+&lt;td&gt; weight &lt;/td&gt;   
+&lt;td&gt; w.&lt;/td&gt;    </code></pre>
+</tr>
+<tr>
+<pre><code>&lt;td&gt; cell_type &lt;/td&gt;
+&lt;td&gt; CellType &lt;/td&gt;
+&lt;td&gt; Cell Type &lt;/td&gt;</code></pre>
+</tr>
+<tr>
+<pre><code>&lt;td&gt; Observation_01 &lt;/td&gt;
+&lt;td&gt; first_observation&lt;/td&gt;
+&lt;td&gt; 1st Obs&lt;/td&gt;</code></pre>
+</tr>
+</table>
+</div>
+<div id="using-special-characters-in-data" class="section level3 unnumbered">
+<h3><a name="special"></a> Using special characters in data</h3>
+<p><strong>Example</strong>: You treat your spreadsheet program as a word processor when writing notes, for example copying data directly from Word or other applications.</p>
+<p><strong>Solution</strong>: This is a common strategy. For example, when writing longer text in a cell, people often include line breaks, em-dashes, etc in their spreadsheet. Also, when copying data in from applications such as Word, formatting and fancy non-standard characters (such as left- and right-aligned quotation marks) are included. When exporting this data into a coding/statistical environment or into a relational database, dangerous things may occur, such as lines being cut in half and encoding errors being thrown.</p>
+<p>General best practice is to avoid adding characters such as newlines, tabs, and vertical tabs. In other words, treat a text cell as if it were a simple web form that can only contain text and spaces.</p>
+</div>
+<div id="inclusion-of-metadata-in-data-table" class="section level3 unnumbered">
+<h3><a name="metadata"></a> Inclusion of metadata in data table</h3>
+<p><strong>Example</strong>: You add a legend at the top or bottom of your data table explaining column meaning, units, exceptions, etc.</p>
+<p><strong>Solution</strong>: Recording data about your data (“metadata”) is essential. You may be on intimate terms with your dataset while you are collecting and analysing it, but the chances that you will still remember that the variable “sglmemgp” means single member of group, for example, or the exact algorithm you used to transform a variable or create a derived one, after a few months, a year, or more are slim.</p>
+<p>As well, there are many reasons other people may want to examine or use your data - to understand your findings, to verify your findings, to review your submitted publication, to replicate your results, to design a similar study, or even to archive your data for access and re-use by others. While digital data by definition are machine-readable, understanding their meaning is a job for human beings. The importance of documenting your data during the collection and analysis phase of your research cannot be overestimated, especially if your research is going to be part of the scholarly record.</p>
+<p>However, metadata should not be contained in the data file itself. Unlike a table in a paper or a supplemental file, metadata (in the form of legends) should not be included in a data file since this information is not data, and including it can disrupt how computer programs interpret your data file. Rather, metadata should be stored as a separate file in the same directory as your data file, preferably in plain text format with a name that clearly associates it with your data file. Because metadata files are free text format, they also allow you to encode comments, units, information about how null values are encoded, etc. that are important to document but can disrupt the formatting of your data file.</p>
+<p>Additionally, file or database level metadata describes how files that make up the dataset relate to each other; what format are they are in; and whether they supercede or are superceded by previous files. A folder-level readme.txt file is the classic way of accounting for all the files and folders in a project.</p>
+</div>
+</div>
+<div id="key-points" class="section level2">
+<h2><span class="header-section-number">2.3</span> Key points</h2>
+<ul>
+<li>Avoid using multiple tables within one spreadsheet.</li>
+<li>Avoid spreading data across multiple tabs (but do use a new tab to record data cleaning or manipulations).</li>
+<li>Record zeros as zeros.</li>
+<li>Use an appropriate null value to record missing data.</li>
+<li>Don’t use formatting to convey information or to make your spreadsheet look pretty.</li>
+<li>Place comments in a separate column.</li>
+<li>Record units in column headers.</li>
+<li>Include only one piece of information in a cell.</li>
+<li>Avoid spaces, numbers and special characters in column headers.</li>
+<li>Avoid special characters in your data.</li>
+<li>Record metadata in a separate plain text file.</li>
+</ul>
+<p>An excellent reference, in particular with regard to R scripting is</p>
+<ul>
+<li>Hadley Wickham, Tidy Data, Vol. 59, Issue 10, Sep 2014, Journal of Statistical Software. <a href="http://www.jstatsoft.org/v59/i10" class="uri">http://www.jstatsoft.org/v59/i10</a>.</li>
+</ul>
 
-</div>
 </div>
 </div>
             </section>
@@ -552,8 +464,8 @@ shinyServer(function(input, output) {
           </div>
         </div>
       </div>
-<a href="visualisation-of-high-dimensional-data-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="navigating-the-bioconductor-project.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="before-we-start.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

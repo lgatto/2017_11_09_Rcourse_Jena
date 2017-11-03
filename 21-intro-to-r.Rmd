@@ -1,15 +1,4 @@
----
-title: Introduction to R
-author: Data Carpentry contributors
-minutes: 45
----
-
-
-```{r, echo=FALSE, purl=FALSE, message = FALSE}
-source("setup.R")
-```
-
-------------
+# Introduction to R
 
 > ### Learning Objectives
 >
@@ -24,13 +13,9 @@ source("setup.R")
 > * Subset and extract values from vectors.
 > * Correctly define and handle missing values in vectors.
 
-------------
 
 ## Creating objects in R
 
-```{r, echo=FALSE, purl=TRUE}
-### Creating objects in R
-```
 
 You can get output from R simply by typing math in the console:
 
@@ -543,4 +528,3 @@ structures, we are ready to start working with the Portal dataset we have been
 using in the other lessons, and learn about data frames.
 
 
-<p style="text-align: right; font-size: small;">Page built on: `r format(Sys.time())`</p>
