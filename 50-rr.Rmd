@@ -1,0 +1,15 @@
+# Reproducible research with Rmarkdown 
+
+- Short explanation of markdown and Rmarkdown
+- Rmarkdown file or notebook
+- Reminder about session info
+
+> Challenge
+>
+> Prepare an Rmarkdown report summarising the portal ecology data. The
+> report should include a *Material and methods* section where the
+> data is read in (ideally from the online file) and briefly
+> described, a *Data preparation* section where rows with missing
+> values are filtered out, and a *Visualisation* section where one or
+> two plots are rendered. Finish your report with a *Session
+> information* section.

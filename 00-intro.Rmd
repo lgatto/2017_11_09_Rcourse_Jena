@@ -9,14 +9,17 @@ formatted as a `bookdown` document
 #### Day 1  {-}
 
 - Setup and introduction
+
+> The following material is based on Data Carpentry's the
+> [Data analisis and visualisation](http://www.datacarpentry.org/R-ecology-lesson/) lessons.
+
 - Spreadsheets and tidy data (1 hour)
 - Data manipulation using the tidyverse (1.5 hours)
 - Visualisation with ggplot2 (1.5 hours)
+- Reproducible research with Rmarkdown (0.5 hour)
 - Wrap-up
 
 #### Day 2 {-}
-
-- Reproducible research with Rmarkdown (1 hour)
 - R package development (about 1.5 hours)
 - Viz. of high-dimensional data (bit.ly/highdimvis) (1.5 hours)
 - Interactive visualisation: ggvis, shiny (1.5 hours)

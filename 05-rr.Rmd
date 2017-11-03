@@ -1,1 +1,0 @@
-# Reproducible research with Rmarkdown 

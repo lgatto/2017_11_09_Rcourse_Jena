@@ -1,0 +1,9 @@
+# Navigating the Bioconductor project
+
+- The biocViews
+- The support forum
+- Package landing pages
+- Workflows
+- Core infrastructure
+- A note on tidy data and high throughput biology data
+
