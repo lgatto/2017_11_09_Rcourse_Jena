@@ -237,13 +237,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html"><i class="fa fa-check"></i><b>12</b> Navigating the Bioconductor project</a><ul>
 <li class="chapter" data-level="12.1" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#biocviews"><i class="fa fa-check"></i><b>12.1</b> <em>biocViews</em></a></li>
 <li class="chapter" data-level="12.2" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#workflows"><i class="fa fa-check"></i><b>12.2</b> Workflows</a></li>
-<li class="chapter" data-level="12.3" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#learning-about-specific-packages"><i class="fa fa-check"></i><b>12.3</b> Learning about specific packages</a></li>
-<li class="chapter" data-level="12.4" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#installation-1"><i class="fa fa-check"></i><b>12.4</b> Installation</a></li>
-<li class="chapter" data-level="12.5" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#versions"><i class="fa fa-check"></i><b>12.5</b> Versions</a></li>
-<li class="chapter" data-level="12.6" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#getting-help"><i class="fa fa-check"></i><b>12.6</b> Getting help</a></li>
-<li class="chapter" data-level="12.7" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#data-structures"><i class="fa fa-check"></i><b>12.7</b> Data structures</a></li>
-<li class="chapter" data-level="12.8" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#more"><i class="fa fa-check"></i><b>12.8</b> More</a></li>
-<li class="chapter" data-level="12.9" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#challenges-1"><i class="fa fa-check"></i><b>12.9</b> Challenges</a></li>
+<li class="chapter" data-level="12.3" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#learning-about-specific-packages"><i class="fa fa-check"></i><b>12.3</b> Learning about specific packages</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#package-vignettes"><i class="fa fa-check"></i><b>12.3.1</b> Package vignettes</a></li>
+<li class="chapter" data-level="12.3.2" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#installation-1"><i class="fa fa-check"></i><b>12.3.2</b> Installation</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#versions"><i class="fa fa-check"></i><b>12.4</b> Versions</a></li>
+<li class="chapter" data-level="12.5" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#getting-help"><i class="fa fa-check"></i><b>12.5</b> Getting help</a></li>
+<li class="chapter" data-level="12.6" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#data-infrastructure"><i class="fa fa-check"></i><b>12.6</b> Data infrastructure</a></li>
+<li class="chapter" data-level="12.7" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#more-resources-1"><i class="fa fa-check"></i><b>12.7</b> More resources</a></li>
+<li class="chapter" data-level="12.8" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#challenges-1"><i class="fa fa-check"></i><b>12.8</b> Challenges</a></li>
 </ul></li>
 </ul>
 
@@ -282,6 +284,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <img src="figs/biocwww.png" />
 
 </div>
+<p>See also this <a href="https://bioconductor.org/developers/how-to/biocViews/">page</a> for additional information.</p>
 </div>
 <div id="workflows" class="section level2">
 <h2><span class="header-section-number">12.2</span> Workflows</h2>
@@ -312,49 +315,77 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="https://bioconductor.org/packages/MSnbase" class="uri">https://bioconductor.org/packages/MSnbase</a></li>
 </ul>
 <p>These short URLs are then resolved to their longer form to redirect to the longer package URL leading the user to the current release version of the packge.</p>
+<div id="package-vignettes" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> Package vignettes</h3>
 <p>An important quality of every Bioconductor package is the availability of a dedicated <em>vignette</em>. Vignettes are documentations (generally provided as pdf or html files) that provide a generic overview of the package, without necessarily going in detail for every function of the package.</p>
-<ul>
-<li>Package vignettes <a href="https://bioconductor.org/help/package-vignettes/" class="uri">https://bioconductor.org/help/package-vignettes/</a></li>
-<li>Also <code>knitr::purl</code></li>
-</ul>
+<p>Vignettes are special in that respect as they are produced as part of the package building process. The code in a vignette is executed and its output, whether in the form of simple text, tables and figures, are inserted in the vignette before the final file (in pdf or html) is produced. Hence, all the code and outputs are guaranteed to be correct and reproduced.</p>
+<p>Given a vignette, it is this possible to re-generate all the results. To make reproducing a long vignette as easy as possible without copy and pasting all code chunks one by one, it is possible to extract the code into an R script runnung the <code>Stangle</code> (from the <code>utils</code> package - see <a href="https://bioconductor.org/help/package-vignettes/">here</a> for details) or <code>knitr::purl</code> functions on the vignette source document.</p>
 </div>
-<div id="installation-1" class="section level2">
-<h2><span class="header-section-number">12.4</span> Installation</h2>
+<div id="installation-1" class="section level3">
+<h3><span class="header-section-number">12.3.2</span> Installation</h3>
 <p>The installation of a Bioconductor package is done using the <code>biocLite</code> function from the <code>BiocInstaller</code> package. The first time, when the package isn’t available yet, you need to run</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## try http:// if https:// URLs are not supported
 <span class="kw">source</span>(<span class="st">&quot;https://bioconductor.org/biocLite.R&quot;</span>)</code></pre></div>
 <p>The above command will install and load <code>r Biocpkg(&quot;BiocInstaller&quot;)</code>. If it isn’t loaded yet, first load it with <code>library</code>, then install your package(s) of interest with <code>biocLite</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;BiocInstaller&quot;</span>)
 <span class="kw">biocLite</span>(<span class="st">&quot;Biobase&quot;</span>)</code></pre></div>
+<p>This <a href="https://bioconductor.org/install/">page</a> provides more details on package installation and update.</p>
+</div>
 </div>
 <div id="versions" class="section level2">
-<h2><span class="header-section-number">12.5</span> Versions</h2>
+<h2><span class="header-section-number">12.4</span> Versions</h2>
+<p>It is also useful to know that at any given time, there are two Bioconductor versions - there is always a release (stable) and a development (devel) versions. For example, in October 2017, the release version is 3.6 and the development is 3.7.</p>
+<p>The individual packages have a similar scheme. Every package is available for the release and the development versions of Bioconductor. These two versions of the package have also different version numbers, where the last digit is even for the former and off for the later. Currently, the <code>rBiocpkg(&quot;MSnbase&quot;)</code> has versions <code>2.4.0</code> and <code>2.5.1</code>, respectively.</p>
+<p>Finally, every Bioconductor version is tight to an R version. To access the current Bioconductor release 3.6 version, one needs to use the latest R version, which is 3.4.2. Hence, it is important to have an up-to-date R installation to keep up with the latest developments in Bioconductor. More details <a href="https://bioconductor.org/developers/how-to/version-numbering/">here</a>.</p>
 </div>
 <div id="getting-help" class="section level2">
-<h2><span class="header-section-number">12.6</span> Getting help</h2>
+<h2><span class="header-section-number">12.5</span> Getting help</h2>
+<p>The best way to get help with regard the a Bioconductor package is to post the question on the <em>Bioconductor support forum</em> at <a href="https://support.bioconductor.org/" class="uri">https://support.bioconductor.org/</a>. Package developers generally follow the support site for questions related to their packages. See this page for <a href="https://bioconductor.org/help/support/">some details</a>.</p>
+<p>To maximise the chances to obtain a answer promptly, it is important to provide details for other to understand the question and, if relevant, reproduce the observed errors. The Bioconductor project has a dedicated <a href="https://bioconductor.org/help/support/posting-guide/">posting guide</a>. Here’s another useful guide on <a href="http://adv-r.had.co.nz/Reproducibility.html">how to write a reproducible question</a>.</p>
+<p>Packages come with a lot of documentation build in, that users are advised to read to familiarise themselves with the package and how to use it. In addition to the package vignettes are describe above, every function of class in a package is documented in great detail in their respective <em>man</em> page, that can be accessed with <code>?function</code>.</p>
+<p>There is also a dedicated <a href="https://bioconductor.org/help/support/posting-guide/"><em>developer mailing list</em></a> that is dedicated for questions and discussions related to package development.</p>
+</div>
+<div id="data-infrastructure" class="section level2">
+<h2><span class="header-section-number">12.6</span> Data infrastructure</h2>
+<p>An essential aspect that is central to Bioconductor and its success is the availability of core data infrastructure that is used across packages. Package developers are advised to make use of existing infrastructure to provide coherence, interoperability and stability to the project as a whole.</p>
+<p>Here are some core classes, taken from the <a href="https://bioconductor.org/developers/how-to/commonMethodsAndClasses/">Common Bioconductor Methods and Classes</a> page:</p>
+<div id="importing" class="section level4 unnumbered">
+<h4>Importing</h4>
 <ul>
-<li>The support forum</li>
+<li>GTF, GFF, BED, BigWig, etc., - <em><a href="http://bioconductor.org/packages/rtracklayer">rtracklayer</a></em><code>::import()</code></li>
+<li>VCF – <em><a href="http://bioconductor.org/packages/VariantAnnotation">VariantAnnotation</a></em><code>::readVcf()</code></li>
+<li>SAM / BAM – <em><a href="http://bioconductor.org/packages/Rsamtools">Rsamtools</a></em><code>::scanBam()</code>, <em><a href="http://bioconductor.org/packages/GenomicAlignments">GenomicAlignments</a></em><code>:readGAlignment*()</code></li>
+<li>FASTA – <em><a href="http://bioconductor.org/packages/Biostrings">Biostrings</a></em><code>::readDNAStringSet()</code></li>
+<li>FASTQ – <em><a href="http://bioconductor.org/packages/ShortRead">ShortRead</a></em><code>::readFastq()</code></li>
+<li>Mass spectrometry data (XML-based and mfg formats) – <em><a href="http://bioconductor.org/packages/MSnbase">MSnbase</a></em><code>::readMSData()</code>, <em><a href="http://bioconductor.org/packages/MSnbase">MSnbase</a></em><code>::readMgfData()</code></li>
 </ul>
 </div>
-<div id="data-structures" class="section level2">
-<h2><span class="header-section-number">12.7</span> Data structures</h2>
+<div id="common-classes" class="section level4 unnumbered">
+<h4>Common Classes</h4>
 <ul>
-<li><p>Core infrastructure</p></li>
-<li><p>A note on tidy data and high throughput biology data</p></li>
+<li>Rectangular feature x sample data – <em><a href="http://bioconductor.org/packages/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, …)</li>
+<li>Genomic coordinates – <em><a href="http://bioconductor.org/packages/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
+<li>DNA / RNA / AA sequences – <em><a href="http://bioconductor.org/packages/Biostrings">Biostrings</a></em><code>::*StringSet()</code></li>
+<li>Gene sets – <em><a href="http://bioconductor.org/packages/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="http://bioconductor.org/packages/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code></li>
+<li>Multi-omics data – <em><a href="http://bioconductor.org/packages/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code></li>
+<li>Single cell data – <em><a href="http://bioconductor.org/packages/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code></li>
+<li>Mass spectrometry data – <em><a href="http://bioconductor.org/packages/MSnbase">MSnbase</a></em><code>::MSnExp()</code></li>
 </ul>
 </div>
-<div id="more" class="section level2">
-<h2><span class="header-section-number">12.8</span> More</h2>
+</div>
+<div id="more-resources-1" class="section level2">
+<h2><span class="header-section-number">12.7</span> More resources</h2>
 <ul>
 <li>Videos: <a href="https://www.youtube.com/user/bioconductor" class="uri">https://www.youtube.com/user/bioconductor</a></li>
 <li>Community Contributed Help Resources: <a href="https://bioconductor.org/help/community/" class="uri">https://bioconductor.org/help/community/</a></li>
+<li>Tutorials: <a href="https://support.bioconductor.org/t/Tutorials/" class="uri">https://support.bioconductor.org/t/Tutorials/</a></li>
 </ul>
 </div>
 <div id="challenges-1" class="section level2">
-<h2><span class="header-section-number">12.9</span> Challenges</h2>
+<h2><span class="header-section-number">12.8</span> Challenges</h2>
 <ol style="list-style-type: decimal">
 <li><p>Install a Bioconductor package of your choice, discover the vignette(s) it offers, open one, and extract the R code of it.</p></li>
-<li><p>Find a package that allows reading raw mass spectrometry data and identify the specific function. Either use the <em>biocViews</em> tree or look for a possible <em>workflow</em>.</p></li>
+<li><p>Find a package that allows reading raw mass spectrometry data and identify the specific function. Either use the <em>biocViews</em> tree, look for a possible <em>workflow</em>, or look in the common methods and classes page on the Bioconductor page.</p></li>
 </ol>
 
 </div>

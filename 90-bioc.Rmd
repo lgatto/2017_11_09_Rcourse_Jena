@@ -26,6 +26,10 @@ on the homepage, under *About Bioconductor*.
 
 ![](./figs/biocwww.png)
 
+See also
+this [page](https://bioconductor.org/developers/how-to/biocViews/) for
+additional information.
+
 ## Workflows 
 
 On the other hand, people generally don't approach the Bioconductor
@@ -79,17 +83,30 @@ These short URLs are then resolved to their longer form to redirect to
 the longer package URL leading the user to the current release version
 of the packge.
 
+### Package vignettes
+
 An important quality of every Bioconductor package is the availability
 of a dedicated *vignette*. Vignettes are documentations (generally
 provided as pdf or html files) that provide a generic overview of the
 package, without necessarily going in detail for every function of the
 package.
 
+Vignettes are special in that respect as they are produced as part of
+the package building process. The code in a vignette is executed and
+its output, whether in the form of simple text, tables and figures,
+are inserted in the vignette before the final file (in pdf or html) is
+produced. Hence, all the code and outputs are guaranteed to be correct
+and reproduced.
 
-- Package vignettes https://bioconductor.org/help/package-vignettes/
-- Also `knitr::purl`
+Given a vignette, it is this possible to re-generate all the
+results. To make reproducing a long vignette as easy as possible
+without copy and pasting all code chunks one by one, it is possible to
+extract the code into an R script runnung the `Stangle` (from the
+`utils` package -
+see [here](https://bioconductor.org/help/package-vignettes/) for
+details) or `knitr::purl` functions on the vignette source document.
 
-## Installation
+### Installation
 
 The installation of a Bioconductor package is done using the
 `biocLite` function from the `BiocInstaller` package. The first time,
@@ -109,23 +126,95 @@ library("BiocInstaller")
 biocLite("Biobase")
 ```
 
+This [page](https://bioconductor.org/install/) provides more details
+on package installation and update.
+
 ## Versions
 
+It is also useful to know that at any given time, there are two
+Bioconductor versions - there is always a release (stable) and a
+development (devel) versions. For example, in October 2017, the
+release version is 3.6 and the development is 3.7. 
+
+The individual packages have a similar scheme. Every package is
+available for the release and the development versions of
+Bioconductor. These two versions of the package have also different
+version numbers, where the last digit is even for the former and off
+for the later. Currently, the `rBiocpkg("MSnbase")` has versions
+`2.4.0` and `2.5.1`, respectively.
+
+Finally, every Bioconductor version is tight to an R version. To
+access the current Bioconductor release 3.6 version, one needs to use
+the latest R version, which is 3.4.2. Hence, it is important to have
+an up-to-date R installation to keep up with the latest developments
+in Bioconductor. More
+details
+[here](https://bioconductor.org/developers/how-to/version-numbering/).
 
 ## Getting help
 
-- The support forum
+The best way to get help with regard the a Bioconductor package is to
+post the question on the *Bioconductor support forum* at
+https://support.bioconductor.org/. Package developers generally follow
+the support site for questions related to their packages. See this
+page for [some details](https://bioconductor.org/help/support/).
 
-## Data structures
+To maximise the chances to obtain a answer promptly, it is important
+to provide details for other to understand the question and, if
+relevant, reproduce the observed errors. The Bioconductor project has
+a dedicated
+[posting guide](https://bioconductor.org/help/support/posting-guide/). Here's
+another useful guide on
+[how to write a reproducible question](http://adv-r.had.co.nz/Reproducibility.html).
 
-- Core infrastructure
 
-- A note on tidy data and high throughput biology data
+Packages come with a lot of documentation build in, that users are
+advised to read to familiarise themselves with the package and how to
+use it. In addition to the package vignettes are describe above, every
+function of class in a package is documented in great detail in their
+respective *man* page, that can be accessed with `?function`.
 
-## More
+There is also a
+dedicated
+[*developer mailing list*](https://bioconductor.org/help/support/posting-guide/) that
+is dedicated for questions and discussions related to package
+development. 
+
+## Data infrastructure
+
+An essential aspect that is central to Bioconductor and its success is
+the availability of core data infrastructure that is used across
+packages. Package developers are advised to make use of existing
+infrastructure to provide coherence, interoperability and stability to
+the project as a whole. 
+
+Here are some core classes, taken from the
+[Common Bioconductor Methods and Classes](https://bioconductor.org/developers/how-to/commonMethodsAndClasses/) page:
+
+#### Importing  {-}
+
+- GTF, GFF, BED, BigWig, etc., - `r Biocpkg("rtracklayer")``::import()`
+- VCF – `r Biocpkg("VariantAnnotation")``::readVcf()`
+- SAM / BAM – `r Biocpkg("Rsamtools")``::scanBam()`, `r Biocpkg("GenomicAlignments")``:readGAlignment*()`
+- FASTA – `r Biocpkg("Biostrings")``::readDNAStringSet()`
+- FASTQ – `r Biocpkg("ShortRead")``::readFastq()`
+- Mass spectrometry data (XML-based and mfg formats) – `r Biocpkg("MSnbase")``::readMSData()`, `r Biocpkg("MSnbase")``::readMgfData()`
+
+#### Common Classes {-}
+
+- Rectangular feature x sample data – `r Biocpkg("SummarizedExperiment")``::SummarizedExperiment()` (RNAseq count matrix, microarray, ...)
+- Genomic coordinates – `r Biocpkg("GenomicRanges")``::GRanges()` (1-based, closed interval)
+- DNA / RNA / AA sequences – `r Biocpkg("Biostrings")``::*StringSet()`
+- Gene sets – `r Biocpkg("GSEABase")``::GeneSet()` `r Biocpkg("GSEABase")``::GeneSetCollection()`
+- Multi-omics data – `r Biocpkg("MultiAssayExperiment")``::MultiAssayExperiment()`
+- Single cell data – `r Biocpkg("SingleCellExperiment")``::SingleCellExperiment()`
+- Mass spectrometry data – `r Biocpkg("MSnbase")``::MSnExp()`
+
+## More resources
 
 - Videos: https://www.youtube.com/user/bioconductor
 - Community Contributed Help Resources: https://bioconductor.org/help/community/
+- Tutorials: https://support.bioconductor.org/t/Tutorials/
 
 ## Challenges
 
@@ -133,5 +222,6 @@ biocLite("Biobase")
    vignette(s) it offers, open one, and extract the R code of it.
 
 2. Find a package that allows reading raw mass spectrometry data and
-   identify the specific function. Either use the *biocViews* tree or
-   look for a possible *workflow*.
+   identify the specific function. Either use the *biocViews* tree,
+   look for a possible *workflow*, or look in the common methods and
+   classes page on the Bioconductor page.
