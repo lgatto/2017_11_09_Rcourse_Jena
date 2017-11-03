@@ -1,9 +1,137 @@
 # Navigating the Bioconductor project
 
-- The biocViews
+
+## *biocViews*
+
+Bioconductor has become a large project proposing many packages (1473
+software packages at the time of writing) across many domains of high
+throughput biology. It continues to grow, at an increasing rate, and
+it can be difficult to get started. 
+
+One way to find packages of interest is to navigate the *biocViews*
+hierarchy. Every package is tagged with a set of *biocViews*
+labels. The highest level defines 3 types of packages:
+
+- Software: packages providing a specific functionality.
+- AnnotationData: packages providing annotations, such as various
+  ontologies, species annotations, microarray annotations, ...
+- ExperimentData: packages distributing experiments.
+
+The *biocViews* page is available here
+
+- https://bioconductor.org/packages/release/BiocViews.html#___Software
+  
+It is most easily accessed by clicking on the *software packages* link
+on the homepage, under *About Bioconductor*.
+
+![](./figs/biocwww.png)
+
+## Workflows 
+
+On the other hand, people generally don't approach the Bioconductor
+project to learn the whole project, but are interested by a specific
+analysis from a Bioconductor package, that they have read in a paper
+of interest. In my opinion, it is more effective to restrict ones
+attention to a problem or analysis of interest to first immerse
+oneself into Bioconductor, then broaden up ones experience to other
+topics and packages.
+
+To to that, the project offers workflows that provide a general
+introduction to topics such as sequence analysis, annotation
+resources, RNA-Seq data analyis, Mass spectrometry and proteomics,
+CyTOF analysis, ....
+
+- https://bioconductor.org/help/workflows/
+
+A similar set of resources are published
+in [F1000Research](https://f1000research.com/) under the Bioconductor
+gateway
+
+- https://f1000research.com/gateways/bioconductor
+
+These peer-reviewed papers describe more complete pipelines involving
+one or several packages.
+
+## Learning about specific packages
+
+Each Bioconductor package has it's own *landing pages* that provides
+all necessary information about a package, including a short summary,
+its current version, the authors, how the cite the package,
+installation instructions, and links to all package vignettes. 
+
+Any Bioconductor package page can be contructed by appending the
+package's name to `https://bioconductor.org/packages/` to produce an
+URL like
+
+- https://bioconductor.org/packages/packagename
+
+This works for any type of package (software, annotation or data). For
+example, the pages for packages `r Biocpkg("DESeq2")` or `r Biocpkg("MSnbase")` 
+would be
+
+- https://bioconductor.org/packages/DESeq2
+
+and
+
+- https://bioconductor.org/packages/MSnbase
+
+These short URLs are then resolved to their longer form to redirect to
+the longer package URL leading the user to the current release version
+of the packge.
+
+An important quality of every Bioconductor package is the availability
+of a dedicated *vignette*. Vignettes are documentations (generally
+provided as pdf or html files) that provide a generic overview of the
+package, without necessarily going in detail for every function of the
+package.
+
+
+- Package vignettes https://bioconductor.org/help/package-vignettes/
+
+
+## Installation
+
+The installation of a Bioconductor package is done using the
+`biocLite` function from the `BiocInstaller` package. The first time,
+when the package isn't available yet, you need to run
+
+```{r biocLite, eval = FALSE}
+## try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+```
+
+The above command will install and load `r
+Biocpkg("BiocInstaller")`. If it isn't loaded yet, first load it with
+`library`, then install your package(s) of interest with `biocLite`:
+
+```{r bioLite2, eval = FALSE}
+library("BiocInstaller")
+biocLite("Biobase")
+```
+
+## Versions
+
+
+## Getting help
+
 - The support forum
-- Package landing pages
-- Workflows
+
+## Data structures
+
 - Core infrastructure
+
 - A note on tidy data and high throughput biology data
 
+## More
+
+- Videos: https://www.youtube.com/user/bioconductor
+- Community Contributed Help Resources: https://bioconductor.org/help/community/
+
+## Challenges
+
+1. Install a Bioconductor package of your choice, discover the
+   vignette(s) it offers, open one, and extract the R code of it.
+
+2. Find a package that allows reading raw mass spectrometry data and
+   identify the specific function. Either use the *biocViews* tree or
+   look for a possible *workflow*.

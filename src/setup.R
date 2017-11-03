@@ -4,6 +4,7 @@ suppressPackageStartupMessages(library("stats"))
 suppressPackageStartupMessages(library("DT"))
 suppressPackageStartupMessages(library("knitr"))
 
+suppressPackageStartupMessages(library("BiocStyle"))
 
 suppressPackageStartupMessages(library("dplyr"))
 suppressPackageStartupMessages(library("ggplot2"))
