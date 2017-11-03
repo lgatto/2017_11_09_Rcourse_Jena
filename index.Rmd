@@ -43,11 +43,7 @@ editor of their choice.
 #### Day 1  {-}
 
 - Setup and introduction
-
-> The following material is based on Data Carpentry's the
-> [Data analisis and visualisation](http://www.datacarpentry.org/R-ecology-lesson/) lessons.
-
-- Spreadsheets and tidy data (1 hour)
+- Spreadsheets and tidy data (0.5 hour)
 - Data manipulation using the tidyverse (1.5 hours)
 - Visualisation with ggplot2 (1.5 hours)
 - Reproducible research with Rmarkdown (0.5 hour)

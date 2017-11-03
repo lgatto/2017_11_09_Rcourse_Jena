@@ -1,5 +1,8 @@
 # Data visualization with ggplot2
 
+> The following material is based on Data Carpentry's the
+> [Data analisis and visualisation](http://www.datacarpentry.org/R-ecology-lesson/) lessons.
+
 Learning Objectives:
 
 * Produce scatter plots, boxplots, and time series plots using ggplot.

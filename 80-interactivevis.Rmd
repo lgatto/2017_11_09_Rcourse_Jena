@@ -114,8 +114,8 @@ p %>%
   [axes and legends vignette](http://ggvis.rstudio.com/axes-legends.html).
 
 
-### Challenge
-
+> Challenge
+>
 > Apply a PCA analysis on the `iris` data, and use `ggvis` to
 > visualise that data along PC1 and PC2, controlling the point size
 > using a slide bar.
@@ -246,7 +246,7 @@ writeLines(lns[-grep("^\\s*$", lns)])
 >
 > Using the code above, implement and test the app.
 
-### Challenges
+#### Challenges {-}
 
 > 1. Create an app to visualise the `iris` data where the user can select
 >    along which features to view the data.

@@ -1,5 +1,8 @@
 # Manipulating and analyzing data
 
+> The following material is based on Data Carpentry's the
+> [Data analisis and visualisation](http://www.datacarpentry.org/R-ecology-lesson/) lessons.
+
 
 Learning Objectives:
 
