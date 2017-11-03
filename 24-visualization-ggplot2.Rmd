@@ -1,12 +1,12 @@
 # Data visualization with ggplot2
 
-> ### Learning Objectives
->
-> * Produce scatter plots, boxplots, and time series plots using ggplot.
-> * Set universal plot settings.
-> * Understand and apply faceting in ggplot.
-> * Modify the aesthetics of an existing ggplot plot (including axis labels and color).
-> * Build complex and customized plots from data in a data frame.
+Learning Objectives:
+
+* Produce scatter plots, boxplots, and time series plots using ggplot.
+* Set universal plot settings.
+* Understand and apply faceting in ggplot.
+* Modify the aesthetics of an existing ggplot plot (including axis labels and color).
+* Build complex and customized plots from data in a data frame.
 
 
 We start by loading the required packages. **`ggplot2`** is included
@@ -187,18 +187,11 @@ ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
     geom_point(alpha = 0.1, aes(color=species_id))
 ```
 
-> ### Challenge
+> Challenge
 >
-> Use what you just learned to create a scatter plot of `weight` over `species_id` with the plot types showing in different colors.
-> Is this a good way to show this type of data?
-
-```{r scatter-challenge, echo=FALSE, eval=FALSE, purl=TRUE}
-### Challenge with scatter plot:
-##
-##  Use what you just learned to create a scatter plot of `weight`
-## over `species_id` with the plot types showing in different colors.
-## Is this a good way to show this type of data?
-```
+> Use what you just learned to create a scatter plot of `weight` over
+> `species_id` with the plot types showing in different colors.  Is
+> this a good way to show this type of data?
 
 
 ## Boxplot
@@ -223,7 +216,7 @@ Notice how the boxplot layer is behind the jitter layer? What do you need to
 change in the code to put the boxplot in front of the points such that it's not
 hidden?
 
-> ### Challenges
+> Challenges
 >
 > Boxplots are useful summaries, but hide the *shape* of the distribution. For
 > example, if there is a bimodal distribution, it would not be observed with a
@@ -250,7 +243,9 @@ hidden?
 
 > Hint: Check the class for `plot_id`. Consider changing the class of `plot_id` from integer to factor. Why does this change how R makes the graph?
 
-```{r boxplot-challenge, eval=FALSE, purl=TRUE, echo=FALSE}
+
+<details>
+```{r boxplot-challenge}
 ## Challenge with boxplots:
 ##  Start with the boxplot we created:
 ggplot(data = surveys_complete, aes(x = species_id, y = weight)) +
@@ -268,9 +263,8 @@ ggplot(data = surveys_complete, aes(x = species_id, y = weight)) +
 ##  Hint: Check the class for `plot_id`. Consider changing the class
 ##  of `plot_id` from integer to factor. Why does this change how R
 ##  makes the graph?
-
 ```
-
+</details>
 
 ## Plotting time series data
 
@@ -366,12 +360,13 @@ of packages that extend the capabilities of **`ggplot2`**, including additional
 themes.
 
 
-> ### Challenge
+> Challenge
 
 > Use what you just learned to create a plot that depicts how the average weight
 > of each species changes through the years.
 
-<!-- Answer
+
+<details>
 ```{r average-weight-time-series, purl=FALSE}
 yearly_weight <- surveys_complete %>%
                  group_by(year, species_id) %>%
@@ -381,15 +376,7 @@ ggplot(data = yearly_weight, aes(x=year, y=avg_weight)) +
     facet_wrap(~ species_id) +
     theme_bw()
 ```
--->
-
-```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-### Plotting time series challenge:
-##
-##  Use what you just learned to create a plot that depicts how the
-##  average weight of each species changes through the years.
-
-```
+</details>
 
 The `facet_wrap` geometry extracts plots into an arbitrary number of dimensions
 to allow them to cleanly fit on one page. On the other hand, the `facet_grid`
@@ -486,7 +473,7 @@ ggplot(surveys_complete, aes(x = species_id, y = hindfoot_length)) +
     grey_theme
 ```
 
-> ### Challenge
+> Challenge
 
 > With all of this information in hand, please take another five minutes to either
 > improve one of the plots generated in this exercise or create a beautiful graph
@@ -501,7 +488,11 @@ ggplot(surveys_complete, aes(x = species_id, y = hindfoot_length)) +
 
 ## Arranging and exporting plots
 
-Faceting is a great tool for splitting one plot into multiple plots, but sometimes you may want to produce a single figure that contains multiple plots using different variables or even different data frames. The **`gridExtra`** package allows us to combine separate ggplots into a single figure using `grid.arrange()`:
+Faceting is a great tool for splitting one plot into multiple plots,
+but sometimes you may want to produce a single figure that contains
+multiple plots using different variables or even different data
+frames. The **`gridExtra`** package allows us to combine separate
+ggplots into a single figure using `grid.arrange()`:
 
 ```{r gridarrange-example, message=FALSE, purl=FALSE, fig.width=10}
 library(gridExtra)
@@ -519,11 +510,19 @@ grid.arrange(spp_weight_boxplot, spp_count_plot, ncol = 2, widths = c(4,6))
 
 ```
 
-In addition to the `ncol` and `nrow` arguments, used to make simple arrangements, there are tools for [constucting more complex layouts](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html). 
+In addition to the `ncol` and `nrow` arguments, used to make simple
+arrangements, there are tools
+for
+[constucting more complex layouts](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html).
 
-After creating your plot, you can save it to a file in your favorite format. The Export tab in the **Plot** pane in RStudio will save your plots at low resolution, which will not be accepted by many journals and will not scale well for posters. 
+After creating your plot, you can save it to a file in your favorite
+format. The Export tab in the **Plot** pane in RStudio will save your
+plots at low resolution, which will not be accepted by many journals
+and will not scale well for posters.
 
-Instead, use the `ggsave()` function, which allows you easily change the dimension and resolution of your plot by adjusting the appropriate arguments (`width`, `height` and `dpi`):
+Instead, use the `ggsave()` function, which allows you easily change
+the dimension and resolution of your plot by adjusting the appropriate
+arguments (`width`, `height` and `dpi`):
 
 ```{r ggsave-example, eval=FALSE, purl=FALSE}
 my_plot <- ggplot(data = yearly_sex_counts, aes(x = year, y = n, color = sex)) +
@@ -544,14 +543,3 @@ ggsave("combo_plot_abun_weight.png", combo_plot, width = 10, dpi = 300)
 ```
 
 Note: The parameters `width` and `height` also determine the font size in the saved plot.
-
-
-```{r final-challenge, eval=FALSE, purl=TRUE, echo=FALSE}
-### Final plotting challenge:
-##  With all of this information in hand, please take another five
-##  minutes to either improve one of the plots generated in this
-##  exercise or create a beautiful graph of your own. Use the RStudio
-##  ggplot2 cheat sheet for inspiration:
-##  https://www.rstudio.com/wp-content/uploads/2015/08/ggplot2-cheatsheet.pdf
-```
-

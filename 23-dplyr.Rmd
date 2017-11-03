@@ -1,23 +1,29 @@
 # Manipulating and analyzing data
 
 
-> ### Learning Objectives
->
-> * Understand the purpose of the **`dplyr`** and **`tidyr`** packages.
-> * Select certain columns in a data frame with the **`dplyr`** function `select`.
-> * Select certain rows in a data frame according to filtering conditions with the **`dplyr`** function `filter` .
-> * Link the output of one **`dplyr`** function to the input of another function with the 'pipe' operator `%>%`.
-> * Add new columns to a data frame that are functions of existing columns with `mutate`.
-> * Understand the split-apply-combine concept for data analysis.
-> * Use `summarize`, `group_by`, and `tally` to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results.
-> * Understand the concept of a wide and a long table format and for which purpose those formats are useful.
-> * Understand what key-value pairs are.
-> * Reshape a data frame from long to wide format and back with the `spread` and `gather` commands from the **`tidyr`** package.
-> * Export a data frame to a .csv file.
+Learning Objectives:
 
-Bracket subsetting is handy, but it can be cumbersome and difficult to read,
-especially for complicated operations. Enter **`dplyr`**. **`dplyr`** is a package for
-making tabular data manipulation easier. It pairs nicely with **`tidyr`** which enables you to swiftly convert between different data formats for plotting and analysis.
+* Understand the purpose of the **`dplyr`** and **`tidyr`** packages.
+* Select certain columns in a data frame with the **`dplyr`** function `select`.
+* Select certain rows in a data frame according to filtering
+  conditions with the **`dplyr`** function `filter` .
+* Link the output of one **`dplyr`** function to the input of another function with the 'pipe' operator.
+* Add new columns to a data frame that are functions of existing columns with `mutate`.
+* Understand the split-apply-combine concept for data analysis.
+* Use `summarize`, `group_by`, and `tally` to split a data frame into groups
+  of observations, apply a summary statistics for each group, and then
+  combine the results.
+* Understand the concept of a wide and a long table format and for which purpose those formats are useful.
+* Understand what key-value pairs are.
+* Reshape a data frame from long to wide format and back with the
+  `spread` and `gather` commands from the **`tidyr`** package.
+* Export a data frame to a .csv file.
+
+Bracket subsetting is handy, but it can be cumbersome and difficult to
+read, especially for complicated operations. Enter
+**`dplyr`**. **`dplyr`** is a package for making tabular data manipulation
+easier. It pairs nicely with **`tidyr`** which enables you to swiftly
+convert between different data formats for plotting and analysis.
 
 Packages in R are basically sets of additional functions that let you do more
 stuff. The functions we've been using so far, like `str()` or `data.frame()`,
@@ -162,26 +168,22 @@ surveys_sml
 
 Note that the final data frame is the leftmost part of this expression.
 
-> ### Challenge {.challenge}
+> Challenge {.challenge}
 >
 >  Using pipes, subset the `surveys` data to include individuals collected before
 >  1995 and retain only the columns `year`, `sex`, and `weight`.
 
-<!---
+
+<details>
 ```{r, eval=FALSE, purl=FALSE}
 ## Answer
 surveys %>%
     filter(year < 1995) %>%
     select(year, sex, weight)
 ```
---->
+</details>
 
-    ```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-    ## Pipes Challenge:
-    ##  Using pipes, subset the data to include individuals collected
-    ##  before 1995, and retain the columns `year`, `sex`, and `weight.`
 
-    ```
 
 ### Mutate
 
@@ -231,7 +233,7 @@ surveys %>%
 `is.na()` is a function that determines whether something is an `NA`. The `!`
 symbol negates the result, so we're asking for everything that *is not* an `NA`.
 
-> ### Challenge {.challenge}
+> Challenge {.challenge}
 >
 >  Create a new data frame from the `surveys` data that meets the following
 >  criteria: contains only the `species_id` column and a new column called
@@ -241,16 +243,16 @@ symbol negates the result, so we're asking for everything that *is not* an `NA`.
 >
 >  **Hint**: think about how the commands should be ordered to produce this data frame!
 
-<!---
+
+<details>
 ```{r, eval=FALSE, purl=FALSE}
-## Answer
 surveys_hindfoot_half <- surveys %>%
     filter(!is.na(hindfoot_length)) %>%
     mutate(hindfoot_half = hindfoot_length / 2) %>%
     filter(hindfoot_half < 30) %>%
     select(species_id, hindfoot_half)
 ```
---->
+</details>
 
 ### Split-apply-combine data analysis and the summarize() function
 
@@ -340,7 +342,7 @@ surveys %>%
 Here, `tally()` is the action applied to the groups created by `group_by()` and
 counts the total number of records for each category.
 
-> ### Challenge {.challenge}
+> Challenge {.challenge}
 >
 > 1. How many individuals were caught in each `plot_type` surveyed?
 >
@@ -355,7 +357,7 @@ counts the total number of records for each category.
 > using `group_by()` and `summarize()`? Hint: see `?n`.
 
 
-<!---
+<details>
 ```{r, echo=FALSE, purl=FALSE}
 ## Answer 1
 surveys %>%
@@ -385,23 +387,8 @@ surveys %>%
   group_by(sex) %>%
   summarize(n = n())
 ```
---->
+</details>
 
-```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-## Tally Challenges:
-##  1. How many individuals were caught in each `plot_type` surveyed?
-
-##  2. Use `group_by()` and `summarize()` to find the mean, min, and
-##  max hindfoot length for each species (using `species_id`).
-
-##  3. What was the heaviest animal measured in each year? Return the
-##  columns `year`, `genus`, `species_id`, and `weight`.
-
-## 4. You saw above how to count the number of individuals of each `sex` using a
-## combination of `group_by()` and `tally()`. How could you get the same result
-## using `group_by()` and `summarize()`? Hint: see `?n`.
-
-```
 
 ### Reshaping with gather and spread
 
@@ -533,7 +520,7 @@ surveys_spread %>%
   head()
 ```
 
-> ### Challenge {.challenge}
+> Challenge {.challenge}
 >
 > 1. Spread the data frame with `year` as columns, `plot_id` as rows, and the
 >   values are the number of genera per plot. You will need to summarize before
@@ -558,21 +545,10 @@ surveys_spread %>%
 >    `weight`. Hint: Remember, you only need to specify the key and value
 >    columns for `spread()`.
 
-```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-## Reshaping challenges
 
-## 1. Make a wide data frame with `year` as columns, `plot_id`` as rows, and the values are the number of genera per plot. You will need to summarize before reshaping, and use the function `n_distinct` to get the number of unique types of a genera. It's a powerful function! See `?n_distinct` for more.
+<details>
 
-## 2. Now take that data frame, and make it long again, so each row is a unique `plot_id` `year` combination
-
-## 3. The `surveys` data set is not truly wide or long because there are two columns of measurement - `hindfoot_length` and `weight`.  This makes it difficult to do things like look at the relationship between mean values of each measurement per year in different plot types. Let's walk through a common solution for this type of problem. First, use `gather` to create a truly long dataset where we have a key column called `measurement` and a `value` column that takes on the value of either `hindfoot_length` or `weight`. Hint: You'll need to specify which columns are being gathered.
-
-## 4. With this new truly long data set, calculate the average of each `measurement` in each `year` for each different `plot_type`. Then `spread` them into a wide data set with a column for `hindfoot_length` and `weight`. Hint: Remember, you only need to specify the key and value columns for `spread`.
-
-```
-
-<!---
-  ```{r, echo=FALSE, purl=FALSE}
+```{r, echo=FALSE, purl=FALSE}
 ## Answer 1
 rich_time <- surveys %>%
   group_by(plot_id, year) %>%
@@ -595,7 +571,7 @@ surveys_long %>%
   summarize(mean_value = mean(value, na.rm=TRUE)) %>%
   spread(measurement, mean_value)
 ```
---->
+</details>
 
 ## Exporting data
 
