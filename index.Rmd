@@ -56,6 +56,9 @@ editor of their choice.
 - Navigate and mine Bioconductor for useful scripting components (0.5 hour)
 - Wrap-up
 
+#### Optional
+
+- R programming concepts and tools
 
 ## License and credits
 
