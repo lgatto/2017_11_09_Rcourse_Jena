@@ -314,7 +314,20 @@ writeLines(lns[-grep("^\\s*$", lns)])
 >
 > Using the code above, implement and run the app.
 
-#### Challenges {-}
+### Single-file app
+
+Instead of defining the *ui* and *server* in their respective files,
+they can be combined into list to be passed directly to `runApp`:
+
+```{r, eval = FALSE}
+ui <- fluidPage(...)
+server <- function(input, output) { ... }
+
+app <- list(ui = ui, server = server)
+runApp(app)
+```
+
+### Challenges {-}
 
 > 1. Create an app to visualise the `iris` data where the user can select
 >    along which features to view the data.
@@ -322,3 +335,32 @@ writeLines(lns[-grep("^\\s*$", lns)])
 > 2. As above, where the visualisation is a PCA plot and the user chooses
 >    the PCs.
 
+### Sharing `shiny` apps
+
+* Share the code file(s) and `runApp`
+* `runUrl`
+* `runGitHub`
+* `runGist`
+* [shinyapps](http://wwwshinyapps.io)
+* Shiny server (in-house)
+
+### More interactivity
+
+```{r, eval = FALSE}
+ plotOutput("pca",
+            hover = "hover",
+            click = "click",
+            dblclick = "dblClick",
+            brush = brushOpts(
+                id = "brush",
+                resetOnNew = TRUE))
+```
+
+Example [here](http://shiny.rstudio.com/gallery/plot-interaction-advanced.html).
+
+
+
+### References
+
+* [`shiny` page](http://shiny.rstudio.com/)
+* [`shiny` cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/01/shiny-cheatsheet.pdf)
