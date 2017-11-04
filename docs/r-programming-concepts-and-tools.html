@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="navigating-the-bioconductor-project.html">
 
-<link rel="next" href="tidy-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -283,65 +283,370 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data analysis and R programming</h1>
-<h4 class="author"><em>Laurent Gatto</em></h4>
-<h4 class="date"><em>2017-11-04</em></h4>
-</div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>This course presents a 2-day introduction to data analysis and visualisation with R as well as certain programming topics. It is formatted as a <code>bookdown</code> document</p>
-<p>The material can be accessed here:</p>
+<div id="r-programming-concepts-and-tools" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> R programming concepts and tools</h1>
+<blockquote>
+<p>This section is composed of various section of more advanced programming topics from the <a href="https://lgatto.github.io/TeachingMaterial/">Teaching Material</a> page.</p>
+</blockquote>
+<div id="defensive-programming" class="section level2">
+<h2><span class="header-section-number">13.1</span> Defensive programming</h2>
+<p>Before even debugging, let’s look at ways to prevent bugs in the first place.</p>
+<p><strong>Defensive programming:</strong></p>
 <ul>
-<li><a href="https://lgatto.github.io/2017_11_09_Rcourse_Jena/" class="uri">https://lgatto.github.io/2017_11_09_Rcourse_Jena/</a></li>
+<li>making the code work in a predicable manner</li>
+<li>writing code that fails in a well-defined manner</li>
+<li>if something <em>weird</em> happens, either properly deal with it, of fail quickly and loudly</li>
 </ul>
-<p>The source code for this document is available on GitHub at</p>
-<ul>
-<li><a href="https://github.com/lgatto/2017_11_09_Rcourse_Jena" class="uri">https://github.com/lgatto/2017_11_09_Rcourse_Jena</a>.</li>
-</ul>
-<div id="installation" class="section level2">
-<h2><span class="header-section-number">1.1</span> Installation</h2>
-<p>We will install required packages as we go along. Before the course, participants should install a recent version of <a href="https://www.r-project.org/">R</a> (ideally the current release version) and <a href="https://www.rstudio.com/products/RStudio/">RStudio</a>, or any other editor of their choice.</p>
+<p>The level of defensiveness will depend whether you write a function for interactive of programmatic usage.</p>
+<div id="talking-to-users" class="section level3 unnumbered">
+<h3>Talking to users</h3>
+<div id="diagnostic-messages" class="section level4 unnumbered">
+<h4>Diagnostic messages</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">message</span>(<span class="st">&quot;This is a message for our dear users.&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">message</span>(<span class="st">&quot;This is a message for our dear users. &quot;</span>,
+    <span class="kw">paste</span>(<span class="st">&quot;Thank you for using our software&quot;</span>,
+              sw, <span class="st">&quot;version&quot;</span>, <span class="kw">packageVersion</span>(sw)))</code></pre></div>
+<p>Do not use <code>print</code> or <code>cat</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 &lt;-<span class="st"> </span><span class="cf">function</span>() {
+    <span class="kw">cat</span>(<span class="st">&quot;I AM LOUD AND YOU CAN&#39;T HELP IT.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    ## do stuff
+    <span class="kw">invisible</span>(<span class="ot">TRUE</span>)
+}
+<span class="kw">f1</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f2 &lt;-<span class="st"> </span><span class="cf">function</span>() {
+    <span class="kw">message</span>(<span class="st">&quot;Sorry to interup, but...&quot;</span>)
+    ## do stuff
+    <span class="kw">invisible</span>(<span class="ot">TRUE</span>)
+}
+<span class="kw">f2</span>()
+<span class="kw">suppressMessages</span>(<span class="kw">f2</span>())</code></pre></div>
+<p>Of course, it is also possible to manually define verbosity. This makes you write more code for a feature readily available. But still better to use <code>message</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f3 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) {
+    <span class="cf">if</span> (verbose)
+        <span class="kw">message</span>(<span class="st">&quot;I am being verbose because you let me.&quot;</span>)
+    ## do stuff
+    <span class="kw">invisible</span>(<span class="ot">TRUE</span>)
+}
+<span class="kw">f3</span>()
+<span class="kw">f3</span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre></div>
 </div>
-<div id="programme" class="section level2">
-<h2><span class="header-section-number">1.2</span> Programme</h2>
-<ul>
-<li>Morning: 9:30 - 13:00 (3 hours, with 30 min break)</li>
-<li>Afternoon: 14:00 - 17:00 (3 hours, with a shorter break)</li>
-</ul>
-<div id="day-1" class="section level4 unnumbered">
-<h4>Day 1</h4>
-<ul>
-<li>Setup and introduction</li>
-<li>Spreadsheets and tidy data (0.5 hour)</li>
-<li>Data manipulation using the tidyverse (1.5 hours)</li>
-<li>Visualisation with ggplot2 (1.5 hours)</li>
-<li>Reproducible research with Rmarkdown (0.5 hour)</li>
-<li>Wrap-up</li>
-</ul>
+<div id="warning" class="section level4 unnumbered">
+<h4>Warning</h4>
+<blockquote>
+<p>There is a problem with warnings. No one reads them. Pat Burns, in <em>R inferno</em>.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">warning</span>(<span class="st">&quot;Do not ignore me. Somthing bad might have happened.&quot;</span>)
+<span class="kw">warning</span>(<span class="st">&quot;Do not ignore me. Somthing bad might be happening.&quot;</span>, <span class="dt">immediate. =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>(...)
+    <span class="kw">warning</span>(<span class="st">&quot;Attention, attention, ...!&quot;</span>, ...)
+<span class="kw">f</span>()
+<span class="kw">f</span>(<span class="dt">call. =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>Print warnings after they have been thrown.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">warnings</span>()
+last.warning</code></pre></div>
+<p>See also to <code>warn</code> option in <code>?options</code> .</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">option</span>(<span class="st">&quot;warn&quot;</span>)</code></pre></div>
 </div>
-<div id="day-2" class="section level4 unnumbered">
-<h4>Day 2</h4>
+<div id="error" class="section level4 unnumbered">
+<h4>Error</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stop</span>(<span class="st">&quot;This is the end, my friend.&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>)); <span class="kw">print</span>(<span class="st">&#39;end&#39;</span>) ## warning 
+<span class="kw">xor</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>));  <span class="kw">print</span> (<span class="st">&#39;end&#39;</span>)  ## error</code></pre></div>
+<p>Stop also has a <code>call.</code> parameter.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">geterrmessage</span>()</code></pre></div>
+</div>
+<div id="progress-bars" class="section level4 unnumbered">
+<h4>Progress bars</h4>
 <ul>
-<li>R package development (about 1.5 hours)</li>
-<li>Viz. of high-dimensional data (bit.ly/highdimvis) (1.5 hours)</li>
-<li>Interactive visualisation: ggvis, shiny (1.5 hours)</li>
-<li>Navigate and mine Bioconductor for useful scripting components (0.5 hour)</li>
-<li>Wrap-up</li>
+<li><code>utils::txtProgressBar</code> function</li>
 </ul>
-</div>
-<div id="optional" class="section level4">
-<h4><span class="header-section-number">1.2.0.1</span> Optional</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">10</span>
+pb &lt;-<span class="st"> </span><span class="kw">txtProgressBar</span>(<span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> n, <span class="dt">style =</span> <span class="dv">3</span>)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) {
+    <span class="kw">setTxtProgressBar</span>(pb, i)
+    <span class="kw">Sys.sleep</span>(<span class="fl">0.5</span>)
+}
+<span class="kw">close</span>(pb)</code></pre></div>
 <ul>
-<li>R programming concepts and tools</li>
+<li><a href="https://github.com/gaborcsardi/progress"><code>progress</code></a> package</li>
 </ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;progress&quot;</span>)
+pb &lt;-<span class="st"> </span>progress_bar<span class="op">$</span><span class="kw">new</span>(<span class="dt">total =</span> n)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) {
+    pb<span class="op">$</span><span class="kw">tick</span>()
+    <span class="kw">Sys.sleep</span>(<span class="fl">0.5</span>)
+}</code></pre></div>
+<p>Tip: do not over use progress bars. Ideally, a user should be confident that everything is under control and progress is made while waiting for a function to return. In my experience, a progress bar is usefull when there is a specific and/or user-defined number of iterations, such a <em>iterating over n files</em>, or <em>running a simulation n times</em>.</p>
 </div>
 </div>
-<div id="license-and-credits" class="section level2">
-<h2><span class="header-section-number">1.3</span> License and credits</h2>
-<p>This material is licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>.</p>
-<p>Some content is inspired by other sources, see the first paragraph in the respective chapters for credits.</p>
+</div>
+<div id="kiss" class="section level2">
+<h2><span class="header-section-number">13.2</span> KISS</h2>
+<p>Keep your functions simple and stupid (and short).</p>
+</div>
+<div id="failing-fast-and-well" class="section level2">
+<h2><span class="header-section-number">13.3</span> Failing fast and well</h2>
+<blockquote>
+<p>Bounds errors are ugly, nasty things that should be stamped out whenever possible. One solution to this problem is to use the <code>assert</code> statement. The <code>assert</code> statement tells C++, “This can never happen, but if it does, abort the program in a nice way.” One thing you find out as you gain programming experience is that things that can “never happen” happen with alarming frequency. So just to make sure that things work as they are supposed to, it’s a good idea to put lots of self checks in your program. – Practical C++ Programming, Steve Oualline, O’Reilly.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span>condition) <span class="kw">stop</span>(...)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stopifnot</span>(<span class="ot">TRUE</span>)
+<span class="kw">stopifnot</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</code></pre></div>
+<p>For example to test input classes, lengths, …</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+    <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(x), <span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
+    <span class="kw">invisible</span>(<span class="ot">TRUE</span>)
+}
 
+<span class="kw">f</span>(<span class="dv">1</span>)
+<span class="kw">f</span>(<span class="st">&quot;1&quot;</span>)
+<span class="kw">f</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)
+<span class="kw">f</span>(letters)</code></pre></div>
+<p>The <a href="https://github.com/hadley/assertthat"><code>assertthat</code></a> package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;1&quot;</span>
+<span class="kw">library</span>(<span class="st">&quot;assertthat&quot;</span>)
+<span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(x))
+<span class="kw">assert_that</span>(<span class="kw">is.numeric</span>(x))
+<span class="kw">assert_that</span>(<span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<ul>
+<li><code>assert_that()</code> signal an error.</li>
+<li><code>see_if()</code> returns a logical value, with the error message as an attribute.</li>
+<li><p><code>validate_that()</code> returns <code>TRUE</code> on success, otherwise returns the error as a string.</p></li>
+<li><code>is.flag(x)</code>: is x <code>TRUE</code> or <code>FALSE</code>? (a boolean flag)</li>
+<li><code>is.string(x)</code>: is x a length 1 character vector?</li>
+<li><code>has_name(x, nm)</code>, <code>x %has_name% nm</code>: does <code>x</code> have component <code>nm</code>?</li>
+<li><code>has_attr(x, attr)</code>, <code>x %has_attr% attr</code>: does <code>x</code> have attribute <code>attr</code>?</li>
+<li><code>is.count(x)</code>: is x a single positive integer?</li>
+<li><code>are_equal(x, y)</code>: are <code>x</code> and <code>y</code> equal?</li>
+<li><code>not_empty(x)</code>: are all dimensions of <code>x</code> greater than 0?</li>
+<li><code>noNA(x)</code>: is <code>x</code> free from missing values?</li>
+<li><code>is.dir(path)</code>: is <code>path</code> a directory?</li>
+<li><code>is.writeable(path)</code>/<code>is.readable(path)</code>: is <code>path</code> writeable/readable?</li>
+<li><p><code>has_extension(path, extension)</code>: does <code>file</code> have given <code>extension</code>?</p></li>
+</ul>
+</div>
+<div id="consistency-and-predictability" class="section level2">
+<h2><span class="header-section-number">13.4</span> Consistency and predictability</h2>
+<p><strong>Ineractive use vs programming</strong>: Moving from using R to programming R is <em>abstraction</em>, <em>automation</em>, <em>generalisation</em>.</p>
+<div id="drop" class="section level4 unnumbered">
+<h4><code>drop</code></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(cars)
+<span class="kw">head</span>(cars[, <span class="dv">1</span>])
+<span class="kw">head</span>(cars[, <span class="dv">1</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>])</code></pre></div>
+</div>
+<div id="sapplylapply" class="section level4 unnumbered">
+<h4><code>sapply/lapply</code></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])
+<span class="kw">sapply</span>(df1, class)
+df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> <span class="kw">Sys.time</span>() <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)
+<span class="kw">sapply</span>(df2, class)</code></pre></div>
+<p>Rather use a form where the return data structure is known…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(df1, class)
+<span class="kw">lapply</span>(df2, class)</code></pre></div>
+<p>or that will break if the result is not what is exected</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vapply</span>(df1, class, <span class="st">&quot;1&quot;</span>)
+<span class="kw">vapply</span>(df2, class, <span class="st">&quot;1&quot;</span>)</code></pre></div>
+<p>Reminder of the interactive use vs programming examples: - <code>[</code> and <code>drop</code> - <code>sapply</code>, <code>lapply</code>, <code>vapply</code></p>
+<p>Remember also the concept of <em>tidy data</em>.</p>
+</div>
+</div>
+<div id="comparisons" class="section level2">
+<h2><span class="header-section-number">13.5</span> Comparisons</h2>
+<div id="floating-point-issues-to-be-aware-of" class="section level3 unnumbered">
+<h3>Floating point issues to be aware of</h3>
+<p>R FAQ <a href="http://cran.r-project.org/doc/FAQ/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f">7.31</a>?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">2</span>)
+a <span class="op">*</span><span class="st"> </span>a <span class="op">==</span><span class="st"> </span><span class="dv">2</span>
+a <span class="op">*</span><span class="st"> </span>a <span class="op">-</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">1L <span class="op">+</span><span class="st"> </span>2L <span class="op">==</span><span class="st"> </span>3L
+<span class="fl">1.0</span> <span class="op">+</span><span class="st"> </span><span class="fl">2.0</span> <span class="op">==</span><span class="st"> </span><span class="fl">3.0</span>
+<span class="fl">0.1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">==</span><span class="st"> </span><span class="fl">0.3</span></code></pre></div>
+</div>
+<div id="floating-point-how-to-compare" class="section level3 unnumbered">
+<h3>Floating point: how to compare</h3>
+<ul>
+<li><code>all.equal</code> compares R objects for <em>near equality</em>. Takes into account whether object attributes and names ought the taken into consideration (<code>check.attributes</code> and <code>check.names</code> parameters) and tolerance, which is machine dependent.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(<span class="fl">0.1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.2</span>, <span class="fl">0.3</span>)
+<span class="kw">all.equal</span>(<span class="fl">0.1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.2</span>, <span class="fl">3.0</span>)
+<span class="kw">isTRUE</span>(<span class="kw">all.equal</span>(<span class="fl">0.1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.2</span>, <span class="dv">3</span>)) ## when you just want TRUE/FALSE</code></pre></div>
+</div>
+<div id="exact-identity" class="section level3 unnumbered">
+<h3>Exact identity</h3>
+<p><code>identical</code>: test objects for exact equality</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="ot">NULL</span>
+<span class="kw">all.equal</span>(<span class="dv">1</span>, <span class="ot">NULL</span>)
+<span class="kw">identical</span>(<span class="dv">1</span>, <span class="ot">NULL</span>)
+<span class="kw">identical</span>(<span class="dv">1</span>, <span class="dv">1</span>.)   ## TRUE in R (both are stored as doubles)
+<span class="kw">all.equal</span>(<span class="dv">1</span>, 1L)
+<span class="kw">identical</span>(<span class="dv">1</span>, 1L)   ## stored as different types</code></pre></div>
+<p>Appropriate within <code>if</code>, <code>while</code> condition statements. (not <code>all.equal</code>, unless wrapped in <code>isTRUE</code>).</p>
+</div>
+</div>
+<div id="exercise" class="section level2">
+<h2><span class="header-section-number">13.6</span> Exercise</h2>
+<p>From <a href="http://adv-r.had.co.nz/Exceptions-Debugging.html#defensive-programming">Advanced R</a> by Hadley Wickham.</p>
+<p>The <code>col_means</code> function computes the means of all numeric columns in a data frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">col_means &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  numeric &lt;-<span class="st"> </span><span class="kw">sapply</span>(df, is.numeric)
+  numeric_cols &lt;-<span class="st"> </span>df[, numeric]
+  <span class="kw">data.frame</span>(<span class="kw">lapply</span>(numeric_cols, mean))
+}</code></pre></div>
+<p>Is it a robust function? What happens if there are unusual inputs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">col_means</span>(mtcars)
+<span class="kw">col_means</span>(mtcars[, <span class="dv">0</span>])
+<span class="kw">col_means</span>(mtcars[<span class="dv">0</span>, ])
+<span class="kw">col_means</span>(mtcars[, <span class="st">&quot;mpg&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>])
+<span class="kw">col_means</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
+<span class="kw">col_means</span>(<span class="kw">as.matrix</span>(mtcars))
+<span class="kw">col_means</span>(<span class="kw">as.list</span>(mtcars))
+
+mtcars2 &lt;-<span class="st"> </span>mtcars
+mtcars2[<span class="op">-</span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">lapply</span>(mtcars2[<span class="op">-</span><span class="dv">1</span>], as.character)
+<span class="kw">col_means</span>(mtcars2)</code></pre></div>
+<p>Using some of the concepts and tips above, re-write <code>col_means</code> to make it more robust.</p>
+</div>
+<div id="debugging-techniques-and-tools" class="section level2">
+<h2><span class="header-section-number">13.7</span> Debugging: techniques and tools</h2>
+<p><strong>Shit happens!</strong></p>
+<blockquote>
+<p>Funding your bug is a process of confirming the many things that you believe are true - until you find one which is not true. – Norm Matloff</p>
+</blockquote>
+<div id="identify-the-bug-the-difficult-part" class="section level4 unnumbered">
+<h4>1. Identify the bug (the difficult part)</h4>
+<ul>
+<li>Something went wrong!</li>
+<li>Where in the code does it happen?</li>
+<li>Does it happen every time?</li>
+<li>What input triggered it?</li>
+<li>Report it (even if it is in your code - use github issues, for example).</li>
+</ul>
+<p><strong>Tip</strong>: Beware of your intuition. As a scientist, do what you are used to: generate a hypotheses, <em>design an experiment</em> to test them, and record the results.</p>
+</div>
+<div id="fix-it-the-less-difficult-part" class="section level4 unnumbered">
+<h4>2. Fix it (the less difficult part)</h4>
+<ul>
+<li>Correct the bug.</li>
+<li>Make sure that bug will not repeat itself!</li>
+<li>How can we be confident that we haven’t introduced new bugs?</li>
+</ul>
+</div>
+<div id="tools" class="section level3 unnumbered">
+<h3>Tools</h3>
+<ul>
+<li><code>print</code>/<code>cat</code></li>
+<li><code>traceback()</code></li>
+<li><code>browser()</code></li>
+<li>IDE: RStudio, StatET, emacs’ ess tracebug.</li>
+</ul>
+<div id="manually" class="section level4 unnumbered">
+<h4>Manually</h4>
+<p>Inserting <code>print</code> and <code>cat</code> statements in the code. Works, but time consuming.</p>
+</div>
+<div id="finding-the-bug" class="section level4 unnumbered">
+<h4>Finding the bug</h4>
+<p>Bugs are shy, and are generally hidden, deep down in your code, to make it as difficult as possible for you to find them.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e &lt;-<span class="st"> </span><span class="cf">function</span>(i) {
+  x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>
+  <span class="cf">if</span> (i <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>) x[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+  <span class="cf">else</span> x[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+}
+f &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, e)
+g &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">f</span>()</code></pre></div>
+<p><code>traceback</code>: lists the sequence of calls that lead to the error</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">g</span>()
+<span class="kw">traceback</span>()</code></pre></div>
+<p>If the source code is available (for example for <code>source()</code>d code), then traceback will display the exact location in the function, in the form <code>filename.R#linenum</code>.</p>
+</div>
+<div id="browsing-the-error" class="section level4 unnumbered">
+<h4>Browsing the error</h4>
+<ul>
+<li><p>Register the function for debugging: <code>debug(g)</code>. This adds a call to the <code>browser()</code> function (see also below) and the very beginning of the function <code>g</code>.</p></li>
+<li><p>Every call to <code>g()</code> will not be run interactively.</p></li>
+<li><p>To finish debugging: <code>undebug(g)</code>.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">debug</span>(g)
+<span class="kw">g</span>()</code></pre></div>
+<p>How to debug:</p>
+<ul>
+<li><code>n</code> executes the next step of the function. Use <code>print(n)</code> or <code>get(n)</code> to print/access the variable <code>n</code>.</li>
+<li><code>s</code> to step into the next function. If it is not a function, same as <code>n</code>.</li>
+<li><code>f</code> to finish execution of the current loop of function.</li>
+<li><code>c</code> to leave interactive debugging and continue regular execution of the function.</li>
+<li><code>Q</code> to stop debugging, terminate the function and return to the global workspace.</li>
+<li><code>where</code> print a stack trace of all active function calls.</li>
+<li><code>Enter</code> same as <code>n</code> (or <code>s</code>, if it was used most recently), unless <code>options(browserNLdisabled = TRUE)</code> is set.</li>
+</ul>
+<p>To fix a function when the source code is not directly available, use <code>fix(fun)</code>. This will open the function’s source code for editing and, after saving and closing, store the updated function in the global workspace.</p>
+</div>
+<div id="breakpoints" class="section level4 unnumbered">
+<h4>Breakpoints</h4>
+<ul>
+<li><p>Add a call to <code>browser()</code> anywhere in the source code to execute the rest of the code interactively.</p></li>
+<li><p>To run breakpoints conditionally, wrap the call to <code>browser()</code> in a condition.</p></li>
+</ul>
+</div>
+<div id="debugging-with-ides" class="section level4 unnumbered">
+<h4>Debugging with IDEs</h4>
+<ul>
+<li>RSudio: <code>Show Traceback</code>, <code>Rerun with Debug</code> and interactive debugging.</li>
+</ul>
+<p><img src="figs/debugRStudio1.png" alt="RStudio debugging 1" /> <img src="figs/debugRStudio2.png" alt="RStudio debugging 2" /></p>
+<ul>
+<li><p>StatET (Eclipse plugin)</p></li>
+<li><p><a href="http://ess.r-project.org/Manual/ess.html#Developing-with-ESS">emacs ESS and tracebug</a></p></li>
+</ul>
+</div>
+</div>
+<div id="exercise-1" class="section level3 unnumbered">
+<h3>Exercise</h3>
+<ol style="list-style-type: decimal">
+<li>Your turn - play with <code>traceback</code>, <code>recover</code> and <code>debug</code>:</li>
+</ol>
+<p>(Example originally by Martin Morgan and Robert Gentleman.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e &lt;-<span class="st"> </span><span class="cf">function</span>(i) {
+  x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>
+  <span class="cf">if</span> (i <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>) x[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+  <span class="cf">else</span> x[<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="co"># oops! x[-(1:2)]</span>
+}
+f &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, e)
+g &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">f</span>()</code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Fix <code>readFasta2</code>.</li>
+</ol>
+<p>Preparing the ground</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## make sure you have the &#39;sequences&#39; package.
+<span class="kw">library</span>(<span class="st">&quot;devtools&quot;</span>)
+<span class="kw">install_github</span>(<span class="st">&quot;lgatto/sequences&quot;</span>) ## from github
+## or 
+<span class="kw">install.packages</span>(<span class="st">&quot;sequences&quot;</span>) ## from CRAN</code></pre></div>
+<p>A working example: reading a single sequence from a fasta file to create a object of class <code>DnaSeq</code>, representing the DNA string:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;sequences&quot;</span>)</code></pre></div>
+<pre><code>## Loading required package: Rcpp</code></pre>
+<pre><code>## This is package &#39;sequences&#39;</code></pre>
+<pre><code>## 
+## Attaching package: &#39;sequences&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     id</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;sequences&quot;</span>),
+         <span class="dt">full.names=</span><span class="ot">TRUE</span>, <span class="dt">pattern =</span> <span class="st">&quot;aDnaSeq.fasta&quot;</span>)
+<span class="kw">readFasta</span>(f)</code></pre></div>
+<pre><code>## Object of class DnaSeq 
+##  Id: example dna sequence 
+##  Length: 132 
+##  Alphabet: A C G T 
+##  Sequence: AGCATACGACGACTACGACACTACGACATCAGACACTACAGACTACTACGACTACAGACATCAGACACTACATATTTACATCATCAGAGATTATATTAACATCAGACATCGACACATCATCATCAGCATCAT</code></pre>
+<p>A bug, trying to read multiple sequences from a fasta file. The expected behaviour would be to return a list of <code>DnaSeq</code> objects:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Get readFasta2, the function to debug
+sequences<span class="op">:::</span><span class="kw">debugme</span>()
+## Get an example file
+f &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;sequences&quot;</span>),
+         <span class="dt">full.names=</span><span class="ot">TRUE</span>, <span class="dt">pattern =</span> <span class="st">&quot;moreDnaSeqs.fasta&quot;</span>)
+## BANG!
+<span class="kw">readFasta2</span>(f)</code></pre></div>
+
+</div>
 </div>
 </div>
             </section>
@@ -349,8 +654,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
+<a href="navigating-the-bioconductor-project.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="tidy-data.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

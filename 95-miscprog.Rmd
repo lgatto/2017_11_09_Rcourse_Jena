@@ -7,10 +7,11 @@
 
 ## Defensive programming
 
-Before we begin with debugging, let's look at ways to prevent bugs
-(more at the end of this part). 
+Before even debugging, let's look at ways to prevent bugs in the first
+place.
 
-*Defensive programming*: 
+**Defensive programming:**  
+
 - making the code work in a predicable manner
 - writing code that fails in a well-defined manner
 - if something *weird* happens, either properly deal with it, of fail
@@ -19,7 +20,7 @@ Before we begin with debugging, let's look at ways to prevent bugs
 The level of defensiveness will depend whether you write a function
 for interactive of programmatic usage.
 
-### Talk to your users
+### Talking to users {-}
 
 #### Diagnostic messages {-}
 
@@ -261,7 +262,7 @@ Remember also the concept of *tidy data*.
 
 ## Comparisons
 
-### Floating point issues to be aware of
+### Floating point issues to be aware of {-}
 
 R FAQ [7.31](http://cran.r-project.org/doc/FAQ/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)?
 
@@ -278,7 +279,7 @@ a * a - 2
 0.1 + 0.2 == 0.3
 ```
 
-### Floating point: how to compare
+### Floating point: how to compare {-}
 
 - `all.equal` compares R objects for *near equality*. Takes into
   account whether object attributes and names ought the taken into
@@ -291,7 +292,7 @@ all.equal(0.1 + 0.2, 3.0)
 isTRUE(all.equal(0.1 + 0.2, 3)) ## when you just want TRUE/FALSE
 ```
 
-### Exact identity
+### Exact identity {-}
 
 `identical`: test objects for exact equality
 
@@ -337,6 +338,10 @@ mtcars2 <- mtcars
 mtcars2[-1] <- lapply(mtcars2[-1], as.character)
 col_means(mtcars2)
 ```
+
+Using some of the concepts and tips above, re-write `col_means` to
+make it more robust.
+
 ## Debugging: techniques and tools
 
 **Shit happens!**
@@ -361,13 +366,11 @@ and record the results.
 - Make sure that bug will not repeat itself!
 - How can we be confident that we haven't introduced new bugs?
 
-### Tools
+### Tools {-}
 
 - `print`/`cat`
 - `traceback()`
 - `browser()`
-- `options(error = )`, `options(warn = )`
-- `trace`
 - IDE: RStudio, StatET, emacs' ess tracebug.
 
 
@@ -446,30 +449,6 @@ workspace.
 - To run breakpoints conditionally, wrap the call to `browser()` in a
   condition.
 
-#### Setting options {-}
-
-- `options(error = recover)`: display the call stack and choose where
-  to step in.
-
-- `options(error = stop)` or `options(error = NULL)`: reset to default
-  behaviour.
-
-- `options(warn = 'numeric')`: sets the handling of warning
-  messages. If `warn` is negative all warnings are ignored.  If `warn`
-  is zero (the default) warnings are stored until the top-level
-  function returns.  If 10 or fewer warnings were signalled they will
-  be printed otherwise a message saying how many were signalled. An
-  object called `last.warning` is created and can be printed through
-  the function `warnings`.  If `warn` is one, warnings are printed as
-  they occur.  If `warn` is two or larger all warnings are turned into
-  errors.
-
-- `options(error = dump.frames)`: like `recover` but for
-  non-interactive use. Will create a `last.dump.rda` file in the
-  current working directory, which can then be reloaded in an
-  interactive session to re-inter interactive debugging (using
-  `debugger()`).
-
 #### Debugging with IDEs {-}
 
 - RSudio: `Show Traceback`, `Rerun with Debug` and interactive debugging.
@@ -481,7 +460,7 @@ workspace.
 
 - [emacs ESS and tracebug](http://ess.r-project.org/Manual/ess.html#Developing-with-ESS)
 
-### Exercise
+### Exercise {-}
 
 1. Your turn - play with `traceback`, `recover` and `debug`:
 
@@ -499,14 +478,32 @@ g <- function() f()
 
 2. Fix `readFasta2`.
 
+Preparing the ground
+
 ```{r, eval=FALSE}
 ## make sure you have the 'sequences' package.
-## Get readFasta2, the function to debug
-library(devtools)
+library("devtools")
 install_github("lgatto/sequences") ## from github
 ## or 
 install.packages("sequences") ## from CRAN
+```
+
+A working example: reading a single sequence from a fasta file to
+create a object of class `DnaSeq`, representing the DNA string:
+
+```{r}
 library("sequences")
+f <- dir(system.file("extdata", package = "sequences"),
+         full.names=TRUE, pattern = "aDnaSeq.fasta")
+readFasta(f)
+
+```
+
+A bug, trying to read multiple sequences from a fasta file. The
+expected behaviour would be to return a list of `DnaSeq` objects:
+
+```{r, eval=FALSE}
+## Get readFasta2, the function to debug
 sequences:::debugme()
 ## Get an example file
 f <- dir(system.file("extdata", package = "sequences"),
