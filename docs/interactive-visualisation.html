@@ -231,6 +231,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.2.2" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#creation-of-our-fist-shiny-app"><i class="fa fa-check"></i><b>11.2.2</b> Creation of our fist shiny app</a></li>
 <li class="chapter" data-level="11.2.3" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#the-shiny-infrastructure"><i class="fa fa-check"></i><b>11.2.3</b> The shiny infrastructure</a></li>
 <li class="chapter" data-level="11.2.4" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#another-shiny-app"><i class="fa fa-check"></i><b>11.2.4</b> Another shiny app</a></li>
+<li class="chapter" data-level="11.2.5" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#single-file-app"><i class="fa fa-check"></i><b>11.2.5</b> Single-file app</a></li>
+<li class="chapter" data-level="11.2.6" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#theres-more-to-shiny"><i class="fa fa-check"></i><b>11.2.6</b> There’s more to <code>shiny</code></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html"><i class="fa fa-check"></i><b>12</b> Navigating the Bioconductor project</a><ul>
@@ -244,7 +246,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.5" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#getting-help"><i class="fa fa-check"></i><b>12.5</b> Getting help</a></li>
 <li class="chapter" data-level="12.6" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#data-infrastructure"><i class="fa fa-check"></i><b>12.6</b> Data infrastructure</a></li>
 <li class="chapter" data-level="12.7" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#more-resources-1"><i class="fa fa-check"></i><b>12.7</b> More resources</a></li>
-<li class="chapter" data-level="12.8" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#challenges-1"><i class="fa fa-check"></i><b>12.8</b> Challenges</a></li>
+<li class="chapter" data-level="12.8" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#challenges"><i class="fa fa-check"></i><b>12.8</b> Challenges</a></li>
 </ul></li>
 </ul>
 
@@ -672,18 +674,53 @@ shinyServer(function(input, output) {
 <p>Challenge</p>
 <p>Using the code above, implement and run the app.</p>
 </blockquote>
-<div id="challenges" class="section level4 unnumbered">
-<h4>Challenges</h4>
+</div>
+<div id="single-file-app" class="section level3">
+<h3><span class="header-section-number">11.2.5</span> Single-file app</h3>
+<p>Instead of defining the <em>ui</em> and <em>server</em> in their respective files, they can be combined into list to be passed directly to <code>runApp</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(...)
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) { ... }
+
+app &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)
+<span class="kw">runApp</span>(app)</code></pre></div>
 <blockquote>
+<p>Challenges</p>
 <ol style="list-style-type: decimal">
-<li>Create an app to visualise the <code>iris</code> data where the user can select along which features to view the data.</li>
+<li><p>Create an app to visualise the <code>iris</code> data where the user can select along which features to view the data.</p></li>
+<li><p>As above, where the visualisation is a PCA plot and the user chooses the PCs.</p></li>
 </ol>
 </blockquote>
-<blockquote>
-<ol start="2" style="list-style-type: decimal">
-<li>As above, where the visualisation is a PCA plot and the user chooses the PCs.</li>
-</ol>
-</blockquote>
+</div>
+<div id="theres-more-to-shiny" class="section level3">
+<h3><span class="header-section-number">11.2.6</span> There’s more to <code>shiny</code></h3>
+<div id="sharing-shiny-apps" class="section level4">
+<h4><span class="header-section-number">11.2.6.1</span> Sharing <code>shiny</code> apps</h4>
+<ul>
+<li>Share the code file(s) and <code>runApp</code></li>
+<li><code>runUrl</code></li>
+<li><code>runGitHub</code></li>
+<li><code>runGist</code></li>
+<li><a href="http://wwwshinyapps.io">shinyapps</a></li>
+<li>Shiny server (in-house)</li>
+</ul>
+</div>
+<div id="more-interactivity" class="section level4">
+<h4><span class="header-section-number">11.2.6.2</span> More interactivity</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">plotOutput</span>(<span class="st">&quot;pca&quot;</span>,
+            <span class="dt">hover =</span> <span class="st">&quot;hover&quot;</span>,
+            <span class="dt">click =</span> <span class="st">&quot;click&quot;</span>,
+            <span class="dt">dblclick =</span> <span class="st">&quot;dblClick&quot;</span>,
+            <span class="dt">brush =</span> <span class="kw">brushOpts</span>(
+                <span class="dt">id =</span> <span class="st">&quot;brush&quot;</span>,
+                <span class="dt">resetOnNew =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<p>Example <a href="http://shiny.rstudio.com/gallery/plot-interaction-advanced.html">here</a>.</p>
+</div>
+<div id="references-1" class="section level4">
+<h4><span class="header-section-number">11.2.6.3</span> References</h4>
+<ul>
+<li><a href="http://shiny.rstudio.com/"><code>shiny</code> page</a></li>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2016/01/shiny-cheatsheet.pdf"><code>shiny</code> cheat sheet</a></li>
+</ul>
 
 </div>
 </div>
