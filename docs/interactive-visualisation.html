@@ -25,7 +25,7 @@
 <meta name="author" content="Laurent Gatto">
 
 
-<meta name="date" content="2017-11-03">
+<meta name="date" content="2017-11-04">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -227,9 +227,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.1.3" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#more-components"><i class="fa fa-check"></i><b>11.1.3</b> More components</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#interactive-apps"><i class="fa fa-check"></i><b>11.2</b> Interactive apps</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#creation-of-our-fist-shiny-app"><i class="fa fa-check"></i><b>11.2.1</b> Creation of our fist shiny app</a></li>
-<li class="chapter" data-level="11.2.2" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#the-shiny-infrastructure"><i class="fa fa-check"></i><b>11.2.2</b> The shiny infrastructure</a></li>
-<li class="chapter" data-level="11.2.3" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#another-shiny-app"><i class="fa fa-check"></i><b>11.2.3</b> Another shiny app</a></li>
+<li class="chapter" data-level="11.2.1" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#introduction-4"><i class="fa fa-check"></i><b>11.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2.2" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#creation-of-our-fist-shiny-app"><i class="fa fa-check"></i><b>11.2.2</b> Creation of our fist shiny app</a></li>
+<li class="chapter" data-level="11.2.3" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#the-shiny-infrastructure"><i class="fa fa-check"></i><b>11.2.3</b> The shiny infrastructure</a></li>
+<li class="chapter" data-level="11.2.4" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#another-shiny-app"><i class="fa fa-check"></i><b>11.2.4</b> Another shiny app</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html"><i class="fa fa-check"></i><b>12</b> Navigating the Bioconductor project</a><ul>
@@ -269,7 +270,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 <p>This section is based on the on-line <a href="http://ggvis.rstudio.com/"><code>ggvis</code> documentation</a></p>
 </blockquote>
-<p>The goal of ggvis is to make it easy to build interactive graphics for exploratory data analysis. <a href="http://ggvis.rstudio.com/"><code>ggvis</code></a> has a similar underlying theory to <code>ggplot2</code> (the grammar of graphics), but it’s expressed a little differently, and adds new features to make your plots interactive. <a href="http://ggvis.rstudio.com/"><code>ggvis</code></a> also incorporates shiny’s reactive programming model and <code>dplyr</code>’s grammar of data transformation.</p>
+<p>The goal of ggvis is to make it easy to build interactive graphics for exploratory data analysis. <a href="http://ggvis.rstudio.com/"><code>ggvis</code></a> has a similar underlying theory to <code>ggplot2</code> (the grammar of graphics), but it’s expressed a little differently, and adds new features to make your plots interactive. <a href="http://ggvis.rstudio.com/"><code>ggvis</code></a> also incorporates shiny’s reactive programming model (see later) and <code>dplyr</code>’s grammar of data transformation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;ggvis&quot;</span>)
 sml &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(surveys), <span class="fl">1e3</span>)
 surveys_sml &lt;-<span class="st"> </span>surveys_complete[sml, ]</code></pre></div>
@@ -339,6 +340,8 @@ p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_
 </div>
 <div id="interactive-apps" class="section level2">
 <h2><span class="header-section-number">11.2</span> Interactive apps</h2>
+<div id="introduction-4" class="section level3">
+<h3><span class="header-section-number">11.2.1</span> Introduction</h3>
 <blockquote>
 <p>This section is based on RStudio <code>shiny</code> tutorials.</p>
 </blockquote>
@@ -347,8 +350,13 @@ p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_
 <p>Shiny is an R package that makes it easy to build interactive web apps straight from R.</p>
 </blockquote>
 <p>When using <a href="https://shiny.rstudio.com/"><code>shiny</code></a>, one tends to aim for more complete, long-lasting applications, rather then <em>simply</em> and transient visualisations.</p>
-<p>A <a href="https://shiny.rstudio.com/"><code>shiny</code></a> application is composed of a <em>ui</em> (user interface) and a server that exchange information using a programming paradigm called <em>reactive programming</em>: changes performed by the user to the <em>ui</em> trigger a reaction by the <em>server</em> and the output is updated accordingly.</p>
-<p>Before looking at the details of such an architecture, let’s build a simple example from scratch. This app, shown below, uses the <code>faithful</code> data, describing the wainting time between eruptions and the duration of the reuption for the Old Faithful geyser in Yellowstone National Park, Wyoming, USA.</p>
+<p>A <a href="https://shiny.rstudio.com/"><code>shiny</code></a> application is composed of a <em>ui</em> (user interface) and a <em>server</em> that exchange information using a programming paradigm called <em>reactive programming</em>: changes performed by the user to the <em>ui</em> trigger a reaction by the <em>server</em> and the output is updated accordingly.</p>
+<ul>
+<li><p>In the ui: define the components of the user interface (such as page layout, page title, input options and outputs), i.e what the user will see and interact with.</p></li>
+<li><p>In the server: defines the computations in the R backend.</p></li>
+<li><p>The <em>reactive</em> programming is implemented through <em>reactive</em> functions, which are functions that are only called when their respective inputs are changed.</p></li>
+</ul>
+<p>Before looking at the details of such an architecture, let’s build a simple example from scratch, step by step. This app, shown below, uses the <code>faithful</code> data, describing the wainting time between eruptions and the duration of the reuption for the Old Faithful geyser in Yellowstone National Park, Wyoming, USA.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(faithful)</code></pre></div>
 <pre><code>##   eruptions waiting
 ## 1     3.600      79
@@ -360,73 +368,214 @@ p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_
 <p>It shows the distribution of waiting times along a histogram (produced by the <code>hist</code> function) and provides a slider to adjust the number of bins (the <code>breaks</code> argument to <code>hist</code>).</p>
 <iframe src="https://lgatto.shinyapps.io/shiny-app1/?showcase=0" width="672" height="650px">
 </iframe>
+</div>
 <div id="creation-of-our-fist-shiny-app" class="section level3">
-<h3><span class="header-section-number">11.2.1</span> Creation of our fist shiny app</h3>
+<h3><span class="header-section-number">11.2.2</span> Creation of our fist shiny app</h3>
 <ol style="list-style-type: decimal">
 <li>Create a directory that will contain the app, such as for example <code>&quot;shinyapp&quot;</code>.</li>
 <li>In this directory, create the <em>ui</em> and <em>server</em> files, named <code>ui.R</code> and <code>server.R</code>.</li>
-<li>In the <code>ui.R</code> file, copy and paste the following code, that defines a the general UI containing</li>
+<li>In the <code>ui.R</code> file, let’s defines a (fluid) page containing</li>
 </ol>
 <ul>
-<li>a titel panel with a page title;</li>
-<li>a page with a sidebar layout, containing a sidebar and a main panel;</li>
-<li>the sidebar panel contains a slider defining the <code>bins</code> variable (ranging from 1 to 50 with default value of 30);</li>
-<li>the main panel that plots the <code>distPlot</code> figure.</li>
+<li>a title panel with a page title;</li>
+<li>a layout containing a sidebar and a main panel</li>
 </ul>
 <pre><code>library(shiny)
-# Define UI for application that draws a histogram
+
 shinyUI(fluidPage(
-  # Application title
-  titlePanel(&quot;Hello Shiny!&quot;),
-  # Sidebar with a slider input for the number of bins
-  sidebarLayout(
-    sidebarPanel(
-      sliderInput(&quot;bins&quot;,
-                  &quot;Number of bins:&quot;,
-                  min = 1,
-                  max = 50,
-                  value = 30)
-    ),
-    # Show a plot of the generated distribution
-    mainPanel(
-      plotOutput(&quot;distPlot&quot;)
+    titlePanel(&quot;My Shiny App&quot;),
+    sidebarLayout(
+        sidebarPanel(
+        ),
+        mainPanel(
+        )
     )
-  )
 ))</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>In the <code>server.R</code> file, copy and paste the following code, that defines the server backend</li>
+<li>In the <code>server.R</code> file, defined the <code>shinyServer</code> function that handles input and ouputs (none at this stage) and the R logic.</li>
 </ol>
-<ul>
-<li>the server is a function that manages an <code>input</code> and an <code>ouput</code>;</li>
-<li>the input is the <code>bins</code> defined in the <em>ui</em> that can be accessed with <code>input$bins</code>;</li>
-<li>the outputs are created by assigning <code>output$distPlot</code> a value with a <em>render</em> functon (here <code>renderPlot</code>).</li>
-</ul>
 <pre><code>library(shiny)
-# Define server logic required to draw a histogram
+
 shinyServer(function(input, output) {
-  # Expression that generates a histogram. The expression is
-  # wrapped in a call to renderPlot to indicate that:
-  #
-  #  1) It is &quot;reactive&quot; and therefore should be automatically
-  #     re-executed when inputs change
-  #  2) Its output type is a plot
-  output$distPlot &lt;- renderPlot({
-    x    &lt;- faithful[, 2]  # Old Faithful Geyser data
-    bins &lt;- seq(min(x), max(x), length.out = input$bins + 1)
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = &#39;darkgray&#39;, border = &#39;white&#39;)
-  })
 })</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li>Run the app with <code>shiny::runApp(&quot;shinyapp&quot;)</code> or simply <code>shiny::runApp()</code> of your working directory is the app dir.</li>
+<li>Let’s now add some items to the <em>ui</em>: a text input widget in the sidebar and a field to hold the text ouput.</li>
 </ol>
+<pre><code>library(shiny)
+
+shinyUI(fluidPage(
+    titlePanel(&quot;My Shiny App&quot;),
+    sidebarLayout(
+        sidebarPanel(
+            textInput(&quot;textInput&quot;, &quot;Enter text here:&quot;)
+        ),
+        mainPanel(
+            textOutput(&quot;textOutput&quot;)
+        )
+    )
+))</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>In the <code>server.R</code> file, we add in the <code>shinyServer</code> function some R code defining how to manipulate the user-provided text and render it using a shiny <code>textOuput</code>.</li>
+</ol>
+<pre><code>library(shiny)
+
+shinyServer(function(input, output) {
+    output$textOutput &lt;- renderText(paste(&quot;User-entered text: &quot;,
+                                          input$textInput))
+})</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>Let’s now add a plot in the main panel in <code>ui.R</code> and some code to draw a histogram in <code>server.R</code>:</li>
+</ol>
+<pre><code>library(shiny)
+
+shinyUI(fluidPage(
+    titlePanel(&quot;My Shiny App&quot;),
+    sidebarLayout(
+        sidebarPanel(
+            textInput(&quot;textInput&quot;, &quot;Enter text here:&quot;)
+        ),
+        mainPanel(
+            textOutput(&quot;textOutput&quot;),
+            plotOutput(&quot;distPlot&quot;)            
+        )
+    )
+))</code></pre>
+<pre><code>library(shiny)
+
+shinyServer(function(input, output) {
+    output$textOutput &lt;- renderText(paste(&quot;User-entered text: &quot;,
+                                          input$textInput))
+    output$distPlot &lt;- renderPlot({
+        x    &lt;- faithful[, 2]
+        hist(x)
+    })
+    
+})</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>We want to be able to control the number of breaks used to plot the histograms. We first add a <code>sliderInput</code> to the <em>ui</em> for the user to specify the number of bins, and then make use of that new input to parametrise the histogram.</li>
+</ol>
+<pre><code>library(shiny)
+
+shinyUI(fluidPage(
+    titlePanel(&quot;My Shiny App&quot;),
+    sidebarLayout(
+        sidebarPanel(
+            textInput(&quot;textInput&quot;, &quot;Enter text here:&quot;),
+            sliderInput(&quot;bins&quot;,
+                        &quot;Number of bins:&quot;,
+                        min = 1,
+                        max = 50,
+                        value = 30)            
+        ),
+        mainPanel(
+            textOutput(&quot;textOutput&quot;),
+            plotOutput(&quot;distPlot&quot;)            
+        )
+    )
+))</code></pre>
+<pre><code>library(shiny)
+
+shinyServer(function(input, output) {
+    output$textOutput &lt;- renderText(paste(&quot;User-entered text: &quot;,
+                                          input$textInput))
+    output$distPlot &lt;- renderPlot({
+        x    &lt;- faithful[, 2]
+        bins &lt;- seq(min(x), max(x), length.out = input$bins + 1)    
+        hist(x, breaks = bins)
+    })
+    
+})</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>The last addition is to add a menu for the user to choose a set of predefined colours (that would be a <code>selectInput</code>) in the <code>ui.R</code> file and use that new input to parametrise the colour of the histogramme in the <code>server.R</code> file.</li>
+</ol>
+<pre><code>library(shiny)
+
+shinyUI(fluidPage(
+    titlePanel(&quot;My Shiny App&quot;),
+    sidebarLayout(
+        sidebarPanel(
+            textInput(&quot;textInput&quot;, &quot;Enter text here:&quot;),
+            sliderInput(&quot;bins&quot;,
+                        &quot;Number of bins:&quot;,
+                        min = 1,
+                        max = 50,
+                        value = 30),
+            selectInput(&quot;col&quot;, &quot;Select a colour:&quot;,
+                        choices = c(&quot;steelblue&quot;, &quot;darkgray&quot;, &quot;orange&quot;))            
+        ),
+        mainPanel(
+            textOutput(&quot;textOutput&quot;),
+            plotOutput(&quot;distPlot&quot;)
+        )
+    )
+))</code></pre>
+<pre><code>library(shiny)
+
+shinyServer(function(input, output) {
+    output$textOutput &lt;- renderText(paste(&quot;User-entered text: &quot;,
+                                          input$textInput))
+    output$distPlot &lt;- renderPlot({
+        x    &lt;- faithful[, 2]
+        bins &lt;- seq(min(x), max(x), length.out = input$bins + 1)
+        hist(x, breaks = bins, col = input$col)
+    })
+    
+})</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>The last addition that we want is to visualise the actual data in the main panel. We add a <code>dataTableOutput</code> in <code>ui.R</code> and generate that table in <code>server.R</code> using a <code>renderDataTable</code> rendering function.</li>
+</ol>
+<pre><code>library(shiny)
+## Define UI for application that draws a histogram
+shinyUI(fluidPage(
+    ## Application title
+    titlePanel(&quot;My Shiny App&quot;),
+    ## Sidebar with text, slide bar and menu selection inputs
+    sidebarLayout(
+        sidebarPanel(
+            textInput(&quot;textInput&quot;, &quot;Enter text here:&quot;),
+            sliderInput(&quot;bins&quot;,
+                        &quot;Number of bins:&quot;,
+                        min = 1,
+                        max = 50,
+                        value = 30),
+            selectInput(&quot;col&quot;, &quot;Select a colour:&quot;,
+                        choices = c(&quot;steelblue&quot;, &quot;darkgray&quot;, &quot;orange&quot;))
+        ),
+        ## Main panel showing user-entered text, a reactive plot and a
+        ## dynamic table
+        mainPanel(
+            textOutput(&quot;textOutput&quot;),
+            plotOutput(&quot;distPlot&quot;),
+            dataTableOutput(&quot;dataTable&quot;)
+        )
+    )
+))</code></pre>
+<pre><code>library(shiny)
+## Define server logic 
+shinyServer(function(input, output) {
+    output$textOutput &lt;- renderText(paste(&quot;User-entered text: &quot;,
+                                          input$textInput))
+    ## Expression that generates a histogram. The expression is
+    ## wrapped in a call to renderPlot to indicate that:
+    ##
+    ##  1) It is &quot;reactive&quot; and therefore should be automatically
+    ##     re-executed when inputs change
+    ##  2) Its output type is a plot
+    output$distPlot &lt;- renderPlot({
+        x    &lt;- faithful[, 2]  ## Old Faithful Geyser data
+        bins &lt;- seq(min(x), max(x), length.out = input$bins + 1)
+        ## draw the histogram with the specified number of bins
+        hist(x, breaks = bins, col = input$col, border = &#39;white&#39;)
+    })
+    output$dataTable &lt;- renderDataTable(faithful)
+})</code></pre>
 <blockquote>
 <p>Challenge</p>
 <p>Run your <code>shinyapp</code> application, as described above.</p>
 </blockquote>
 </div>
 <div id="the-shiny-infrastructure" class="section level3">
-<h3><span class="header-section-number">11.2.2</span> The shiny infrastructure</h3>
+<h3><span class="header-section-number">11.2.3</span> The shiny infrastructure</h3>
 <p>The overview figure below is based and makes reference to lessons of the <a href="https://shiny.rstudio.com/tutorial/">written tutorial</a>.</p>
 <div class="figure">
 <img src="figs/shiny-overview.jpg" />
@@ -434,7 +583,7 @@ shinyServer(function(input, output) {
 </div>
 </div>
 <div id="another-shiny-app" class="section level3">
-<h3><span class="header-section-number">11.2.3</span> Another shiny app</h3>
+<h3><span class="header-section-number">11.2.4</span> Another shiny app</h3>
 <iframe src="https://lgatto.shinyapps.io/shiny-app2/?showcase=0" width="672" height="650px">
 </iframe>
 <p>The <em>ui</em> uses the <code>fluidPage</code> UI and a sidebar layout. The sidebar panel contains a <code>textInput</code> with a caption, a <code>selectInput</code> to choose from the three possible datasets <code>rock</code>, <code>pressure</code> or <code>cars</code>, and a <code>numericInput</code> to define how many observations to show.</p>

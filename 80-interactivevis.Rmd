@@ -9,8 +9,8 @@ exploratory data analysis. [`ggvis`](http://ggvis.rstudio.com/) has a
 similar underlying theory to `ggplot2` (the grammar of graphics), but
 it's expressed a little differently, and adds new features to make
 your plots interactive. [`ggvis`](http://ggvis.rstudio.com/) also
-incorporates shiny's reactive programming model and `dplyr`'s grammar
-of data transformation.
+incorporates shiny's reactive programming model (see later) and
+`dplyr`'s grammar of data transformation.
 
 ```{r, eval = FALSE}
 library("ggvis")
@@ -122,6 +122,8 @@ p %>%
 
 ## Interactive apps 
 
+### Introduction
+
 > This section is based on RStudio `shiny` tutorials.
 
 From the [`shiny`](https://shiny.rstudio.com/)
@@ -135,16 +137,26 @@ more complete, long-lasting applications, rather then *simply* and
 transient visualisations.
 
 A [`shiny`](https://shiny.rstudio.com/) application is composed of a
-*ui* (user interface) and a server that exchange information using a
+*ui* (user interface) and a *server* that exchange information using a
 programming paradigm called *reactive programming*: changes performed
 by the user to the *ui* trigger a reaction by the *server* and the
 output is updated accordingly.
 
+- In the ui: define the components of the user interface (such as page
+  layout, page title, input options and outputs), i.e what the user
+  will see and interact with.
+
+- In the server: defines the computations in the R backend.
+
+- The *reactive* programming is implemented through *reactive*
+  functions, which are functions that are only called when their
+  respective inputs are changed.
+
 Before looking at the details of such an architecture, let's build a
-simple example from scratch. This app, shown below, uses the
-`faithful` data, describing the wainting time between eruptions and
-the duration of the reuption for the Old Faithful geyser in
-Yellowstone National Park, Wyoming, USA. 
+simple example from scratch, step by step. This app, shown below, uses
+the `faithful` data, describing the wainting time between eruptions
+and the duration of the reuption for the Old Faithful geyser in
+Yellowstone National Park, Wyoming, USA.
 
 ```{r faithfuldata}
 head(faithful)
@@ -159,41 +171,94 @@ knitr::include_app("https://lgatto.shinyapps.io/shiny-app1/",
                    height = "650px")
 ```
 
-### Creation of our fist shiny app
+### Creation of our fist shiny app 
+
 
 1. Create a directory that will contain the app, such as for example
    `"shinyapp"`.
 2. In this directory, create the *ui* and *server* files, named `ui.R`
    and `server.R`.
-3. In the `ui.R` file, copy and paste the following code, that defines
-   a the general UI containing
-   - a titel panel with a page title;
-   - a page with a sidebar layout, containing a sidebar and a main
-     panel;
-   - the sidebar panel contains a slider defining the `bins` variable
-     (ranging from 1 to 50 with default value of 30);
-   - the main panel that plots the `distPlot` figure.
+3. In the `ui.R` file, let's defines a (fluid) page containing
+   - a title panel with a page title;
+   - a layout containing a sidebar and a main panel
+
+```{r ui00, comment = "", echo=FALSE}
+writeLines(readLines('src/shiny-app00/ui.R'))
+```
+
+4. In the `server.R` file, defined the `shinyServer` function that
+   handles input and ouputs (none at this stage) and the R logic.
+
+```{r server00, comment = "", echo=FALSE}
+writeLines(readLines('src/shiny-app00/server.R'))
+```
+
+5. Let's now add some items to the *ui*: a text input widget in the
+   sidebar and a field to hold the text ouput.
+
+```{r ui01, comment = "", echo=FALSE}
+writeLines(readLines('src/shiny-app01/ui.R'))
+```
+
+6. In the `server.R` file, we add in the `shinyServer` function some R
+   code defining how to manipulate the user-provided text and render
+   it using a shiny `textOuput`.
+
+```{r server01, comment = "", echo=FALSE}
+writeLines(readLines('src/shiny-app01/server.R'))
+```
+
+7. Let's now add a plot in the main panel in `ui.R` and some code to
+   draw a histogram in `server.R`:
+
+```{r ui02, comment = "", echo=FALSE}
+writeLines(readLines('src/shiny-app02/ui.R'))
+```
+
+```{r server02, comment = "", echo=FALSE}
+writeLines(readLines('src/shiny-app02/server.R'))
+```
+
+8. We want to be able to control the number of breaks used to plot the
+   histograms. We first add a `sliderInput` to the *ui* for the user
+   to specify the number of bins, and then make use of that new input
+   to parametrise the histogram.
+   
+```{r ui03, comment = "", echo=FALSE}
+writeLines(readLines('src/shiny-app03/ui.R'))
+```
+
+```{r server03, comment = "", echo=FALSE}
+writeLines(readLines('src/shiny-app03/server.R'))
+```
+
+9. The last addition is to add a menu for the user to choose a set of
+   predefined colours (that would be a `selectInput`) in the `ui.R`
+   file and use that new input to parametrise the colour of the
+   histogramme in the `server.R` file.
+
+```{r ui04, comment = "", echo=FALSE}
+writeLines(readLines('src/shiny-app04/ui.R'))
+```
+
+```{r server04, comment = "", echo=FALSE}
+writeLines(readLines('src/shiny-app04/server.R'))
+```
+
+10. The last addition that we want is to visualise the actual data in
+   the main panel. We add a `dataTableOutput` in `ui.R` and generate
+   that table in `server.R` using a `renderDataTable` rendering
+   function.
 
 ```{r ui1, comment = "", echo=FALSE}
 lns <- readLines('src/shiny-app1/ui.R')
 writeLines(lns[-grep("^\\s*$", lns)])
 ```
 
-4. In the `server.R` file, copy and paste the following code, that
-   defines the server backend
-   - the server is a function that manages an `input` and an `ouput`;
-   - the input is the `bins` defined in the *ui* that can be accessed
-     with `input$bins`;
-   - the outputs are created by assigning `output$distPlot` a value
-     with a *render* functon (here `renderPlot`).
-
 ```{r server1, comment = "", echo=FALSE}
 lns <- readLines('src/shiny-app1/server.R')
 writeLines(lns[-grep("^\\s*$", lns)])
 ```
-
-5. Run the app with `shiny::runApp("shinyapp")` or simply
-   `shiny::runApp()` of your working directory is the app dir.
 
 > Challenge 
 > 
