@@ -43,20 +43,20 @@ editor of their choice.
 #### Day 1  {-}
 
 - Setup and introduction
-- Spreadsheets and tidy data (0.5 hour)
-- Data manipulation using the tidyverse (1.5 hours)
-- Visualisation with ggplot2 (1.5 hours)
-- Reproducible research with Rmarkdown (0.5 hour)
+- Spreadsheets and tidy data 
+- Data manipulation using the tidyverse
+- Visualisation with ggplot2
+- Reproducible research with Rmarkdown
 - Wrap-up
 
 #### Day 2 {-}
-- R package development (about 1.5 hours)
-- Viz. of high-dimensional data (bit.ly/highdimvis) (1.5 hours)
-- Interactive visualisation: ggvis, shiny (1.5 hours)
-- Navigate and mine Bioconductor for useful scripting components (0.5 hour)
+- R package development 
+- Viz. of high-dimensional data (bit.ly/highdimvis)
+- Interactive visualisation: ggvis, shiny
+- Navigate and mine Bioconductor for useful scripting components
 - Wrap-up
 
-#### Optional
+#### Optional {-}
 
 - R programming concepts and tools
 

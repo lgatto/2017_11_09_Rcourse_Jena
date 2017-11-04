@@ -117,9 +117,10 @@ when the package isn't available yet, you need to run
 source("https://bioconductor.org/biocLite.R")
 ```
 
-The above command will install and load `r
-Biocpkg("BiocInstaller")`. If it isn't loaded yet, first load it with
-`library`, then install your package(s) of interest with `biocLite`:
+The above command will install and load 
+`r Biocpkg("BiocInstaller")`. If it isn't loaded yet, first load it
+with `library`, then install your package(s) of interest with
+`biocLite`:
 
 ```{r bioLite2, eval = FALSE}
 library("BiocInstaller")
@@ -140,7 +141,7 @@ The individual packages have a similar scheme. Every package is
 available for the release and the development versions of
 Bioconductor. These two versions of the package have also different
 version numbers, where the last digit is even for the former and off
-for the later. Currently, the `rBiocpkg("MSnbase")` has versions
+for the later. Currently, the `r Biocpkg("MSnbase")` has versions
 `2.4.0` and `2.5.1`, respectively.
 
 Finally, every Bioconductor version is tight to an R version. To

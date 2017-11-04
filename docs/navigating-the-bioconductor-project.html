@@ -345,7 +345,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The installation of a Bioconductor package is done using the <code>biocLite</code> function from the <code>BiocInstaller</code> package. The first time, when the package isn’t available yet, you need to run</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## try http:// if https:// URLs are not supported
 <span class="kw">source</span>(<span class="st">&quot;https://bioconductor.org/biocLite.R&quot;</span>)</code></pre></div>
-<p>The above command will install and load <code>r Biocpkg(&quot;BiocInstaller&quot;)</code>. If it isn’t loaded yet, first load it with <code>library</code>, then install your package(s) of interest with <code>biocLite</code>:</p>
+<p>The above command will install and load <em><a href="http://bioconductor.org/packages/BiocInstaller">BiocInstaller</a></em>. If it isn’t loaded yet, first load it with <code>library</code>, then install your package(s) of interest with <code>biocLite</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;BiocInstaller&quot;</span>)
 <span class="kw">biocLite</span>(<span class="st">&quot;Biobase&quot;</span>)</code></pre></div>
 <p>This <a href="https://bioconductor.org/install/">page</a> provides more details on package installation and update.</p>
@@ -354,7 +354,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="versions" class="section level2">
 <h2><span class="header-section-number">12.4</span> Versions</h2>
 <p>It is also useful to know that at any given time, there are two Bioconductor versions - there is always a release (stable) and a development (devel) versions. For example, in October 2017, the release version is 3.6 and the development is 3.7.</p>
-<p>The individual packages have a similar scheme. Every package is available for the release and the development versions of Bioconductor. These two versions of the package have also different version numbers, where the last digit is even for the former and off for the later. Currently, the <code>rBiocpkg(&quot;MSnbase&quot;)</code> has versions <code>2.4.0</code> and <code>2.5.1</code>, respectively.</p>
+<p>The individual packages have a similar scheme. Every package is available for the release and the development versions of Bioconductor. These two versions of the package have also different version numbers, where the last digit is even for the former and off for the later. Currently, the <em><a href="http://bioconductor.org/packages/MSnbase">MSnbase</a></em> has versions <code>2.4.0</code> and <code>2.5.1</code>, respectively.</p>
 <p>Finally, every Bioconductor version is tight to an R version. To access the current Bioconductor release 3.6 version, one needs to use the latest R version, which is 3.4.2. Hence, it is important to have an up-to-date R installation to keep up with the latest developments in Bioconductor. More details <a href="https://bioconductor.org/developers/how-to/version-numbering/">here</a>.</p>
 </div>
 <div id="getting-help" class="section level2">
