@@ -355,6 +355,7 @@ p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_
 <li><p>In the ui: define the components of the user interface (such as page layout, page title, input options and outputs), i.e what the user will see and interact with.</p></li>
 <li><p>In the server: defines the computations in the R backend.</p></li>
 <li><p>The <em>reactive</em> programming is implemented through <em>reactive</em> functions, which are functions that are only called when their respective inputs are changed.</p></li>
+<li><p>An application is run with the <code>shiny::runApp()</code> function, which takes the directory containing the two files as input.</p></li>
 </ul>
 <p>Before looking at the details of such an architecture, let’s build a simple example from scratch, step by step. This app, shown below, uses the <code>faithful</code> data, describing the wainting time between eruptions and the duration of the reuption for the Old Faithful geyser in Yellowstone National Park, Wyoming, USA.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(faithful)</code></pre></div>
@@ -392,7 +393,7 @@ shinyUI(fluidPage(
     )
 ))</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>In the <code>server.R</code> file, defined the <code>shinyServer</code> function that handles input and ouputs (none at this stage) and the R logic.</li>
+<li>In the <code>server.R</code> file, we define the <code>shinyServer</code> function that handles input and ouputs (none at this stage) and the R logic.</li>
 </ol>
 <pre><code>library(shiny)
 
@@ -571,7 +572,7 @@ shinyServer(function(input, output) {
 })</code></pre>
 <blockquote>
 <p>Challenge</p>
-<p>Run your <code>shinyapp</code> application, as described above.</p>
+<p>Write and your <code>shinyapp</code> applications, as described above.</p>
 </blockquote>
 </div>
 <div id="the-shiny-infrastructure" class="section level3">
@@ -669,7 +670,7 @@ shinyServer(function(input, output) {
 })</code></pre>
 <blockquote>
 <p>Challenge</p>
-<p>Using the code above, implement and test the app.</p>
+<p>Using the code above, implement and run the app.</p>
 </blockquote>
 <div id="challenges" class="section level4 unnumbered">
 <h4>Challenges</h4>

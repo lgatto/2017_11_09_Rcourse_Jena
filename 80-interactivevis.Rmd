@@ -152,6 +152,9 @@ output is updated accordingly.
   functions, which are functions that are only called when their
   respective inputs are changed.
 
+- An application is run with the `shiny::runApp()` function, which
+  takes the directory containing the two files as input.
+
 Before looking at the details of such an architecture, let's build a
 simple example from scratch, step by step. This app, shown below, uses
 the `faithful` data, describing the wainting time between eruptions
@@ -186,7 +189,7 @@ knitr::include_app("https://lgatto.shinyapps.io/shiny-app1/",
 writeLines(readLines('src/shiny-app00/ui.R'))
 ```
 
-4. In the `server.R` file, defined the `shinyServer` function that
+4. In the `server.R` file, we define the `shinyServer` function that
    handles input and ouputs (none at this stage) and the R logic.
 
 ```{r server00, comment = "", echo=FALSE}
@@ -262,7 +265,7 @@ writeLines(lns[-grep("^\\s*$", lns)])
 
 > Challenge 
 > 
-> Run your `shinyapp` application, as described above.
+> Write and your `shinyapp` applications, as described above.
 
 ### The shiny infrastructure 
 
@@ -309,7 +312,7 @@ writeLines(lns[-grep("^\\s*$", lns)])
 
 > Challenge
 >
-> Using the code above, implement and test the app.
+> Using the code above, implement and run the app.
 
 #### Challenges {-}
 
