@@ -210,6 +210,14 @@ Here are some core classes, taken from the
 - Single cell data – `r Biocpkg("SingleCellExperiment")``::SingleCellExperiment()`
 - Mass spectrometry data – `r Biocpkg("MSnbase")``::MSnExp()`
 
+A common design theme that is found throughout many Bioconductor core
+classes is illustrated below, which is found in microarrays,
+quantiative proteomics data, RNA-Seq data, ... It contains a
+rectangular feature x sample data matrix and sample and
+feature-specific annotations.
+
+![](./figs/msnset.png)
+
 ## More resources
 
 - Videos: https://www.youtube.com/user/bioconductor
