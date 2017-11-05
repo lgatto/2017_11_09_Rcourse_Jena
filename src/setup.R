@@ -10,4 +10,5 @@ suppressPackageStartupMessages(library("dplyr"))
 suppressPackageStartupMessages(library("ggplot2"))
 suppressPackageStartupMessages(library("ggvis"))
 suppressPackageStartupMessages(library("shiny"))
+suppressPackageStartupMessages(library("DT"))
 
