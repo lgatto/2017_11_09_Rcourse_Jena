@@ -1,9 +1,63 @@
 # Reproducible research with Rmarkdown 
 
-- Short explanation of markdown and Rmarkdown
-- Rmarkdown file or notebook
-- show also DT::datatable
-- Reminder about session info
+## Introduction
+
+Reproducible research is an essential part of any data analysis. With
+the tools that are available, one can argue that it has become more
+difficult not to produce reproducible reports than to producing then.
+
+Reproducible documents have been a part of R since the very
+beginning. See for example
+[*Statistical Analyses and Reproducible Research*](https://biostats.bepress.com/bioconductor/paper2/) by
+Gentleman and Temple Land, 2004), to see how such *compendia* play a
+central role within the [Bioconductor](https://bioconductor.org/)
+project (more about Bioconductor in it's dedicated
+section). Originally, these were written in LaTeX, interleaved with R
+code chunks, forming so called Sweave documents (with extension
+`.Rnw`).
+
+More recently, it has become to use
+the [markdown](https://daringfireball.net/projects/markdown/) syntax
+marup language, rather than LaTeX. Once interleaved with R code
+chunks, these documents become Rmarkdown files (`.Rmd`). The can be
+converted into markdown using `knitr::knit`, that executes the code
+chunk and incoporates their output in the resulting markdown
+documents, which itselft is converted to one of many output formats,
+typically pdf of html using [pandoc](http://pandoc.org/). I R, this
+final conversion is done using `rmarkdown::render` (that relies on
+pandoc). The [rmarkdown](http://rmarkdown.rstudio.com/) package is
+developed and maintained by RStudio and benefits from excellent
+documentation, support and integrates into the RStudio editor.
+
+![](./figs/rmd.png)
+
+RStudio now also support *R Notebook* documents that execute
+individual code chunks that are displayed directly in the source
+document.
+
+![](./figs.rnb.png)
+
+## Additional features
+
+- Among the most optiosn that can set for code chunks is
+  `cache`. Setting `cache=TRUE` will avoid that specific code chunk to
+  be cached and not recomputed every time the documented in *knitted*,
+  unless the code chunk was modified. This is an important feature
+  when long computations are necessary.
+
+- The `DT::datatable` function allows to create dynamic tables
+  directly from R, as show below.
+
+```{r dtexample}
+DT::datatable(cars)
+```
+
+- It is always useful to finish a Rmarkdown report with a section
+  providing all the session information details with the
+  `sessionInfo()` function, such at the end of this material. This
+  allows readers to review the version of R itself and all the
+  packages that were used to produce the report.
+
 
 > Challenge
 >
