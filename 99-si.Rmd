@@ -1,5 +1,8 @@
 # Session information {-}
 
+The version of R and all packages used to generate this material are
+documented below.
+
 ```{r si}
 sessionInfo()
 ```

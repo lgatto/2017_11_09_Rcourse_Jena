@@ -18,11 +18,11 @@ code chunks, forming so called Sweave documents (with extension
 
 More recently, it has become to use
 the [markdown](https://daringfireball.net/projects/markdown/) syntax
-marup language, rather than LaTeX. Once interleaved with R code
+markup language, rather than LaTeX. Once interleaved with R code
 chunks, these documents become Rmarkdown files (`.Rmd`). The can be
 converted into markdown using `knitr::knit`, that executes the code
-chunk and incoporates their output in the resulting markdown
-documents, which itselft is converted to one of many output formats,
+chunk and incorporates their output in the resulting markdown
+documents, which itself is converted to one of many output formats,
 typically pdf of html using [pandoc](http://pandoc.org/). I R, this
 final conversion is done using `rmarkdown::render` (that relies on
 pandoc). The [rmarkdown](http://rmarkdown.rstudio.com/) package is
@@ -35,11 +35,11 @@ RStudio now also support *R Notebook* documents that execute
 individual code chunks that are displayed directly in the source
 document.
 
-![](./figs.rnb.png)
+![](./figs/rnb.png)
 
 ## Additional features
 
-- Among the most optiosn that can set for code chunks is
+- Among the most options that can set for code chunks is
   `cache`. Setting `cache=TRUE` will avoid that specific code chunk to
   be cached and not recomputed every time the documented in *knitted*,
   unless the code chunk was modified. This is an important feature
@@ -59,12 +59,12 @@ DT::datatable(cars)
   packages that were used to produce the report.
 
 
-> Challenge
->
-> Prepare an Rmarkdown report summarising the portal ecology data. The
-> report should include a *Material and methods* section where the
-> data is read in (ideally from the online file) and briefly
-> described, a *Data preparation* section where rows with missing
-> values are filtered out, and a *Visualisation* section where one or
-> two plots are rendered. Finish your report with a *Session
-> information* section.
+## Challenge
+
+Prepare an Rmarkdown report summarising the portal ecology data. The
+report should include a *Material and methods* section where the
+data is read in (ideally from the online file) and briefly
+described, a *Data preparation* section where rows with missing
+values are filtered out, and a *Visualisation* section where one or
+two plots are rendered. Finish your report with a *Session
+information* section.
