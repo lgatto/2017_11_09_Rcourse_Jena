@@ -14,7 +14,7 @@ incorporates shiny's reactive programming model (see later) and
 
 ```{r, eval = FALSE}
 library("ggvis")
-sml <- sample(nrow(surveys), 1e3)
+sml <- sample(nrow(surveys_complete), 1e3)
 surveys_sml <- surveys_complete[sml, ]
 ```
 

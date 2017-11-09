@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data analysis and R programming</title>
+  <meta name="description" content="Material for the ‘Data analysis and R programming’ course.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data analysis and R programming" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Material for the ‘Data analysis and R programming’ course." />
+  <meta name="github-repo" content="lgatto/2017_11_09_Rcourse_Jena" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data analysis and R programming" />
+  
+  <meta name="twitter:description" content="Material for the ‘Data analysis and R programming’ course." />
+  
+
+<meta name="author" content="Laurent Gatto">
+
+
+<meta name="date" content="2017-11-09">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="r-package-development.html">
+<link rel="next" href="interactive-visualisation.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-0.9/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i><b>1.1</b> Installation</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#programme"><i class="fa fa-check"></i><b>1.2</b> Programme</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#license-and-credits"><i class="fa fa-check"></i><b>1.3</b> License and credits</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>2</b> Tidy data</a><ul>
+<li class="chapter" data-level="2.1" data-path="tidy-data.html"><a href="tidy-data.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="tidy-data.html"><a href="tidy-data.html#common-spreadsheet-errors"><i class="fa fa-check"></i><b>2.2</b> Common Spreadsheet Errors</a></li>
+<li class="chapter" data-level="2.3" data-path="tidy-data.html"><a href="tidy-data.html#key-points"><i class="fa fa-check"></i><b>2.3</b> Key points</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="before-we-start.html"><a href="before-we-start.html"><i class="fa fa-check"></i><b>3</b> Before we start</a><ul>
+<li class="chapter" data-level="3.1" data-path="before-we-start.html"><a href="before-we-start.html#what-is-r-what-is-rstudio"><i class="fa fa-check"></i><b>3.1</b> What is R? What is RStudio?</a></li>
+<li class="chapter" data-level="3.2" data-path="before-we-start.html"><a href="before-we-start.html#why-learn-r"><i class="fa fa-check"></i><b>3.2</b> Why learn R?</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="before-we-start.html"><a href="before-we-start.html#r-does-not-involve-lots-of-pointing-and-clicking-and-thats-a-good-thing"><i class="fa fa-check"></i><b>3.2.1</b> R does not involve lots of pointing and clicking, and that’s a good thing</a></li>
+<li class="chapter" data-level="3.2.2" data-path="before-we-start.html"><a href="before-we-start.html#r-code-is-great-for-reproducibility"><i class="fa fa-check"></i><b>3.2.2</b> R code is great for reproducibility</a></li>
+<li class="chapter" data-level="3.2.3" data-path="before-we-start.html"><a href="before-we-start.html#r-is-interdisciplinary-and-extensible"><i class="fa fa-check"></i><b>3.2.3</b> R is interdisciplinary and extensible</a></li>
+<li class="chapter" data-level="3.2.4" data-path="before-we-start.html"><a href="before-we-start.html#r-works-on-data-of-all-shapes-and-sizes"><i class="fa fa-check"></i><b>3.2.4</b> R works on data of all shapes and sizes</a></li>
+<li class="chapter" data-level="3.2.5" data-path="before-we-start.html"><a href="before-we-start.html#r-produces-high-quality-graphics"><i class="fa fa-check"></i><b>3.2.5</b> R produces high-quality graphics</a></li>
+<li class="chapter" data-level="3.2.6" data-path="before-we-start.html"><a href="before-we-start.html#r-has-a-large-and-welcoming-community"><i class="fa fa-check"></i><b>3.2.6</b> R has a large and welcoming community</a></li>
+<li class="chapter" data-level="3.2.7" data-path="before-we-start.html"><a href="before-we-start.html#not-only-is-r-free-but-it-is-also-open-source-and-cross-platform"><i class="fa fa-check"></i><b>3.2.7</b> Not only is R free, but it is also open-source and cross-platform</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="before-we-start.html"><a href="before-we-start.html#knowing-your-way-around-rstudio"><i class="fa fa-check"></i><b>3.3</b> Knowing your way around RStudio</a></li>
+<li class="chapter" data-level="3.4" data-path="before-we-start.html"><a href="before-we-start.html#getting-set-up"><i class="fa fa-check"></i><b>3.4</b> Getting set up</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="before-we-start.html"><a href="before-we-start.html#organizing-your-working-directory"><i class="fa fa-check"></i><b>3.4.1</b> Organizing your working directory</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="before-we-start.html"><a href="before-we-start.html#interacting-with-r"><i class="fa fa-check"></i><b>3.5</b> Interacting with R</a></li>
+<li class="chapter" data-level="3.6" data-path="before-we-start.html"><a href="before-we-start.html#how-to-learn-more-after-the-workshop"><i class="fa fa-check"></i><b>3.6</b> How to learn more after the workshop?</a></li>
+<li class="chapter" data-level="3.7" data-path="before-we-start.html"><a href="before-we-start.html#seeking-help"><i class="fa fa-check"></i><b>3.7</b> Seeking help</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="before-we-start.html"><a href="before-we-start.html#use-the-built-in-rstudio-help-interface-to-search-for-more-information-on-r-functions"><i class="fa fa-check"></i><b>3.7.1</b> Use the built-in RStudio help interface to search for more information on R functions</a></li>
+<li class="chapter" data-level="3.7.2" data-path="before-we-start.html"><a href="before-we-start.html#i-know-the-name-of-the-function-i-want-to-use-but-im-not-sure-how-to-use-it"><i class="fa fa-check"></i><b>3.7.2</b> I know the name of the function I want to use, but I’m not sure how to use it</a></li>
+<li class="chapter" data-level="3.7.3" data-path="before-we-start.html"><a href="before-we-start.html#i-want-to-use-a-function-that-does-x-there-must-be-a-function-for-it-but-i-dont-know-which-one"><i class="fa fa-check"></i><b>3.7.3</b> I want to use a function that does X, there must be a function for it but I don’t know which one…</a></li>
+<li class="chapter" data-level="3.7.4" data-path="before-we-start.html"><a href="before-we-start.html#i-am-stuck-i-get-an-error-message-that-i-dont-understand"><i class="fa fa-check"></i><b>3.7.4</b> I am stuck… I get an error message that I don’t understand</a></li>
+<li class="chapter" data-level="3.7.5" data-path="before-we-start.html"><a href="before-we-start.html#asking-for-help"><i class="fa fa-check"></i><b>3.7.5</b> Asking for help</a></li>
+<li class="chapter" data-level="3.7.6" data-path="before-we-start.html"><a href="before-we-start.html#where-to-ask-for-help"><i class="fa fa-check"></i><b>3.7.6</b> Where to ask for help?</a></li>
+<li class="chapter" data-level="3.7.7" data-path="before-we-start.html"><a href="before-we-start.html#more-resources"><i class="fa fa-check"></i><b>3.7.7</b> More resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>4</b> Introduction to R</a><ul>
+<li class="chapter" data-level="4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#creating-objects-in-r"><i class="fa fa-check"></i><b>4.1</b> Creating objects in R</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#comments"><i class="fa fa-check"></i><b>4.1.1</b> Comments</a></li>
+<li class="chapter" data-level="4.1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions-and-their-arguments"><i class="fa fa-check"></i><b>4.1.2</b> Functions and their arguments</a></li>
+<li class="chapter" data-level="4.1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#objects-vs.variables"><i class="fa fa-check"></i><b>4.1.3</b> Objects vs. variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#vectors-and-data-types"><i class="fa fa-check"></i><b>4.2</b> Vectors and data types</a></li>
+<li class="chapter" data-level="4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#subsetting-vectors"><i class="fa fa-check"></i><b>4.3</b> Subsetting vectors</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#conditional-subsetting"><i class="fa fa-check"></i><b>4.3.1</b> Conditional subsetting</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#missing-data"><i class="fa fa-check"></i><b>4.4</b> Missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="starting-with-data.html"><a href="starting-with-data.html"><i class="fa fa-check"></i><b>5</b> Starting with data</a><ul>
+<li class="chapter" data-level="5.1" data-path="starting-with-data.html"><a href="starting-with-data.html#presentation-of-the-survey-data"><i class="fa fa-check"></i><b>5.1</b> Presentation of the Survey Data</a></li>
+<li class="chapter" data-level="5.2" data-path="starting-with-data.html"><a href="starting-with-data.html#what-are-data-frames"><i class="fa fa-check"></i><b>5.2</b> What are data frames?</a></li>
+<li class="chapter" data-level="5.3" data-path="starting-with-data.html"><a href="starting-with-data.html#inspecting-data.frame-objects"><i class="fa fa-check"></i><b>5.3</b> Inspecting <code>data.frame</code> Objects</a></li>
+<li class="chapter" data-level="5.4" data-path="starting-with-data.html"><a href="starting-with-data.html#indexing-and-subsetting-data-frames"><i class="fa fa-check"></i><b>5.4</b> Indexing and subsetting data frames</a></li>
+<li class="chapter" data-level="5.5" data-path="starting-with-data.html"><a href="starting-with-data.html#factors"><i class="fa fa-check"></i><b>5.5</b> Factors</a></li>
+<li class="chapter" data-level="5.6" data-path="starting-with-data.html"><a href="starting-with-data.html#formatting-dates"><i class="fa fa-check"></i><b>5.6</b> Formatting Dates</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html"><i class="fa fa-check"></i><b>6</b> Manipulating and analyzing data</a><ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#what-are-dplyr-and-tidyr"><i class="fa fa-check"></i><b>6.1</b> What are <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong>?</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#selecting-columns-and-filtering-rows"><i class="fa fa-check"></i><b>6.2</b> Selecting columns and filtering rows</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#pipes"><i class="fa fa-check"></i><b>6.3</b> Pipes</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#mutate"><i class="fa fa-check"></i><b>6.3.1</b> Mutate</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#split-apply-combine-data-analysis-and-the-summarize-function"><i class="fa fa-check"></i><b>6.3.2</b> Split-apply-combine data analysis and the summarize() function</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#reshaping-with-gather-and-spread"><i class="fa fa-check"></i><b>6.3.3</b> Reshaping with gather and spread</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#exporting-data"><i class="fa fa-check"></i><b>6.4</b> Exporting data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html"><i class="fa fa-check"></i><b>7</b> Data visualization with ggplot2</a><ul>
+<li class="chapter" data-level="7.1" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html#plotting-with-ggplot2"><i class="fa fa-check"></i><b>7.1</b> Plotting with <strong><code>ggplot2</code></strong></a></li>
+<li class="chapter" data-level="7.2" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html#building-your-plots-iteratively"><i class="fa fa-check"></i><b>7.2</b> Building your plots iteratively</a></li>
+<li class="chapter" data-level="7.3" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html#boxplot"><i class="fa fa-check"></i><b>7.3</b> Boxplot</a></li>
+<li class="chapter" data-level="7.4" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html#plotting-time-series-data"><i class="fa fa-check"></i><b>7.4</b> Plotting time series data</a></li>
+<li class="chapter" data-level="7.5" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html#faceting"><i class="fa fa-check"></i><b>7.5</b> Faceting</a></li>
+<li class="chapter" data-level="7.6" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html#ggplot2-themes"><i class="fa fa-check"></i><b>7.6</b> <strong><code>ggplot2</code></strong> themes</a></li>
+<li class="chapter" data-level="7.7" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html#customization"><i class="fa fa-check"></i><b>7.7</b> Customization</a></li>
+<li class="chapter" data-level="7.8" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html#arranging-and-exporting-plots"><i class="fa fa-check"></i><b>7.8</b> Arranging and exporting plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reproducible-research-with-rmarkdown.html"><a href="reproducible-research-with-rmarkdown.html"><i class="fa fa-check"></i><b>8</b> Reproducible research with Rmarkdown</a><ul>
+<li class="chapter" data-level="8.1" data-path="reproducible-research-with-rmarkdown.html"><a href="reproducible-research-with-rmarkdown.html#introduction-2"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="reproducible-research-with-rmarkdown.html"><a href="reproducible-research-with-rmarkdown.html#additional-features"><i class="fa fa-check"></i><b>8.2</b> Additional features</a></li>
+<li class="chapter" data-level="8.3" data-path="reproducible-research-with-rmarkdown.html"><a href="reproducible-research-with-rmarkdown.html#challenge-1"><i class="fa fa-check"></i><b>8.3</b> Challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="r-package-development.html"><a href="r-package-development.html"><i class="fa fa-check"></i><b>9</b> R Package Development</a><ul>
+<li class="chapter" data-level="9.1" data-path="r-package-development.html"><a href="r-package-development.html#introduction-3"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="r-package-development.html"><a href="r-package-development.html#references"><i class="fa fa-check"></i><b>9.1.1</b> References</a></li>
+<li class="chapter" data-level="9.1.2" data-path="r-package-development.html"><a href="r-package-development.html#terminology"><i class="fa fa-check"></i><b>9.1.2</b> Terminology</a></li>
+<li class="chapter" data-level="9.1.3" data-path="r-package-development.html"><a href="r-package-development.html#requirement"><i class="fa fa-check"></i><b>9.1.3</b> Requirement</a></li>
+<li class="chapter" data-level="9.1.4" data-path="r-package-development.html"><a href="r-package-development.html#course-content"><i class="fa fa-check"></i><b>9.1.4</b> Course content</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="r-package-development.html"><a href="r-package-development.html#preparing-r-code"><i class="fa fa-check"></i><b>9.2</b> Preparing R code</a></li>
+<li class="chapter" data-level="9.3" data-path="r-package-development.html"><a href="r-package-development.html#package-layout"><i class="fa fa-check"></i><b>9.3</b> Package layout</a></li>
+<li class="chapter" data-level="9.4" data-path="r-package-development.html"><a href="r-package-development.html#package-developement-cycle"><i class="fa fa-check"></i><b>9.4</b> Package developement cycle</a></li>
+<li class="chapter" data-level="9.5" data-path="r-package-development.html"><a href="r-package-development.html#package-metadata"><i class="fa fa-check"></i><b>9.5</b> Package metadata</a></li>
+<li class="chapter" data-level="9.6" data-path="r-package-development.html"><a href="r-package-development.html#namespace"><i class="fa fa-check"></i><b>9.6</b> <code>NAMESPACE</code></a></li>
+<li class="chapter" data-level="9.7" data-path="r-package-development.html"><a href="r-package-development.html#r-code"><i class="fa fa-check"></i><b>9.7</b> R code</a></li>
+<li class="chapter" data-level="9.8" data-path="r-package-development.html"><a href="r-package-development.html#package-sub-directories"><i class="fa fa-check"></i><b>9.8</b> Package sub-directories</a></li>
+<li class="chapter" data-level="9.9" data-path="r-package-development.html"><a href="r-package-development.html#documentation"><i class="fa fa-check"></i><b>9.9</b> Documentation</a></li>
+<li class="chapter" data-level="9.10" data-path="r-package-development.html"><a href="r-package-development.html#manual-pages"><i class="fa fa-check"></i><b>9.10</b> Manual pages</a><ul>
+<li class="chapter" data-level="9.10.1" data-path="r-package-development.html"><a href="r-package-development.html#use-roxygen"><i class="fa fa-check"></i><b>9.10.1</b> Use roxygen</a></li>
+<li class="chapter" data-level="9.10.2" data-path="r-package-development.html"><a href="r-package-development.html#vignettes"><i class="fa fa-check"></i><b>9.10.2</b> Vignettes</a></li>
+</ul></li>
+<li class="chapter" data-level="9.11" data-path="r-package-development.html"><a href="r-package-development.html#additional-files"><i class="fa fa-check"></i><b>9.11</b> Additional files</a></li>
+<li class="chapter" data-level="9.12" data-path="r-package-development.html"><a href="r-package-development.html#distributing-packages"><i class="fa fa-check"></i><b>9.12</b> Distributing packages</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html"><i class="fa fa-check"></i><b>10</b> Visualisation of high-dimensional data in R</a><ul>
+<li class="chapter" data-level="10.1" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#introduction-4"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#data"><i class="fa fa-check"></i><b>10.2</b> Data</a></li>
+<li class="chapter" data-level="10.3" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#k-means-clustering"><i class="fa fa-check"></i><b>10.3</b> K-means clustering</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#how-does-k-means-work"><i class="fa fa-check"></i><b>10.3.1</b> How does k-means work</a></li>
+<li class="chapter" data-level="10.3.2" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#model-selection"><i class="fa fa-check"></i><b>10.3.2</b> Model selection</a></li>
+<li class="chapter" data-level="10.3.3" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#how-to-determine-the-number-of-clusters"><i class="fa fa-check"></i><b>10.3.3</b> How to determine the number of clusters</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#hierarchical-clustering"><i class="fa fa-check"></i><b>10.4</b> Hierarchical clustering</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#how-does-hierarchical-clustering-work"><i class="fa fa-check"></i><b>10.4.1</b> How does hierarchical clustering work</a></li>
+<li class="chapter" data-level="10.4.2" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#defining-clusters"><i class="fa fa-check"></i><b>10.4.2</b> Defining clusters</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>10.5</b> Principal component analysis (PCA)</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#visualisation"><i class="fa fa-check"></i><b>10.5.1</b> Visualisation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html"><i class="fa fa-check"></i><b>11</b> Interactive visualisation</a><ul>
+<li class="chapter" data-level="11.1" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#interactivity-graphs"><i class="fa fa-check"></i><b>11.1</b> Interactivity graphs</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#interactivity"><i class="fa fa-check"></i><b>11.1.1</b> Interactivity</a></li>
+<li class="chapter" data-level="11.1.2" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#layers"><i class="fa fa-check"></i><b>11.1.2</b> Layers</a></li>
+<li class="chapter" data-level="11.1.3" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#more-components"><i class="fa fa-check"></i><b>11.1.3</b> More components</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#interactive-apps"><i class="fa fa-check"></i><b>11.2</b> Interactive apps</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#introduction-5"><i class="fa fa-check"></i><b>11.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2.2" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#creation-of-our-fist-shiny-app"><i class="fa fa-check"></i><b>11.2.2</b> Creation of our fist shiny app</a></li>
+<li class="chapter" data-level="11.2.3" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#the-shiny-infrastructure"><i class="fa fa-check"></i><b>11.2.3</b> The shiny infrastructure</a></li>
+<li class="chapter" data-level="11.2.4" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#another-shiny-app"><i class="fa fa-check"></i><b>11.2.4</b> Another shiny app</a></li>
+<li class="chapter" data-level="11.2.5" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#single-file-app"><i class="fa fa-check"></i><b>11.2.5</b> Single-file app</a></li>
+<li class="chapter" data-level="11.2.6" data-path="interactive-visualisation.html"><a href="interactive-visualisation.html#theres-more-to-shiny"><i class="fa fa-check"></i><b>11.2.6</b> There’s more to <code>shiny</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html"><i class="fa fa-check"></i><b>12</b> Navigating the Bioconductor project</a><ul>
+<li class="chapter" data-level="12.1" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#biocviews"><i class="fa fa-check"></i><b>12.1</b> <em>biocViews</em></a></li>
+<li class="chapter" data-level="12.2" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#workflows"><i class="fa fa-check"></i><b>12.2</b> Workflows</a></li>
+<li class="chapter" data-level="12.3" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#learning-about-specific-packages"><i class="fa fa-check"></i><b>12.3</b> Learning about specific packages</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#package-vignettes"><i class="fa fa-check"></i><b>12.3.1</b> Package vignettes</a></li>
+<li class="chapter" data-level="12.3.2" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#installation-1"><i class="fa fa-check"></i><b>12.3.2</b> Installation</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#versions"><i class="fa fa-check"></i><b>12.4</b> Versions</a></li>
+<li class="chapter" data-level="12.5" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#getting-help"><i class="fa fa-check"></i><b>12.5</b> Getting help</a></li>
+<li class="chapter" data-level="12.6" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#data-infrastructure"><i class="fa fa-check"></i><b>12.6</b> Data infrastructure</a></li>
+<li class="chapter" data-level="12.7" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#more-resources-1"><i class="fa fa-check"></i><b>12.7</b> More resources</a></li>
+<li class="chapter" data-level="12.8" data-path="navigating-the-bioconductor-project.html"><a href="navigating-the-bioconductor-project.html#challenges"><i class="fa fa-check"></i><b>12.8</b> Challenges</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html"><i class="fa fa-check"></i><b>13</b> R programming concepts and tools</a><ul>
+<li class="chapter" data-level="13.1" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#defensive-programming"><i class="fa fa-check"></i><b>13.1</b> Defensive programming</a><ul>
+<li class="chapter" data-level="" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#talking-to-users"><i class="fa fa-check"></i>Talking to users</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#kiss"><i class="fa fa-check"></i><b>13.2</b> KISS</a></li>
+<li class="chapter" data-level="13.3" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#failing-fast-and-well"><i class="fa fa-check"></i><b>13.3</b> Failing fast and well</a></li>
+<li class="chapter" data-level="13.4" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#consistency-and-predictability"><i class="fa fa-check"></i><b>13.4</b> Consistency and predictability</a></li>
+<li class="chapter" data-level="13.5" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#comparisons"><i class="fa fa-check"></i><b>13.5</b> Comparisons</a><ul>
+<li class="chapter" data-level="" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#floating-point-issues-to-be-aware-of"><i class="fa fa-check"></i>Floating point issues to be aware of</a></li>
+<li class="chapter" data-level="" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#floating-point-how-to-compare"><i class="fa fa-check"></i>Floating point: how to compare</a></li>
+<li class="chapter" data-level="" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#exact-identity"><i class="fa fa-check"></i>Exact identity</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#exercise"><i class="fa fa-check"></i><b>13.6</b> Exercise</a></li>
+<li class="chapter" data-level="13.7" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#debugging-techniques-and-tools"><i class="fa fa-check"></i><b>13.7</b> Debugging: techniques and tools</a><ul>
+<li class="chapter" data-level="" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#tools"><i class="fa fa-check"></i>Tools</a></li>
+<li class="chapter" data-level="" data-path="r-programming-concepts-and-tools.html"><a href="r-programming-concepts-and-tools.html#exercise-1"><i class="fa fa-check"></i>Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="session-information.html"><a href="session-information.html"><i class="fa fa-check"></i>Session information</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data analysis and R programming</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="visualisation-of-high-dimensional-data-in-r" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Visualisation of high-dimensional data in R</h1>
+<blockquote>
+<p>This section is based composed of the <em>Visualisation of high-dimensional data</em> presentation, and parts of the <a href="https://lgatto.github.io/IntroMachineLearningWithR/index.html"><em>Introduction to Machine Learning with R</em></a> course (unsupervised learning chapter).</p>
+</blockquote>
+<div id="introduction-4" class="section level2">
+<h2><span class="header-section-number">10.1</span> Introduction</h2>
+<ul>
+<li><a href="https://htmlpreview.github.io/?https://github.com/lgatto/visualisation/blob/master/highdimvis.html#visualisation-of-high-dimensional-data">Visualisation of high-dimensional data</a> slides.</li>
+</ul>
+</div>
+<div id="data" class="section level2">
+<h2><span class="header-section-number">10.2</span> Data</h2>
+<p>To illustrate some visualisation techniques, we are going to make use of <em>Edgar Anderson’s Iris Data</em>, available in R with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris)</code></pre></div>
+<p>From the <code>iris</code> manual page:</p>
+<blockquote>
+<p>This famous (Fisher’s or Anderson’s) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are <em>Iris setosa</em>, <em>versicolor</em>, and <em>virginica</em>.</p>
+</blockquote>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg/220px-Kosaciec_szczecinkowaty_Iris_setosa.jpg" alt="Iris setosa (credit Wikipedia)" /> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Iris_versicolor_3.jpg/220px-Iris_versicolor_3.jpg" alt="Iris versicolor (credit Wikipedia)" /> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Iris_virginica.jpg/220px-Iris_virginica.jpg" alt="Iris virginica (credit Wikipedia)" /></p>
+<div id="htmlwidget-7744373493e6f8f9ec85" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7744373493e6f8f9ec85">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2,1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3,2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<p>For more details, see <code>?iris</code>.</p>
+</div>
+<div id="k-means-clustering" class="section level2">
+<h2><span class="header-section-number">10.3</span> K-means clustering</h2>
+<p>The k-means clustering algorithms aims at partitioning <em>n</em> observations into a fixed number of <em>k</em> clusters. The algorithm will find homogeneous clusters.</p>
+<p>In R, we use</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stats<span class="op">::</span><span class="kw">kmeans</span>(x, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)</code></pre></div>
+<p>where</p>
+<ul>
+<li><code>x</code> is a numeric data matrix</li>
+<li><code>centers</code> is the pre-defined number of clusters</li>
+<li>the k-means algorithm has a random component and can be repeated <code>nstart</code> times to improve the returned model</li>
+</ul>
+<blockquote>
+<p>Challenge:</p>
+<ul>
+<li>To learn about k-means, let’s use the <code>iris</code> with the sepal and petal length variables only (to facilitate visualisation). Create such a data matrix and name it <code>x</code></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Run the k-means algorithm on the newly generated data <code>x</code>, save the results in a new variable <code>cl</code>, and explore its output when printed.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>The actual results of the algorithms, i.e. the cluster membership can be accessed in the <code>clusters</code> element of the clustering result output. Use it to colour the inferred clusters to generate a figure like shown below.</li>
+</ul>
+</blockquote>
+<div class="figure"><span id="fig:solkmplot"></span>
+<img src="2017_11_09_Rcourse_Jena_files/figure-html/solkmplot-1.png" alt="k-means algorithm on sepal and petal lengths" width="672" />
+<p class="caption">
+Figure 10.1: k-means algorithm on sepal and petal lengths
+</p>
+</div>
+<p><details></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">i &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;Length&quot;</span>, <span class="kw">names</span>(iris))
+x &lt;-<span class="st"> </span>iris[, i]
+cl &lt;-<span class="st"> </span><span class="kw">kmeans</span>(x, <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
+<span class="kw">plot</span>(x, <span class="dt">col =</span> cl<span class="op">$</span>cluster)</code></pre></div>
+<p></details></p>
+<div id="how-does-k-means-work" class="section level3">
+<h3><span class="header-section-number">10.3.1</span> How does k-means work</h3>
+<p><strong>Initialisation</strong>: randomly assign class membership</p>
+<div class="figure"><span id="fig:kmworksinit"></span>
+<img src="2017_11_09_Rcourse_Jena_files/figure-html/kmworksinit-1.png" alt="k-means random intialisation" width="672" />
+<p class="caption">
+Figure 10.2: k-means random intialisation
+</p>
+</div>
+<p><strong>Iteration</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>Calculate the centre of each subgroup as the average position of all observations is that subgroup.</li>
+<li>Each observation is then assigned to the group of its nearest centre.</li>
+</ol>
+<p>It’s also possible to stop the algorithm after a certain number of iterations, or once the centres move less than a certain distance.</p>
+<div class="figure"><span id="fig:kmworksiter"></span>
+<img src="2017_11_09_Rcourse_Jena_files/figure-html/kmworksiter-1.png" alt="k-means iteration: calculate centers (left) and assign new cluster membership (right)" width="1152" />
+<p class="caption">
+Figure 10.3: k-means iteration: calculate centers (left) and assign new cluster membership (right)
+</p>
+</div>
+<p><strong>Termination</strong>: Repeat iteration until no point changes its cluster membership.</p>
+<div class="figure">
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif" alt="k-means convergence (credit Wikipedia)" />
+<p class="caption">k-means convergence (credit Wikipedia)</p>
+</div>
+</div>
+<div id="model-selection" class="section level3">
+<h3><span class="header-section-number">10.3.2</span> Model selection</h3>
+<p>Due to the random initialisation, one can obtain different clustering results. When k-means is run multiple times, the best outcome, i.e. the one that generates the smallest <em>total within cluster sum of squares (SS)</em>, is selected. The total within SS is calculated as:</p>
+<p>For each cluster results:</p>
+<ul>
+<li>for each observation, determine the squared euclidean distance from observation to centre of cluster</li>
+<li>sum all distances</li>
+</ul>
+<p>Note that this is a <strong>local minimum</strong>; there is no guarantee to obtain a global minimum.</p>
+<blockquote>
+<p>Challenge:</p>
+<p>Repeat kmeans on our <code>x</code> data multiple times, setting the number of iterations to 1 or greater and check whether you repeatedly obtain the same results. Try the same with random data of identical dimensions.</p>
+</blockquote>
+<p><details></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl1 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(x, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
+cl2 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(x, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
+<span class="kw">table</span>(cl1<span class="op">$</span>cluster, cl2<span class="op">$</span>cluster)</code></pre></div>
+<pre><code>##    
+##      1  2  3
+##   1 58  0  0
+##   2  0 41  0
+##   3  0  0 51</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl1 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(x, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">1</span>)
+cl2 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(x, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">1</span>)
+<span class="kw">table</span>(cl1<span class="op">$</span>cluster, cl2<span class="op">$</span>cluster)</code></pre></div>
+<pre><code>##    
+##      1  2  3
+##   1  0  0 41
+##   2  0 51  0
+##   3 58  0  0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+xr &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="kw">prod</span>(<span class="kw">dim</span>(x))), <span class="dt">ncol =</span> <span class="kw">ncol</span>(x))
+cl1 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(xr, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">1</span>)
+cl2 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(xr, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">1</span>)
+<span class="kw">table</span>(cl1<span class="op">$</span>cluster, cl2<span class="op">$</span>cluster)</code></pre></div>
+<pre><code>##    
+##      1  2  3
+##   1 46  0  6
+##   2  1 51  0
+##   3  0  1 45</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diffres &lt;-<span class="st"> </span>cl1<span class="op">$</span>cluster <span class="op">!=</span><span class="st"> </span>cl2<span class="op">$</span>cluster
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">plot</span>(xr, <span class="dt">col =</span> cl1<span class="op">$</span>cluster, <span class="dt">pch =</span> <span class="kw">ifelse</span>(diffres, <span class="dv">19</span>, <span class="dv">1</span>))
+<span class="kw">plot</span>(xr, <span class="dt">col =</span> cl2<span class="op">$</span>cluster, <span class="dt">pch =</span> <span class="kw">ifelse</span>(diffres, <span class="dv">19</span>, <span class="dv">1</span>))</code></pre></div>
+<div class="figure"><span id="fig:selrep"></span>
+<img src="2017_11_09_Rcourse_Jena_files/figure-html/selrep-1.png" alt="Different k-means results on the same (random) data" width="1152" />
+<p class="caption">
+Figure 10.4: Different k-means results on the same (random) data
+</p>
+</div>
+<p></details></p>
+</div>
+<div id="how-to-determine-the-number-of-clusters" class="section level3">
+<h3><span class="header-section-number">10.3.3</span> How to determine the number of clusters</h3>
+<ol style="list-style-type: decimal">
+<li>Run k-means with <code>k=1</code>, <code>k=2</code>, …, <code>k=n</code></li>
+<li>Record total within SS for each value of k.</li>
+<li>Choose k at the <em>elbow</em> position, as illustrated below.</li>
+</ol>
+<p><img src="2017_11_09_Rcourse_Jena_files/figure-html/kmelbow-1.png" width="672" /></p>
+<blockquote>
+<p>Challenge</p>
+<p>Calculate the total within sum of squares for k from 1 to 5 for our <code>x</code> test data, and reproduce the figure above.</p>
+</blockquote>
+<p><details></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ks &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>
+tot_within_ss &lt;-<span class="st"> </span><span class="kw">sapply</span>(ks, <span class="cf">function</span>(k) {
+    cl &lt;-<span class="st"> </span><span class="kw">kmeans</span>(x, k, <span class="dt">nstart =</span> <span class="dv">10</span>)
+    cl<span class="op">$</span>tot.withinss
+})
+<span class="kw">plot</span>(ks, tot_within_ss, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>)</code></pre></div>
+<p><img src="2017_11_09_Rcourse_Jena_files/figure-html/solkmelbow-1.png" width="672" /> </details></p>
+</div>
+</div>
+<div id="hierarchical-clustering" class="section level2">
+<h2><span class="header-section-number">10.4</span> Hierarchical clustering</h2>
+<div id="how-does-hierarchical-clustering-work" class="section level3">
+<h3><span class="header-section-number">10.4.1</span> How does hierarchical clustering work</h3>
+<p><strong>Initialisation</strong>: Starts by assigning each of the n point its own cluster</p>
+<p><strong>Iteration</strong></p>
+<ol style="list-style-type: decimal">
+<li>Find the two nearest clusters, and join them together, leading to n-1 clusters</li>
+<li>Continue merging cluster process until all are grouped into a single cluster</li>
+</ol>
+<p><strong>Termination:</strong> All observations are grouped within a single cluster.</p>
+<div class="figure"><span id="fig:hcldata"></span>
+<img src="2017_11_09_Rcourse_Jena_files/figure-html/hcldata-1.png" alt="Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right)." width="1152" />
+<p class="caption">
+Figure 10.5: Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right).
+</p>
+</div>
+<p>The results of hierarchical clustering are typically visualised along a <strong>dendrogram</strong>, where the distance between the clusters is proportional to the branch lengths.</p>
+<div class="figure"><span id="fig:hcldendro"></span>
+<img src="2017_11_09_Rcourse_Jena_files/figure-html/hcldendro-1.png" alt="Visualisation of the hierarchical clustering results on a dendrogram" width="672" />
+<p class="caption">
+Figure 10.6: Visualisation of the hierarchical clustering results on a dendrogram
+</p>
+</div>
+<p>In R:</p>
+<ul>
+<li>Calculate the distance using <code>dist</code>, typically the Euclidean distance.</li>
+<li>Hierarchical clustering on this distance matrix using <code>hclust</code></li>
+</ul>
+<blockquote>
+<p>Challenge</p>
+<p>Apply hierarchical clustering on the <code>iris</code> data and generate a dendrogram using the dedicated <code>plot</code> method.</p>
+</blockquote>
+<p><details></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">dist</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
+hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(d)
+hcl</code></pre></div>
+<pre><code>## 
+## Call:
+## hclust(d = d)
+## 
+## Cluster method   : complete 
+## Distance         : euclidean 
+## Number of objects: 150</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(hcl)</code></pre></div>
+<p><img src="2017_11_09_Rcourse_Jena_files/figure-html/hclsol-1.png" width="672" /> </details></p>
+</div>
+<div id="defining-clusters" class="section level3">
+<h3><span class="header-section-number">10.4.2</span> Defining clusters</h3>
+<p>After producing the hierarchical clustering result, we need to <em>cut the tree (dendrogram)</em> at a specific height to defined the clusters. For example, on our test dataset above, we could decide to cut it at a distance around 1.5, with would produce 2 clusters.</p>
+<div class="figure"><span id="fig:cuthcl"></span>
+<img src="2017_11_09_Rcourse_Jena_files/figure-html/cuthcl-1.png" alt="Cutting the dendrogram at height 1.5." width="672" />
+<p class="caption">
+Figure 10.7: Cutting the dendrogram at height 1.5.
+</p>
+</div>
+<p>In R we can us the <code>cutree</code> function to</p>
+<ul>
+<li>cut the tree at a specific height: <code>cutree(hcl, h = 1.5)</code></li>
+<li>cut the tree to get a certain number of clusters: <code>cutree(hcl, k = 2)</code></li>
+</ul>
+<blockquote>
+<p>Challenge</p>
+<ul>
+<li>Cut the iris hierarchical clustering result at a height to obtain 3 clusters by setting <code>h</code>.</li>
+<li>Cut the iris hierarchical clustering result at a height to obtain 3 clusters by setting directly <code>k</code>, and verify that both provide the same results.</li>
+</ul>
+</blockquote>
+<p><details></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(hcl)
+<span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">3.9</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="2017_11_09_Rcourse_Jena_files/figure-html/cuthclsol-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>)</code></pre></div>
+<pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [36] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 3 2 3 2 3 2 3 3 3 3 2 3 2 3 3 2 3
+##  [71] 2 3 2 2 2 2 2 2 2 3 3 3 3 2 3 2 2 2 3 3 3 2 3 3 3 3 3 2 3 3
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 50 entries ]</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cutree</span>(hcl, <span class="dt">h =</span> <span class="fl">3.9</span>)</code></pre></div>
+<pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [36] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 3 2 3 2 3 2 3 3 3 3 2 3 2 3 3 2 3
+##  [71] 2 3 2 2 2 2 2 2 2 3 3 3 3 2 3 2 2 2 3 3 3 2 3 3 3 3 3 2 3 3
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 50 entries ]</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">identical</span>(<span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>), <span class="kw">cutree</span>(hcl, <span class="dt">h =</span> <span class="fl">3.9</span>))</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p></details></p>
+<blockquote>
+<p>Challenge</p>
+<p>Using the same value <code>k = 3</code>, verify if k-means and hierarchical clustering produce the same results on the <code>iris</code> data.</p>
+<p>Which one, if any, is correct?</p>
+</blockquote>
+<p><details></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
+hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))
+<span class="kw">table</span>(km<span class="op">$</span>cluster, <span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>))</code></pre></div>
+<pre><code>##    
+##      1  2  3
+##   1  0 38  0
+##   2 50  0  0
+##   3  0 34 28</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">plot</span>(iris<span class="op">$</span>Petal.Length, iris<span class="op">$</span>Sepal.Length, <span class="dt">col =</span> km<span class="op">$</span>cluster, <span class="dt">main =</span> <span class="st">&quot;k-means&quot;</span>)
+<span class="kw">plot</span>(iris<span class="op">$</span>Petal.Length, iris<span class="op">$</span>Sepal.Length, <span class="dt">col =</span> <span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>), <span class="dt">main =</span> <span class="st">&quot;Hierarchical clustering&quot;</span>)</code></pre></div>
+<p><img src="2017_11_09_Rcourse_Jena_files/figure-html/iris2algs-1.png" width="1152" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Checking with the labels provided with the iris data
+<span class="kw">table</span>(iris<span class="op">$</span>Species, km<span class="op">$</span>cluster)</code></pre></div>
+<pre><code>##             
+##               1  2  3
+##   setosa      0 50  0
+##   versicolor  2  0 48
+##   virginica  36  0 14</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(iris<span class="op">$</span>Species, <span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>))</code></pre></div>
+<pre><code>##             
+##               1  2  3
+##   setosa     50  0  0
+##   versicolor  0 23 27
+##   virginica   0 49  1</code></pre>
+<p></details></p>
+</div>
+</div>
+<div id="principal-component-analysis-pca" class="section level2">
+<h2><span class="header-section-number">10.5</span> Principal component analysis (PCA)</h2>
+<p>In R, we can use the <code>prcomp</code> function.</p>
+<p>Let’s explore PCA on the <code>iris</code> data. While it contains only 4 variables, is already becomes difficult to visualise the 3 groups along all these dimensions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(iris[, <span class="op">-</span><span class="dv">5</span>], <span class="dt">col =</span> iris[, <span class="dv">5</span>], <span class="dt">pch =</span> <span class="dv">19</span>)</code></pre></div>
+<p><img src="2017_11_09_Rcourse_Jena_files/figure-html/irispairs-1.png" width="672" /></p>
+<p>Let’s use PCA to reduce the dimension.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">irispca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(iris[, <span class="op">-</span><span class="dv">5</span>])
+<span class="kw">summary</span>(irispca)</code></pre></div>
+<pre><code>## Importance of components:
+##                           PC1     PC2    PC3     PC4
+## Standard deviation     2.0563 0.49262 0.2797 0.15439
+## Proportion of Variance 0.9246 0.05307 0.0171 0.00521
+## Cumulative Proportion  0.9246 0.97769 0.9948 1.00000</code></pre>
+<p>A summary of the <code>prcomp</code> output shows that along PC1 along, we are able to retain over 92% of the total variability in the data.</p>
+<div class="figure"><span id="fig:histpc1"></span>
+<img src="2017_11_09_Rcourse_Jena_files/figure-html/histpc1-1.png" alt="Iris data along PC1." width="672" />
+<p class="caption">
+Figure 10.8: Iris data along PC1.
+</p>
+</div>
+<div id="visualisation" class="section level3">
+<h3><span class="header-section-number">10.5.1</span> Visualisation</h3>
+<p>A <strong>biplot</strong> features all original points re-mapped (rotated) along the first two PCs as well as the original features as vectors along the same PCs. Feature vectors that are in the same direction in PC space are also correlated in the original data space.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(irispca)</code></pre></div>
+<p><img src="2017_11_09_Rcourse_Jena_files/figure-html/irisbiplot-1.png" width="672" /></p>
+<p>One important piece of information when using PCA is the proportion of variance explained along the PCs, in particular when dealing with high dimensional data, as PC1 and PC2 (that are generally used for visualisation), might only account for an insufficient proportion of variance to be relevant on their own.</p>
+<p>In the code chunk below, I extract the standard deviations from the PCA result to calculate the variances, then obtain the percentage of and cumulative variance along the PCs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">var &lt;-<span class="st"> </span>irispca<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span>
+(pve &lt;-<span class="st"> </span>var<span class="op">/</span><span class="kw">sum</span>(var))</code></pre></div>
+<pre><code>## [1] 0.924618723 0.053066483 0.017102610 0.005212184</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cumsum</span>(pve)</code></pre></div>
+<pre><code>## [1] 0.9246187 0.9776852 0.9947878 1.0000000</code></pre>
+<blockquote>
+<p>Challenge</p>
+<ul>
+<li>Repeat the PCA analysis on the iris dataset above, reproducing the biplot and preparing a barplot of the percentage of variance explained by each PC.</li>
+<li>It is often useful to produce custom figures using the data coordinates in PCA space, which can be accessed as <code>x</code> in the <code>prcomp</code> object. Reproduce the PCA plots below, along PC1 and PC2 and PC3 and PC4 respectively.</li>
+</ul>
+</blockquote>
+<p><img src="2017_11_09_Rcourse_Jena_files/figure-html/irispcax-1.png" width="1152" /></p>
+<p><details></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">plot</span>(irispca<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">col =</span> iris<span class="op">$</span>Species)
+<span class="kw">plot</span>(irispca<span class="op">$</span>x[, <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">col =</span> iris<span class="op">$</span>Species)</code></pre></div>
+<p></details></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-package-development.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="interactive-visualisation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
