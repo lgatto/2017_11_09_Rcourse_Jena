@@ -114,7 +114,7 @@ generate. RStudio can also be used for other things (e.g., version control,
 developing packages, writing Shiny apps) that we will not cover during the
 workshop.
 
-![RStudio interface screenshot](img/rstudio-screenshot.png)
+![RStudio interface screenshot](./figs/rstudio-screenshot.png)
 
 RStudio is divided into 4 "Panes": the **Source** for your scripts and documents
 (top-left, in the default layout), the R **Console** (bottom-left), your
@@ -250,14 +250,13 @@ command and return you to the `>` prompt.
 The material we cover during this workshop will give you an initial taste of how you can use R to analyze data for your own research. However, you will need to learn more to do advanced operations such as cleaning your dataset, using statistical methods, or creating beautiful graphics. The best way to become proficient and efficient at R, as with any other tool, is to use it to address your actual research questions. As a beginner, it can feel daunting to have to write a script from scratch, and given that many people make their code available online, modifying existing code to suit your purpose might make it easier for you to get started.
 
 
-
-![](/figs/kitten-try-things.jpg)
+![](./figs/kitten-try-things.jpg)
 
 ## Seeking help
 
 ### Use the built-in RStudio help interface to search for more information on R functions
 
-![RStudio help interface](img/rstudiohelp.png)
+![RStudio help interface](./figs/rstudiohelp.png)
 
 One of the most fastest ways to get help, is to use the RStudio help interface. This panel by default can be found at the lower right hand panel of RStudio. As seen in the screenshot, by typing the word "Mean", RStudio tries to also give a number of suggestions that you might be interested in. The description is then shown in the display window.
 
