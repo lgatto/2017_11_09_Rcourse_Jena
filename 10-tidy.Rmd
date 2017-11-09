@@ -73,7 +73,7 @@ an observation. You’re also potentially using the same field name in
 multiple places, which will make it harder to clean your data up into
 a usable form. The example below depicts the problem:
 
-![](../figs/2_datasheet_example.jpg)
+![](../figs/2_datasheet_example.png)
 
 In the example above, the computer will see (for example) row 4 and
 assume that all columns A-AF refer to the same sample. This row
@@ -150,7 +150,7 @@ analyze your data. It is essential to use a clearly defined and consistent null 
 Blanks (most applications) and NA (for R) are good choices. White et al, 2013, explain good choices for indicating null values for different software applications in their article:
 [Nine simple ways to make it easier to (re)use your data.](https://peerj.com/preprints/7/) Ideas in Ecology and Evolution.
 
-![White et al.](../figs/3_white_table_1.jpg)
+![White et al.](../figs/3_white_table_1.png)
 
 
 #### <a name="formatting"></a> Using formatting to convey information  {-}
