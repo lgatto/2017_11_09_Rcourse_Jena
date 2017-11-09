@@ -111,8 +111,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>2</b> Tidy data</a><ul>
 <li class="chapter" data-level="2.1" data-path="tidy-data.html"><a href="tidy-data.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="tidy-data.html"><a href="tidy-data.html#common-spreadsheet-errors"><i class="fa fa-check"></i><b>2.2</b> Common Spreadsheet Errors</a></li>
-<li class="chapter" data-level="2.3" data-path="tidy-data.html"><a href="tidy-data.html#key-points"><i class="fa fa-check"></i><b>2.3</b> Key points</a></li>
+<li class="chapter" data-level="2.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-1"><i class="fa fa-check"></i><b>2.2</b> Tidy data</a></li>
+<li class="chapter" data-level="2.3" data-path="tidy-data.html"><a href="tidy-data.html#common-spreadsheet-errors"><i class="fa fa-check"></i><b>2.3</b> Common Spreadsheet Errors</a></li>
+<li class="chapter" data-level="2.4" data-path="tidy-data.html"><a href="tidy-data.html#key-points"><i class="fa fa-check"></i><b>2.4</b> Key points</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="before-we-start.html"><a href="before-we-start.html"><i class="fa fa-check"></i><b>3</b> Before we start</a><ul>
 <li class="chapter" data-level="3.1" data-path="before-we-start.html"><a href="before-we-start.html#what-is-r-what-is-rstudio"><i class="fa fa-check"></i><b>3.1</b> What is R? What is RStudio?</a></li>
@@ -313,8 +314,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 </div>
 </div>
+<div id="tidy-data-1" class="section level2">
+<h2><span class="header-section-number">2.2</span> Tidy data</h2>
+<p>The cardinal rules of using spreadsheet programs for data:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Put all your variables in columns - the thing you’re measuring, like ‘weight’ or ‘temperature’.</strong></li>
+<li><strong>Put each observation in its own row.</strong></li>
+<li>Don’t combine multiple pieces of information in one cell. Sometimes it just seems like one thing, but think if that’s the only way you’ll want to be able to use or sort that data.</li>
+<li>Leave the raw data raw - don’t change it!</li>
+<li>Export the cleaned data to a text-based format like CSV (comma-separated values) format. This ensures that anyone can use the data, and is required by most data repositories.</li>
+</ol>
+<div class="figure">
+<embed src="./figs/multiple-info.ong" />
+
+</div>
+<p>And:</p>
+<ul>
+<li>Keeping track of your analyses, using a <code>REAMDE</code> file for instance.</li>
+</ul>
+</div>
 <div id="common-spreadsheet-errors" class="section level2">
-<h2><span class="header-section-number">2.2</span> Common Spreadsheet Errors</h2>
+<h2><span class="header-section-number">2.3</span> Common Spreadsheet Errors</h2>
 <p>There are a few potential errors to be on the lookout for in your own data as well as data from collaborators or the Internet. If you are aware of the errors and the possible negative effect on downstream data analysis and result interpretation, it might motivate yourself and your project members to try and avoid them. Making small changes to the way you format your data in spreadsheets, can have a great impact on efficiency and reliability when it comes to data cleaning and analysis.</p>
 <ul>
 <li>Using multiple tables</li>
@@ -420,7 +440,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 </div>
 <div id="key-points" class="section level2">
-<h2><span class="header-section-number">2.3</span> Key points</h2>
+<h2><span class="header-section-number">2.4</span> Key points</h2>
 <ul>
 <li>Avoid using multiple tables within one spreadsheet.</li>
 <li>Avoid spreading data across multiple tabs (but do use a new tab to record data cleaning or manipulations).</li>
