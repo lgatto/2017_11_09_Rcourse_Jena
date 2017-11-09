@@ -43,7 +43,7 @@ and analysis.
 - Inclusion of metadata in data table
 - Date formatting
 
-#### Using multiple tables
+#### Using multiple tables {-}
 
 A common strategy is creating multiple data tables within one
 spreadsheet. This confuses the computer, so don't do this!  When you
