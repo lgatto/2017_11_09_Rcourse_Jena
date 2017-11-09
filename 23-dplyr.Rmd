@@ -360,7 +360,7 @@ counts the total number of records for each category.
 
 
 <details>
-```{r, echo=FALSE, purl=FALSE}
+```{r}
 ## Answer 1
 surveys %>%
     group_by(plot_type) %>%

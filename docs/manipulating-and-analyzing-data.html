@@ -652,6 +652,10 @@ surveys <span class="op">%&gt;%</span>
 </ol>
 </blockquote>
 <p><details></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Answer 1
+surveys <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(plot_type) <span class="op">%&gt;%</span>
+<span class="st">    </span>tally</code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##                   plot_type     n
 ##                       &lt;chr&gt; &lt;int&gt;
@@ -660,6 +664,15 @@ surveys <span class="op">%&gt;%</span>
 ## 3          Rodent Exclosure  4233
 ## 4 Short-term Krat Exclosure  5906
 ## 5         Spectab exclosure  3918</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Answer 2
+surveys <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(hindfoot_length)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(species_id) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(
+        <span class="dt">mean_hindfoot_length =</span> <span class="kw">mean</span>(hindfoot_length),
+        <span class="dt">min_hindfoot_length =</span> <span class="kw">min</span>(hindfoot_length),
+        <span class="dt">max_hindfoot_length =</span> <span class="kw">max</span>(hindfoot_length)
+    )</code></pre></div>
 <pre><code>## # A tibble: 25 x 4
 ##    species_id mean_hindfoot_length min_hindfoot_length max_hindfoot_length
 ##         &lt;chr&gt;                &lt;dbl&gt;               &lt;dbl&gt;               &lt;dbl&gt;
@@ -674,6 +687,13 @@ surveys <span class="op">%&gt;%</span>
 ##  9         OX             19.12500                  13                  21
 ## 10         PB             26.11592                   2                  47
 ## # ... with 15 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Answer 3
+surveys <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(weight)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(weight <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(weight)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(year, genus, species, weight) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">arrange</span>(year)</code></pre></div>
 <pre><code>## # A tibble: 27 x 4
 ## # Groups:   year [26]
 ##     year     genus     species weight
@@ -689,6 +709,10 @@ surveys <span class="op">%&gt;%</span>
 ##  9  1984   Neotoma    albigula    259
 ## 10  1985   Neotoma    albigula    225
 ## # ... with 17 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Answer 4
+surveys <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>())</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##     sex     n
 ##   &lt;chr&gt; &lt;int&gt;
