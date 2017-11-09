@@ -713,8 +713,8 @@ surveys <span class="op">%&gt;%</span>
 <p>Having created a new table, it is therefore straightforward to explore the relationship between the weight of different species within, and between, the plots. The key point here is that we are still following a tidy data structure, but we have <strong>reshaped</strong> the data according to the observations of interest: average species weight per plot instead of recordings per date.</p>
 <p>The opposite transformation would be to transform column names into values of a variable.</p>
 <p>We can do both these of transformations with two <code>tidyr</code> functions, <code>spread()</code> and <code>gather()</code>.</p>
-<div id="spreading" class="section level4">
-<h4><span class="header-section-number">6.6.0.1</span> Spreading</h4>
+<div id="spreading" class="section level4 unnumbered">
+<h4>Spreading</h4>
 <p><code>spread()</code> takes three principal arguments:</p>
 <ol style="list-style-type: decimal">
 <li>the data</li>
@@ -805,8 +805,8 @@ surveys <span class="op">%&gt;%</span>
 ## # ... with 4 more variables: Peromyscus &lt;dbl&gt;, Reithrodontomys &lt;dbl&gt;,
 ## #   Sigmodon &lt;dbl&gt;, Spermophilus &lt;dbl&gt;</code></pre>
 </div>
-<div id="gathering" class="section level4">
-<h4><span class="header-section-number">6.6.0.2</span> Gathering</h4>
+<div id="gathering" class="section level4 unnumbered">
+<h4>Gathering</h4>
 <p>The opposing situation could occur if we had been provided with data in the form of <code>surveys_spread</code>, where the genus names are column names, but we wish to treat them as values of a genus variable instead.</p>
 <p>In this situation we are gathering the column names and turning them into a pair of new variables. One variable represents the column names as values, and the other variable contains the values previously associated with the column names.</p>
 <p><code>gather()</code> takes four principal arguments:</p>
