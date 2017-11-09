@@ -33,7 +33,7 @@ The cardinal rules of using spreadsheet programs for data:
    (comma-separated values) format. This ensures that anyone can use
    the data, and is required by most data repositories.
 
-![](./figs/multiple-info.ong)
+![](./figs/multiple-info.png)
 
 And:
 
