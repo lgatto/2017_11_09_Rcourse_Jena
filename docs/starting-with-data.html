@@ -543,7 +543,7 @@ Another method is to use the <code>levels()</code> function. Compare:</p>
 <p>When your data is stored as a factor, you can use the <code>plot()</code> function to get a quick glance at the number of observations represented by each factor level. Let’s look at the number of males and females captured over the course of the experiment:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## bar plot of the number of females and males captured during the experiment:
 <span class="kw">plot</span>(surveys<span class="op">$</span>sex)</code></pre></div>
-<p><img src="2017_11_09_Rcourse_Jena_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="2017_11_09_Rcourse_Jena_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>In addition to males and females, there are about 1700 individuals for which the sex information hasn’t been recorded. Additionally, for these individuals, there is no label to indicate that the information is missing. Let’s rename this label to something more meaningful. Before doing that, we’re going to pull out the data on sex and work with that data, so we’re not modifying the working copy of the data frame:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span>surveys<span class="op">$</span>sex
 <span class="kw">head</span>(sex)</code></pre></div>

@@ -17,7 +17,7 @@ Learning Objectives:
 
 ## What is R? What is RStudio?
 
-The term "`R`" is used to refer to both the programming language and the
+The term `R` is used to refer to both the programming language and the
 software that interprets the scripts written using it.
 
 [RStudio](https://rstudio.com) is currently a very popular way to not only write
@@ -157,9 +157,9 @@ tutorial.
 
 Your working directory should now look like this:
 
-```{r, results='markup',fig.cap="How it should look like at the beginning of this lesson", echo=FALSE, purl=FALSE, out.width='400px', fig.align='center'}
-knitr::include_graphics("img/r-starting-how-it-should-look-like.png")
-```
+
+![](./figs/r-starting-how-it-should-look-like.png)
+
 
 ### Organizing your working directory
 
@@ -190,7 +190,7 @@ workshop, we will need a `data/` folder to store our raw data, and we will
 create later a `data_output/` folder when we learn how to export data as CSV
 files.
 
-![Example of a working directory structure](img/working-directory-structure.png)
+![Example of a working directory structure](./figs/working-directory-structure.png)
 
 
 ## Interacting with R
@@ -250,10 +250,8 @@ command and return you to the `>` prompt.
 The material we cover during this workshop will give you an initial taste of how you can use R to analyze data for your own research. However, you will need to learn more to do advanced operations such as cleaning your dataset, using statistical methods, or creating beautiful graphics. The best way to become proficient and efficient at R, as with any other tool, is to use it to address your actual research questions. As a beginner, it can feel daunting to have to write a script from scratch, and given that many people make their code available online, modifying existing code to suit your purpose might make it easier for you to get started.
 
 
-```{r kitten-img, results='markup', echo=FALSE, purl=FALSE, out.width='400px', fig.align='center'}
-knitr::include_graphics("img/kitten-try-things.jpg")
-```
 
+![](/figs/kitten-try-things.jpg)
 
 ## Seeking help
 
