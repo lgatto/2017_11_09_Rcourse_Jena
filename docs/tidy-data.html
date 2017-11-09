@@ -334,8 +334,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h4><a name="tables"></a> Using multiple tables</h4>
 <p>A common strategy is creating multiple data tables within one spreadsheet. This confuses the computer, so don’t do this! When you create multiple tables within one spreadsheet, you’re drawing false associations between things for the computer, which sees each row as an observation. You’re also potentially using the same field name in multiple places, which will make it harder to clean your data up into a usable form. The example below depicts the problem:</p>
 <div class="figure">
-<img src="../figs/2_datasheet_example.jpg" alt="multiple tabs" />
-<p class="caption">multiple tabs</p>
+<img src="../figs/2_datasheet_example.jpg" />
+
 </div>
 <p>In the example above, the computer will see (for example) row 4 and assume that all columns A-AF refer to the same sample. This row actually represents four distinct samples (sample 1 for each of four different collection dates - May 29th, June 12th, June 19th, and June 26th), as well as some calculated summary statistics (an average (avr) and standard error of measurement (SEM)) for two of those samples. Other rows are similarly problematic.</p>
 </div>
