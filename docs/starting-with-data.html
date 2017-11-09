@@ -165,12 +165,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html"><i class="fa fa-check"></i><b>6</b> Manipulating and analyzing data</a><ul>
 <li class="chapter" data-level="6.1" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#what-are-dplyr-and-tidyr"><i class="fa fa-check"></i><b>6.1</b> What are <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong>?</a></li>
 <li class="chapter" data-level="6.2" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#selecting-columns-and-filtering-rows"><i class="fa fa-check"></i><b>6.2</b> Selecting columns and filtering rows</a></li>
-<li class="chapter" data-level="6.3" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#pipes"><i class="fa fa-check"></i><b>6.3</b> Pipes</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#mutate"><i class="fa fa-check"></i><b>6.3.1</b> Mutate</a></li>
-<li class="chapter" data-level="6.3.2" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#split-apply-combine-data-analysis-and-the-summarize-function"><i class="fa fa-check"></i><b>6.3.2</b> Split-apply-combine data analysis and the summarize() function</a></li>
-<li class="chapter" data-level="6.3.3" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#reshaping-with-gather-and-spread"><i class="fa fa-check"></i><b>6.3.3</b> Reshaping with gather and spread</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#pipes"><i class="fa fa-check"></i><b>6.3</b> Pipes</a></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#mutate"><i class="fa fa-check"></i><b>6.4</b> Mutate</a></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#split-apply-combine-data-analysis-and-the-summarize-function"><i class="fa fa-check"></i><b>6.5</b> Split-apply-combine data analysis and the summarize() function</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#the-summarize-function"><i class="fa fa-check"></i><b>6.5.1</b> The <code>summarize()</code> function</a></li>
+<li class="chapter" data-level="6.5.2" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#tallying"><i class="fa fa-check"></i><b>6.5.2</b> Tallying</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#exporting-data"><i class="fa fa-check"></i><b>6.4</b> Exporting data</a></li>
+<li class="chapter" data-level="6.6" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#reshaping-with-gather-and-spread"><i class="fa fa-check"></i><b>6.6</b> Reshaping with gather and spread</a></li>
+<li class="chapter" data-level="6.7" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#exporting-data"><i class="fa fa-check"></i><b>6.7</b> Exporting data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html"><i class="fa fa-check"></i><b>7</b> Data visualization with ggplot2</a><ul>
 <li class="chapter" data-level="7.1" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html#plotting-with-ggplot2"><i class="fa fa-check"></i><b>7.1</b> Plotting with <strong><code>ggplot2</code></strong></a></li>
@@ -606,7 +608,15 @@ surveys<span class="op">$</span>plot_type &lt;-<span class="st"> </span><span cl
        )</code></pre></div></li>
 </ol>
 </blockquote>
-<p><details> * missing quotations around the names of the animals * missing one entry in the “feel” column (probably for one of the furry animals) * missing one comma in the weight column * <code>country</code>, <code>climate</code>, <code>temperature</code>, and <code>northern_hemisphere</code> are factors; <code>has_kangaroo</code> is numeric. * using <code>stringsAsFactors=FALSE</code> would have made them character instead of factors * removing the quotes in temperature, northern_hemisphere, and replacing 1 by TRUE in the <code>has_kangaroo</code> column would probably what was originally intended. </details></p>
+<p><details> - missing quotations around the names of the animals</p>
+<ul>
+<li><p>missing one entry in the “feel” column (probably for one of the furry animals)</p></li>
+<li><p>missing one comma in the weight column</p></li>
+<li><p><code>country</code>, <code>climate</code>, <code>temperature</code>, and <code>northern_hemisphere</code> are factors; <code>has_kangaroo</code> is numeric.</p></li>
+<li><p>using <code>stringsAsFactors=FALSE</code> would have made them character instead of factors</p></li>
+<li><p>removing the quotes in temperature, northern_hemisphere, and replacing 1 by TRUE in the <code>has_kangaroo</code> column would probably what was originally intended.</p></li>
+</ul>
+<p></details></p>
 <p>The automatic conversion of data type is sometimes a blessing, sometimes an annoyance. Be aware that it exists, learn the rules, and double check that data you import in R are of the correct type within your data frame. If not, use it to your advantage to detect mistakes that might have been introduced during data entry (a letter in a column that should only contain numbers for instance).</p>
 </div>
 </div>

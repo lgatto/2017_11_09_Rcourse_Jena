@@ -165,12 +165,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html"><i class="fa fa-check"></i><b>6</b> Manipulating and analyzing data</a><ul>
 <li class="chapter" data-level="6.1" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#what-are-dplyr-and-tidyr"><i class="fa fa-check"></i><b>6.1</b> What are <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong>?</a></li>
 <li class="chapter" data-level="6.2" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#selecting-columns-and-filtering-rows"><i class="fa fa-check"></i><b>6.2</b> Selecting columns and filtering rows</a></li>
-<li class="chapter" data-level="6.3" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#pipes"><i class="fa fa-check"></i><b>6.3</b> Pipes</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#mutate"><i class="fa fa-check"></i><b>6.3.1</b> Mutate</a></li>
-<li class="chapter" data-level="6.3.2" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#split-apply-combine-data-analysis-and-the-summarize-function"><i class="fa fa-check"></i><b>6.3.2</b> Split-apply-combine data analysis and the summarize() function</a></li>
-<li class="chapter" data-level="6.3.3" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#reshaping-with-gather-and-spread"><i class="fa fa-check"></i><b>6.3.3</b> Reshaping with gather and spread</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#pipes"><i class="fa fa-check"></i><b>6.3</b> Pipes</a></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#mutate"><i class="fa fa-check"></i><b>6.4</b> Mutate</a></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#split-apply-combine-data-analysis-and-the-summarize-function"><i class="fa fa-check"></i><b>6.5</b> Split-apply-combine data analysis and the summarize() function</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#the-summarize-function"><i class="fa fa-check"></i><b>6.5.1</b> The <code>summarize()</code> function</a></li>
+<li class="chapter" data-level="6.5.2" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#tallying"><i class="fa fa-check"></i><b>6.5.2</b> Tallying</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#exporting-data"><i class="fa fa-check"></i><b>6.4</b> Exporting data</a></li>
+<li class="chapter" data-level="6.6" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#reshaping-with-gather-and-spread"><i class="fa fa-check"></i><b>6.6</b> Reshaping with gather and spread</a></li>
+<li class="chapter" data-level="6.7" data-path="manipulating-and-analyzing-data.html"><a href="manipulating-and-analyzing-data.html#exporting-data"><i class="fa fa-check"></i><b>6.7</b> Exporting data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html"><i class="fa fa-check"></i><b>7</b> Data visualization with ggplot2</a><ul>
 <li class="chapter" data-level="7.1" data-path="data-visualization-with-ggplot2.html"><a href="data-visualization-with-ggplot2.html#plotting-with-ggplot2"><i class="fa fa-check"></i><b>7.1</b> Plotting with <strong><code>ggplot2</code></strong></a></li>
@@ -435,8 +437,9 @@ surveys <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">filter</span>(year <span class="op">&lt;</span><span class="st"> </span><span class="dv">1995</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">select</span>(year, sex, weight)</code></pre></div>
 <p></details></p>
-<div id="mutate" class="section level3">
-<h3><span class="header-section-number">6.3.1</span> Mutate</h3>
+</div>
+<div id="mutate" class="section level2">
+<h2><span class="header-section-number">6.4</span> Mutate</h2>
 <p>Frequently you’ll want to create new columns based on the values in existing columns, for example to do unit conversions, or find the ratio of values in two columns. For this we’ll use <code>mutate()</code>.</p>
 <p>To create a new column of weight in kg:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys <span class="op">%&gt;%</span>
@@ -523,11 +526,11 @@ surveys <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">select</span>(species_id, hindfoot_half)</code></pre></div>
 <p></details></p>
 </div>
-<div id="split-apply-combine-data-analysis-and-the-summarize-function" class="section level3">
-<h3><span class="header-section-number">6.3.2</span> Split-apply-combine data analysis and the summarize() function</h3>
+<div id="split-apply-combine-data-analysis-and-the-summarize-function" class="section level2">
+<h2><span class="header-section-number">6.5</span> Split-apply-combine data analysis and the summarize() function</h2>
 <p>Many data analysis tasks can be approached using the <em>split-apply-combine</em> paradigm: split the data into groups, apply some analysis to each group, and then combine the results. <strong><code>dplyr</code></strong> makes this very easy through the use of the <code>group_by()</code> function.</p>
-<div id="the-summarize-function" class="section level4">
-<h4><span class="header-section-number">6.3.2.1</span> The <code>summarize()</code> function</h4>
+<div id="the-summarize-function" class="section level3">
+<h3><span class="header-section-number">6.5.1</span> The <code>summarize()</code> function</h3>
 <p><code>group_by()</code> is often used together with <code>summarize()</code>, which collapses each group into a single-row summary of that group. <code>group_by()</code> takes as arguments the column names that contain the <strong>categorical</strong> variables for which you want to calculate the summary statistics. So to view the mean <code>weight</code> by sex:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span>
@@ -626,8 +629,8 @@ surveys <span class="op">%&gt;%</span>
 ## 10     F         PE    22.82218         11
 ## # ... with 54 more rows</code></pre>
 </div>
-<div id="tallying" class="section level4">
-<h4><span class="header-section-number">6.3.2.2</span> Tallying</h4>
+<div id="tallying" class="section level3">
+<h3><span class="header-section-number">6.5.2</span> Tallying</h3>
 <p>When working with data, it is also common to want to know the number of observations found for each factor or combination of factors. For this, <strong><code>dplyr</code></strong> provides <code>tally()</code>. For example, if we wanted to group by sex and find the number of rows of data for each sex, we would do:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span>
@@ -695,8 +698,8 @@ surveys <span class="op">%&gt;%</span>
 <p></details></p>
 </div>
 </div>
-<div id="reshaping-with-gather-and-spread" class="section level3">
-<h3><span class="header-section-number">6.3.3</span> Reshaping with gather and spread</h3>
+<div id="reshaping-with-gather-and-spread" class="section level2">
+<h2><span class="header-section-number">6.6</span> Reshaping with gather and spread</h2>
 <p>In the <span style="background:yellow"><a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/">spreadsheet lesson</a></span> we discussed how to structure our data leading to the four rules defining a tidy dataset:</p>
 <ol style="list-style-type: decimal">
 <li>Each variable has its own column</li>
@@ -711,7 +714,7 @@ surveys <span class="op">%&gt;%</span>
 <p>The opposite transformation would be to transform column names into values of a variable.</p>
 <p>We can do both these of transformations with two <code>tidyr</code> functions, <code>spread()</code> and <code>gather()</code>.</p>
 <div id="spreading" class="section level4">
-<h4><span class="header-section-number">6.3.3.1</span> Spreading</h4>
+<h4><span class="header-section-number">6.6.0.1</span> Spreading</h4>
 <p><code>spread()</code> takes three principal arguments:</p>
 <ol style="list-style-type: decimal">
 <li>the data</li>
@@ -803,7 +806,7 @@ surveys <span class="op">%&gt;%</span>
 ## #   Sigmodon &lt;dbl&gt;, Spermophilus &lt;dbl&gt;</code></pre>
 </div>
 <div id="gathering" class="section level4">
-<h4><span class="header-section-number">6.3.3.2</span> Gathering</h4>
+<h4><span class="header-section-number">6.6.0.2</span> Gathering</h4>
 <p>The opposing situation could occur if we had been provided with data in the form of <code>surveys_spread</code>, where the genus names are column names, but we wish to treat them as values of a genus variable instead.</p>
 <p>In this situation we are gathering the column names and turning them into a pair of new variables. One variable represents the column names as values, and the other variable contains the values previously associated with the column names.</p>
 <p><code>gather()</code> takes four principal arguments:</p>
@@ -897,9 +900,8 @@ surveys <span class="op">%&gt;%</span>
 <p></details></p>
 </div>
 </div>
-</div>
 <div id="exporting-data" class="section level2">
-<h2><span class="header-section-number">6.4</span> Exporting data</h2>
+<h2><span class="header-section-number">6.7</span> Exporting data</h2>
 <p>Now that you have learned how to use <strong><code>dplyr</code></strong> to extract information from or summarize your raw data, you may want to export these new datasets to share them with your collaborators or for archival.</p>
 <p>Similar to the <code>read_csv()</code> function used for reading CSV files into R, there is a <code>write_csv()</code> function that generates CSV files from data frames.</p>
 <p>Before using <code>write_csv()</code>, we are going to create a new folder, <code>data_output</code>, in our working directory that will store this generated dataset. We don’t want to write generated datasets in the same directory as our raw data. It’s good practice to keep them separate. The <code>data</code> folder should only contain the raw, unaltered data, and should be left alone to make sure we don’t delete or modify it. In contrast, our script will generate the contents of the <code>data_output</code> directory, so even if the files it contains are deleted, we can always re-generate them.</p>

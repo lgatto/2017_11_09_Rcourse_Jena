@@ -187,8 +187,7 @@ surveys %>%
 </details>
 
 
-
-### Mutate
+## Mutate
 
 Frequently you'll want to create new columns based on the values in existing
 columns, for example to do unit conversions, or find the ratio of values in two
@@ -257,7 +256,7 @@ surveys_hindfoot_half <- surveys %>%
 ```
 </details>
 
-### Split-apply-combine data analysis and the summarize() function
+## Split-apply-combine data analysis and the summarize() function
 
 Many data analysis tasks can be approached using the *split-apply-combine*
 paradigm: split the data into groups, apply some analysis to each group, and
@@ -265,7 +264,7 @@ then combine the results. **`dplyr`** makes this very easy through the use of th
 `group_by()` function.
 
 
-#### The `summarize()` function
+### The `summarize()` function
 
 `group_by()` is often used together with `summarize()`, which collapses each
 group into a single-row summary of that group.  `group_by()` takes as arguments
@@ -329,7 +328,7 @@ surveys %>%
 ```
 
 
-#### Tallying
+### Tallying
 
 When working with data, it is also common to want to know the number of
 observations found for each factor or combination of factors. For this, **`dplyr`**
@@ -393,7 +392,7 @@ surveys %>%
 </details>
 
 
-### Reshaping with gather and spread
+## Reshaping with gather and spread
 
 In the 
 <span style="background:yellow">[spreadsheet lesson](http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/)</span> we discussed how to 
@@ -426,7 +425,7 @@ a variable.
 We can do both these of transformations with two `tidyr` functions, `spread()`
 and `gather()`.
 
-#### Spreading
+#### Spreading {-}
 
 `spread()` takes three principal arguments:
 
@@ -477,7 +476,7 @@ surveys_gw %>%
   head()
 ```
 
-#### Gathering
+#### Gathering {-}
 
 The opposing situation could occur if we had been provided with data in the
 form of `surveys_spread`, where the genus names are column names, but we 
