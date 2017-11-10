@@ -203,13 +203,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.6" data-path="r-package-development.html"><a href="r-package-development.html#namespace"><i class="fa fa-check"></i><b>9.6</b> <code>NAMESPACE</code></a></li>
 <li class="chapter" data-level="9.7" data-path="r-package-development.html"><a href="r-package-development.html#r-code"><i class="fa fa-check"></i><b>9.7</b> R code</a></li>
 <li class="chapter" data-level="9.8" data-path="r-package-development.html"><a href="r-package-development.html#package-sub-directories"><i class="fa fa-check"></i><b>9.8</b> Package sub-directories</a></li>
-<li class="chapter" data-level="9.9" data-path="r-package-development.html"><a href="r-package-development.html#documentation"><i class="fa fa-check"></i><b>9.9</b> Documentation</a></li>
-<li class="chapter" data-level="9.10" data-path="r-package-development.html"><a href="r-package-development.html#manual-pages"><i class="fa fa-check"></i><b>9.10</b> Manual pages</a><ul>
-<li class="chapter" data-level="9.10.1" data-path="r-package-development.html"><a href="r-package-development.html#use-roxygen"><i class="fa fa-check"></i><b>9.10.1</b> Use roxygen</a></li>
-<li class="chapter" data-level="9.10.2" data-path="r-package-development.html"><a href="r-package-development.html#vignettes"><i class="fa fa-check"></i><b>9.10.2</b> Vignettes</a></li>
+<li class="chapter" data-level="9.9" data-path="r-package-development.html"><a href="r-package-development.html#documentation"><i class="fa fa-check"></i><b>9.9</b> Documentation</a><ul>
+<li class="chapter" data-level="9.9.1" data-path="r-package-development.html"><a href="r-package-development.html#manual-pages"><i class="fa fa-check"></i><b>9.9.1</b> Manual pages</a></li>
+<li class="chapter" data-level="9.9.2" data-path="r-package-development.html"><a href="r-package-development.html#using-roxygen"><i class="fa fa-check"></i><b>9.9.2</b> Using roxygen</a></li>
+<li class="chapter" data-level="9.9.3" data-path="r-package-development.html"><a href="r-package-development.html#vignettes"><i class="fa fa-check"></i><b>9.9.3</b> Vignettes</a></li>
 </ul></li>
-<li class="chapter" data-level="9.11" data-path="r-package-development.html"><a href="r-package-development.html#additional-files"><i class="fa fa-check"></i><b>9.11</b> Additional files</a></li>
-<li class="chapter" data-level="9.12" data-path="r-package-development.html"><a href="r-package-development.html#distributing-packages"><i class="fa fa-check"></i><b>9.12</b> Distributing packages</a></li>
+<li class="chapter" data-level="9.10" data-path="r-package-development.html"><a href="r-package-development.html#additional-files"><i class="fa fa-check"></i><b>9.10</b> Additional files</a></li>
+<li class="chapter" data-level="9.11" data-path="r-package-development.html"><a href="r-package-development.html#distributing-packages"><i class="fa fa-check"></i><b>9.11</b> Distributing packages</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html"><i class="fa fa-check"></i><b>10</b> Visualisation of high-dimensional data in R</a><ul>
 <li class="chapter" data-level="10.1" data-path="visualisation-of-high-dimensional-data-in-r.html"><a href="visualisation-of-high-dimensional-data-in-r.html#introduction-4"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
@@ -460,9 +460,8 @@ functions-ClassA.R  ...</code></pre>
 </div>
 <div id="documentation" class="section level2">
 <h2><span class="header-section-number">9.9</span> Documentation</h2>
-</div>
-<div id="manual-pages" class="section level2">
-<h2><span class="header-section-number">9.10</span> Manual pages</h2>
+<div id="manual-pages" class="section level3">
+<h3><span class="header-section-number">9.9.1</span> Manual pages</h3>
 <p>Package functions, datasets, methods and classes are documented in <code>Rd</code>, a LaTeX-like format.</p>
 <pre><code>% File src/library/base/man/load.Rd
 % Part of the R package, http://www.R-project.org
@@ -543,8 +542,9 @@ close(con) # url() always opens the connection
 <span class="kw">help</span>(<span class="st">&quot;load&quot;</span>, <span class="dt">help_type =</span> <span class="st">&quot;html&quot;</span>)
 <span class="kw">help</span>(<span class="st">&quot;load&quot;</span>, <span class="dt">help_type =</span> <span class="st">&quot;pdf&quot;</span>)</code></pre></div>
 <p>One can use <code>prompt</code>, <code>promptClass</code>, <code>promptMethods</code>, <code>promptPackage</code>, <code>promptPackage</code>, <code>promptData</code> to generate <code>Rd</code> templates for functions, classes, methods, packages and data.</p>
-<div id="use-roxygen" class="section level3">
-<h3><span class="header-section-number">9.10.1</span> Use roxygen</h3>
+</div>
+<div id="using-roxygen" class="section level3">
+<h3><span class="header-section-number">9.9.2</span> Using roxygen</h3>
 <p>The way documentation is managed in R packages separates the code from the documentation, which makes it easier to adapt the latter when to code is updated. In comes <code>roxygen2</code>, that allows developer to write their documentation on top of their functions:</p>
 <pre><code>#&#39; Reads sequences data in fasta and create \code{DnaSeq}
 #&#39; and \code{RnaSeq} instances. 
@@ -580,7 +580,7 @@ readFasta &lt;- function(infile){
 <p>Note: recently, support for markdown format has been added to roxygen.</p>
 </div>
 <div id="vignettes" class="section level3">
-<h3><span class="header-section-number">9.10.2</span> Vignettes</h3>
+<h3><span class="header-section-number">9.9.3</span> Vignettes</h3>
 <p>While manual pages are meant to be specific and technical, vignettes are workflow-type documentation files that provide an overview and/or a use-case demonstrating the package’s functionality.</p>
 <p>Vignettes can be written in Sweave format (<code>.Rnw</code> extension), supporting R code chunks in LaTeX documents, or R markdown formart (<code>.Rmd</code> extension) for R code and markdown.</p>
 <p>The source document (<code>.Rnw</code> or <code>.Rmd</code>) can be</p>
@@ -594,7 +594,7 @@ readFasta &lt;- function(infile){
 </div>
 </div>
 <div id="additional-files" class="section level2">
-<h2><span class="header-section-number">9.11</span> Additional files</h2>
+<h2><span class="header-section-number">9.10</span> Additional files</h2>
 <ul>
 <li><code>.Rbuildignore</code> with a list of files/dirs to ignore when building. For example the <code>.Rproj</code> file.</li>
 <li><code>.Rinstignore</code>with a list of files/dirs to ignore when installing.</li>
@@ -603,7 +603,7 @@ readFasta &lt;- function(infile){
 </ul>
 </div>
 <div id="distributing-packages" class="section level2">
-<h2><span class="header-section-number">9.12</span> Distributing packages</h2>
+<h2><span class="header-section-number">9.11</span> Distributing packages</h2>
 <ul>
 <li><p><strong>CRAN</strong> Read the CRAN Repository Policy (<a href="http://cran.r-project.org/web/packages/policies.html" class="uri">http://cran.r-project.org/web/packages/policies.html</a>). Upload your <code>--as-cran</code> checked} <code>myPackage\_x.y.z.tar.gz</code> to <code>ftp://cran.R-project.org/incoming</code> or using <code>http://CRAN.R-project.org/submit.html</code>. Your package will be installable with <code>install.packages(&quot;myRpackage&quot;)</code>.</p></li>
 <li><p><strong>R-forge</strong> Log in, register a project and wait for acceptance. Then commit you code to the svn repository. Your package will be installable with <code>install.packages</code> using <code>repos=&quot;http://R-Forge.R-project.org&quot;</code>.</p></li>

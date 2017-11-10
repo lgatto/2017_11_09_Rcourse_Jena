@@ -226,7 +226,7 @@ up (just before the package is detached).  See `help(".onLoad"))`,
 
 ## Documentation
 
-## Manual pages
+### Manual pages
 
 Package functions, datasets, methods and classes are documented in
 `Rd`, a LaTeX-like format. 
@@ -321,7 +321,7 @@ One can use `prompt`, `promptClass`, `promptMethods`, `promptPackage`,
 `promptPackage`, `promptData` to generate `Rd` templates for
 functions, classes, methods, packages and data.
 
-### Use roxygen
+### Using roxygen
 
 The way documentation is managed in R packages separates the code from
 the documentation, which makes it easier to adapt the latter when to
