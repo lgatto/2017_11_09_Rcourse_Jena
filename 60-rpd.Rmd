@@ -110,6 +110,7 @@ Using RStudio useful keyboard shortcuts for package authoring:
 * Test Package: `Ctrl + Shift + T`
 
 Using devtools:
+
 * `devtools::build()` 
 * `devtools::build(binary = TRUE)`
 * `devtools::check()`
