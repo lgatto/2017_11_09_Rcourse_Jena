@@ -174,8 +174,10 @@ knitr::include_app("https://lgatto.shinyapps.io/shiny-app1/",
                    height = "650px")
 ```
 
-### Creation of our fist shiny app 
+The app can also be opened at https://lgatto.shinyapps.io/shiny-app1/
 
+
+### Creation of our fist shiny app 
 
 1. Create a directory that will contain the app, such as for example
    `"shinyapp"`.
