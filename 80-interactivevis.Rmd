@@ -237,7 +237,7 @@ writeLines(readLines('src/shiny-app03/ui.R'))
 writeLines(readLines('src/shiny-app03/server.R'))
 ```
 
-9. The last addition is to add a menu for the user to choose a set of
+9. The next addition is to add a menu for the user to choose a set of
    predefined colours (that would be a `selectInput`) in the `ui.R`
    file and use that new input to parametrise the colour of the
    histogramme in the `server.R` file.
